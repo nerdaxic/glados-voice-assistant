@@ -1,0 +1,9 @@
+# Ignore the collected TTS samples
+audio/tts/
+# Ignore locally collected data
+/collectedSpeech
+
+# Local enviroment file
+.env
+failedCommands.txt
+cancelledActivations.txt
