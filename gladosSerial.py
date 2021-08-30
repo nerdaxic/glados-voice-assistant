@@ -18,12 +18,20 @@ def setEyeAnimation(animation="idle"):
 				timeout=1
 			)
 
-			if "idle" in animation:
+			if "idle-green" in animation:
+				ser.write("5".encode())
+			elif "idle" in animation:
 				ser.write("0".encode())
 			elif "wait" in animation:
 				ser.write("1".encode())
 			elif "angry" in animation:
 				ser.write("2".encode())
+			elif "white" in animation:
+				ser.write("3".encode())
+			elif "dim" in animation:
+				ser.write("4".encode())
+			elif "idle-green" in animation:
+				ser.write("5".encode())
 		
 		except serial.SerialException:
 			#speak("It looks like some bird has stolen my eye")

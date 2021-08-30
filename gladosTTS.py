@@ -7,6 +7,7 @@ import _thread as thread
 from threading import Timer
 import RPi.GPIO as GPIO
 from gladosSerial import *
+from gladosServo import *
 import sys
 from dotenv import load_dotenv
 load_dotenv(dotenv_path='settings.env')
@@ -19,6 +20,8 @@ GPIO.setup(int(os.getenv('SOUND_MUTE_PIN')), GPIO.OUT)
 synthFolder = os.getenv('TTS_SAMPLE_FOLDER')
 
 def playFile(filename):
+
+	eye_position_random()
 
 	# Defines a chunk size of 1024 samples per data frame.
 	chunk = 1024  

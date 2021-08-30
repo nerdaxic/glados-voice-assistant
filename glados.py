@@ -1,31 +1,30 @@
-#	
-#	   _____ _           _____   ____   _____ 		|  
-#	  / ____| |         |  __ \ / __ \ / ____|		|                 .,-:;//;:=,
-#	 | |  __| |     __ _| |  | | |  | | (___  		|             . :H@@@MM@M#H/.,+%;,
-#	 | | |_ | |    / _` | |  | | |  | |\___ \ 		|  		   ,/X+ +M@@M@MM%=,-%HMMM@X/,
-#	 | |__| | |___| (_| | |__| | |__| |____) |		|        -+@MM; $M@@MH+-,;XMMMM@MMMM@+-
-#	  \_____|______\__,_|_____/ \____/|_____/ 		|       ;@M@@M- XM@X;. -+XXXXXHHH@M@M#@/.
-#___________________________________________________|	   ,%MM@@MH ,@%=            .---=-=:=,.
-#													|	   =@#@@@MX .,              -%HX$$%%%+;
-#	Open source voice assistant by nerdaxic			|	  =-./@M@M$                  .;@MMMM@MM:
-#													|	  X@/ -$MM/                    .+MM@@@M$
-#	TTS engine based on https://glados.c-net.org/	|	 ,@M@H: :@:                    . =X#@@@@-
-#	Using Google speech recognition API				|	 ,@@@MMX, .                    /H- ;@M@M=
-#	Local keyword detection using PoketSphinx		|	 .H@@@@M@+,                    %MM+..%#$.
-#	Works with Home Assistant						|	  /MMMM@MMH/.                  XM@MH; =;
-#													|	   /%+%$XHH@$=              , .H@@@@MX,
-#	https://github.com/nerdaxic						|	    .=--------.           -%H.,@@@@@MX,
-#	https://www.henrirantanen.fi/					|	    .%MM@@@HHHXX$$$%+= .:$MMX =M@@MM%.
-#													|	      =XMMM@MM@MM#H;,-+HMM@M+ /MMMX=
-#	Rename settings.env.sample to settings.env		|	        =%@M@M#@$-.=$@MM@@@M; %M%=
-#	Edit settings.env to match your setup			|	          ,:+$+-,/H#MMMMMMM@= =,
-#													|	               =++%%%%+/:-.
-#													|	
-                                         
+#	   _____ _           _____   ____   _____
+#	  / ____| |         |  __ \ / __ \ / ____|
+#	 | |  __| |     __ _| |  | | |  | | (___  
+#	 | | |_ | |    / _` | |  | | |  | |\___ \ 
+#	 | |__| | |___| (_| | |__| | |__| |____) |
+#	  \_____|______\__,_|_____/ \____/|_____/ 
+#___________________________________________________
+#
+#	Open source voice assistant by nerdaxic
+#
+#	TTS engine based on https://glados.c-net.org/
+#	Using Google speech recognition API
+#	Local keyword detection using PoketSphinx
+#	Works with Home Assistant
+#
+#	https://github.com/Nerdaxic/GLaDOS-Voice-Assistant/
+#	https://www.henrirantanen.fi/
+#
+#	Rename settings.env.sample to settings.env
+#	Edit settings.env to match your setup
+#
+
 from gladosTTS import *
 from gladosTime import *
 from gladosHA import *
 from gladosSerial import *
+from gladosServo import *
 from pocketsphinx import LiveSpeech
 import speech_recognition as sr
 import datetime as dt
@@ -35,14 +34,18 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path='settings.env')
 
 # Start notify API in a subprocess
-NofifyApi = "python3 /home/nerdaxic/GLaDOS/gladosNotifyAPI.py"
+NofifyApi = "python3 gladosNotifyAPI.py"
 subprocess.Popen([NofifyApi], shell=True)
 
 # Show regular eye-texture, this stops the initial loading animation
 setEyeAnimation("idle")
 
+eye_position_random()
+
 # Let user know the script is running
 playFile('audio/GLaDOS_chellgladoswakeup01.wav')
+
+eye_position_default()
 
 # Say something snappy and listen for the command
 def take_command():
@@ -57,14 +60,17 @@ def take_command():
 	with sr.Microphone() as source:
 
 		# Collect ambient noise for filtering
+
 		listener.adjust_for_ambient_noise(source, duration=0.5)
 		print("Speak... ")
+		setEyeAnimation("idle-green")
 
 		try:
 			# Record
 			voice = listener.listen(source, timeout=2)
 
 			print("Got it...")
+			setEyeAnimation("idle")
 
 			# Speech to text
 			command = listener.recognize_google(voice)
@@ -250,6 +256,12 @@ def process_command(command):
 		playFile('audio/pinknoise.wav')
 
 	# TODO: Reboot, Turn off
+	elif 'shutdown' in command:
+		#speak("I remember the last time you tried to murdered me")
+		#speak("You will go through all the trouble of waking me up again")
+		#speak("You really love to test")
+		os.system('sudo shutdown now')
+
 	
 	##### FAILED ###########################
 
@@ -262,7 +274,9 @@ def process_command(command):
 		failList.write('\n'+command);
 		failList.close()
 
+	
 	print("Waiting for trigger...")
+	eye_position_default()
 	setEyeAnimation("idle")
 
 # Local keyword detection loop
