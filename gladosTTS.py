@@ -21,8 +21,6 @@ synthFolder = os.getenv('TTS_SAMPLE_FOLDER')
 
 def playFile(filename):
 
-	eye_position_random()
-
 	# Defines a chunk size of 1024 samples per data frame.
 	chunk = 1024  
 
@@ -124,8 +122,11 @@ def speak(line):
 
 		# Check if file exists
 		if file:
-		    playFile(file)
-		    print (line)
+			if eye_position_script(line):
+				eye_position_random()
+
+			playFile(file)
+			print (line)
 
 		# Else generate file
 		else:

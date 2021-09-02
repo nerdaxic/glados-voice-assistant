@@ -17,6 +17,11 @@ Tight integration with Home Assistant's local API:
 > Note: The code is provided as reference only.
 
 ## Hardware
-* Rapsberry PI 4
+* Rapsberry Pi 4
 * Memory card
-* Respeaker Mic Array V2.0
+* ReSpeaker Mic Array V2.0
+* Adafruit Stereo 3.7W Class D Audio Amplifier
+* Raspberry Pi 15W USB-C Power supply for computer and audio
+* MeanWell LRS-50-5 5V Power supply for power mechanics
+* Pololu Micro Maestro 6-Channel USB Servo Controller
+

@@ -43,7 +43,12 @@ setEyeAnimation("idle")
 eye_position_random()
 
 # Let user know the script is running
-playFile('audio/GLaDOS_chellgladoswakeup01.wav')
+#playFile('audio/GLaDOS_chellgladoswakeup01.wav')
+speak("oh, its you")
+time.sleep(0.25)
+speak("it's been a long time")
+time.sleep(1.5)
+speak("how have you been")
 
 eye_position_default()
 

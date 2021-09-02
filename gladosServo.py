@@ -20,6 +20,38 @@ def eye_position_default():
 	servo.setAccel(1,25)
 	servo.setSpeed(1,10)
 
-	servo.setTarget(1, 6000)
+	servo.setTarget(1, 5960)
 	servo.setTarget(0, 6000)
 	servo.close()
+
+def eye_position_open():
+	servo = maestro.Controller(ttyStr="/dev/ttyACM1")
+	servo.setAccel(0,15)
+	servo.setSpeed(0,10)
+	servo.setAccel(1,25)
+	servo.setSpeed(1,10)
+
+	servo.setTarget(1, 5000)
+	servo.setTarget(0, 6000)
+
+	print(servo.getMin(1))
+	print(servo.getMax(1))
+	servo.close()
+
+def eye_position_script(script):
+
+	servo = maestro.Controller(ttyStr="/dev/ttyACM1")
+	if "oh, its you" in script:
+		servo.runScriptSub(2)
+		servo.close()
+		return False;
+	elif "it's been a long time" in script:
+		servo.runScriptSub(1)
+		servo.close()
+		return False;
+	elif "how have you been" in script:
+		servo.runScriptSub(0)
+		servo.close()
+		return False;
+	else:
+		return True;
