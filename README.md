@@ -8,6 +8,8 @@ DIY Voice Assistant based on the GLaDOS character from Portal video game series.
 2. Process speech to text using Google's API (for now)
 3. GLaDOS Text-to-Speech generation with https://glados.c-net.org/
 4. Store generated audio samples locally for instant answers in the future
+5. Animatronic eye control using servos
+5. Eye is a small round LCD tha can display textures, controlled by Teensy 4
 
 Tight integration with Home Assistant's local API:
 * Send commands to Home Assistant
@@ -24,4 +26,7 @@ Tight integration with Home Assistant's local API:
 * Raspberry Pi 15W USB-C Power supply for computer and audio
 * MeanWell LRS-50-5 5V Power supply for power mechanics
 * Pololu Micro Maestro 6-Channel USB Servo Controller
+* Teensy 4 to control the eye LCD and NeoPixels
+* Single 5mm NeoPixel for the "REC" light
+* 16 LED NeoPixel ring
 

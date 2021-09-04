@@ -5,6 +5,7 @@ from random import *
 from gladosTTS import *
 from threading import Timer
 import re
+from gladosServo import *
 
 # Reads current time aloud
 def readTime():
@@ -13,11 +14,13 @@ def readTime():
 	minute = timer.strftime('%M')
 
 	print(hour+":"+minute)
-
+	eye_position_random()
 	playFile('audio/clock/hour/GLaDOS-hour-'+hour+'.wav')
+	eye_position_random()
 	playFile('audio/clock/minute/GLaDOS-'+minute+'.wav')
-	#r = str(randint(1, 4))
-	#playFile('audio/clock/time-comment/GLaDOS-general-'+str(r)+'-comment.wav')
+	r = str(randint(1, 4))
+	eye_position_random()
+	playFile('audio/clock/time-comment/GLaDOS-general-'+str(r)+'-comment.wav')
 
 # Start a new timer
 def startTimer(command):

@@ -57,7 +57,7 @@ def take_command():
 
 	# Feedback to user that GLaDOS is listening
 	print('listening...')
-	playFile('audio/GLaDOS-detect-pass-'+str(randint(1, 9))+'.wav')
+	playFile('audio/GLaDOS-detect-pass-'+str(randint(1, 20))+'.wav')
 
 	listener = sr.Recognizer()
 	
@@ -117,7 +117,7 @@ def take_command():
 def process_command(command):
 
 	if 'cancel' in command:
-		playFile('audio/GLaDOS-ok-'+str(randint(1, 5))+'.wav')
+		playFile('audio/GLaDOS-ok-'+str(randint(1, 6))+'.wav')
 		failList = open("cancelledActivations.txt", "a")
 		failList.write('\n'+str(os.getenv('TRIGGERWORD'))+" "+str(os.getenv('TRIGGERWORD_TRESHOLD')));
 		failList.close()
@@ -135,7 +135,7 @@ def process_command(command):
 		playFile('audio/magic-8-ball/'+random.choice(os.listdir("audio/magic-8-ball")))
 
 	elif 'joke' in command:
-		playFile('audio/jokes/GLaDOS-joke-'+str(randint(1, 9))+'.wav')
+		playFile('audio/jokes/GLaDOS-joke-'+str(randint(1, 14))+'.wav')
 
 	elif 'my shopping list' in command:
 		addToShoppingList(command)
@@ -156,6 +156,10 @@ def process_command(command):
 		else:
 			sayforecastfromHA(getDayIndex(command))
 
+		if randint(1, 1) == 1:
+			speak("You don't even care.")
+			speak("Do you?")
+
 	##### LIGHTING CONTROL ###########################
 
 	elif 'daylight' in command:
@@ -164,6 +168,7 @@ def process_command(command):
 
 	elif 'studio light' in command:
 		activateScene("scene.studio_lights")
+		speak("Are you trying to impress me")
 
 	elif 'night light' in command:
 		activateScene("scene.night_light")
@@ -241,6 +246,7 @@ def process_command(command):
 	##### PLEASANTRIES ###########################
 	elif 'how are you' in command:
 		speak("I'm still a bit mad about being unplugged not a long time ago.")
+		speak("you murderer")
 
 	elif 'can you hear me' in command:
 		speak("Yes, I can hear you loud and clear")

@@ -4,10 +4,10 @@ from random import randint
 
 def eye_position_random():
 	servo = maestro.Controller(ttyStr="/dev/ttyACM1")
-	servo.setAccel(0,15)
+	servo.setAccel(0,35)
 	servo.setSpeed(0,100)
 	servo.setAccel(1,25)
-	servo.setSpeed(1,10)
+	servo.setSpeed(1,20)
 
 	servo.setTarget(1, randint(5760, 6100))
 	servo.setTarget(0, randint(5000, 7000))
@@ -44,14 +44,14 @@ def eye_position_script(script):
 	if "oh, its you" in script:
 		servo.runScriptSub(2)
 		servo.close()
-		return False;
+		return True;
 	elif "it's been a long time" in script:
 		servo.runScriptSub(1)
 		servo.close()
-		return False;
+		return True;
 	elif "how have you been" in script:
 		servo.runScriptSub(0)
 		servo.close()
-		return False;
-	else:
 		return True;
+	
+	return False;

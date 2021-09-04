@@ -1,0 +1,94 @@
+<!--Pololu Maestro servo controller settings file, http://www.pololu.com/catalog/product/1350-->
+<UscSettings version="1">
+  <NeverSuspend>false</NeverSuspend>
+  <SerialMode>USB_DUAL_PORT</SerialMode>
+  <FixedBaudRate>9600</FixedBaudRate>
+  <SerialTimeout>0</SerialTimeout>
+  <EnableCrc>false</EnableCrc>
+  <SerialDeviceNumber>12</SerialDeviceNumber>
+  <SerialMiniSscOffset>0</SerialMiniSscOffset>
+  <Channels ServosAvailable="6" ServoPeriod="156">
+    <!--Period = 19,968 ms-->
+    <!--Channel 0-->
+    <Channel name="Eye Zoom" mode="Servo" min="2048" max="9600" homemode="Goto" home="6410" speed="0" acceleration="25" neutral="6000" range="1905" />
+    <!--Channel 1-->
+    <Channel name="Eyelids" mode="Servo" min="5248" max="6144" homemode="Goto" home="5983" speed="30" acceleration="20" neutral="6080" range="1905" />
+    <!--Channel 2-->
+    <Channel name="" mode="Servo" min="3968" max="8000" homemode="Off" home="3968" speed="0" acceleration="0" neutral="6000" range="1905" />
+    <!--Channel 3-->
+    <Channel name="" mode="Servo" min="3968" max="8000" homemode="Off" home="3968" speed="0" acceleration="0" neutral="6000" range="1905" />
+    <!--Channel 4-->
+    <Channel name="" mode="Servo" min="3968" max="8000" homemode="Off" home="3968" speed="0" acceleration="0" neutral="6000" range="1905" />
+    <!--Channel 5-->
+    <Channel name="" mode="Servo" min="3968" max="8000" homemode="Off" home="3968" speed="0" acceleration="0" neutral="6000" range="1905" />
+  </Channels>
+  <Sequences>
+    <Sequence name="how have you been">
+      <Frame name="Frame 0" duration="1">6520 5987 0 0 0 0</Frame>
+      <Frame name="Frame 1" duration="845">7327 5791 0 0 0 0</Frame>
+      <Frame name="Frame 2" duration="500">6190 5965 0 0 0 0</Frame>
+    </Sequence>
+    <Sequence name="it's been a long time">
+      <Frame name="Frame 0" duration="1">6410 5983 0 0 0 0</Frame>
+      <Frame name="Frame 1" duration="375">6410 5900 0 0 0 0</Frame>
+      <Frame name="Frame 2" duration="635">7620 5756 0 0 0 0</Frame>
+      <Frame name="Frame 3" duration="1">6520 5987 0 0 0 0</Frame>
+    </Sequence>
+    <Sequence name="oh, its you">
+      <Frame name="Frame 0" duration="0">6410 5983 0 0 0 0</Frame>
+      <Frame name="Frame 1" duration="750">8463 6144 0 0 0 0</Frame>
+      <Frame name="Frame 2" duration="700">6117 6144 0 0 0 0</Frame>
+      <Frame name="Frame 3" duration="1">6117 5904 0 0 0 0</Frame>
+    </Sequence>
+  </Sequences>
+  <Script ScriptDone="true">
+### Sequence subroutines: ###
+
+# how have you been
+sub how_have_you_been
+  1 6520 5987 0 0 0 0 frame_0..5 # Frame 0
+  845 7327 5791 frame_0_1 # Frame 1
+  500 6190 5965 frame_0_1 # Frame 2
+  return
+# it's been a long time
+sub its_been_a_long_time
+  1 6410 5983 0 0 0 0 frame_0..5 # Frame 0
+  375 5900 frame_1 # Frame 1
+  635 7620 5756 frame_0_1 # Frame 2
+  1 6520 5987 frame_0_1 # Frame 3
+  return
+# oh, its you
+sub oh_its_you
+  0 6410 5983 0 0 0 0 frame_0..5 # Frame 0
+  750 8463 6144 frame_0_1 # Frame 1
+  700 6117 frame_0 # Frame 2
+  1 5904 frame_1 # Frame 3
+  return
+
+sub frame_0..5
+  5 servo
+  4 servo
+  3 servo
+  2 servo
+  1 servo
+  0 servo
+  delay
+  return
+
+sub frame_0_1
+  1 servo
+  0 servo
+  delay
+  return
+
+sub frame_1
+  1 servo
+  delay
+  return
+
+sub frame_0
+  0 servo
+  delay
+  return
+</Script>
+</UscSettings>

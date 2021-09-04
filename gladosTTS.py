@@ -122,7 +122,7 @@ def speak(line):
 
 		# Check if file exists
 		if file:
-			if eye_position_script(line):
+			if eye_position_script(line) == False:
 				eye_position_random()
 
 			playFile(file)
