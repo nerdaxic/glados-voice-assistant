@@ -15,12 +15,12 @@ def readTime():
 
 	print(hour+":"+minute)
 	eye_position_random()
-	playFile('audio/clock/hour/GLaDOS-hour-'+hour+'.wav')
+	playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/hour/GLaDOS-hour-'+hour+'.wav')
 	eye_position_random()
-	playFile('audio/clock/minute/GLaDOS-'+minute+'.wav')
+	playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/minute/GLaDOS-'+minute+'.wav')
 	r = str(randint(1, 4))
 	eye_position_random()
-	playFile('audio/clock/time-comment/GLaDOS-general-'+str(r)+'-comment.wav')
+	#playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/time-comment/GLaDOS-general-'+str(r)+'-comment.wav')
 
 # Start a new timer
 def startTimer(command):
@@ -57,13 +57,13 @@ def startTimer(command):
 			t = Timer(duration, timerEnd, [duration, context])
 			t.start()
 			print(str(duration)+" second "+context+" timer started at "+str(dt.datetime.now()))
-			playFile('audio/clock/GLaDOS_Announcer_ding_on.wav')
+			playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/GLaDOS_Announcer_ding_on.wav')
 	else:
 		speak("I didn't understand the duration you wanted the timer for")
 
 # Run this when the timer ends
 def timerEnd(duration, context=""):
-	playFile('audio/clock/GLaDOS_Announcer_ding_off.wav')
+	playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/GLaDOS_Announcer_ding_off.wav')
 
 	# Did timer have context or was it generic?
 	if context:

@@ -5,7 +5,7 @@ import random
 import json
 import datetime as dt
 from dotenv import load_dotenv
-load_dotenv(dotenv_path='settings.env')
+load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
 # Get settings form environment file
 token = os.getenv('HOME_ASSISTANT_TOKEN')

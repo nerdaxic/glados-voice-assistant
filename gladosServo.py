@@ -41,6 +41,11 @@ def eye_position_open():
 def eye_position_script(script):
 
 	servo = maestro.Controller(ttyStr="/dev/ttyACM1")
+	servo.setAccel(0,15)
+	servo.setSpeed(0,100)
+	servo.setAccel(1,25)
+	servo.setSpeed(1,20)
+
 	if "oh, its you" in script:
 		servo.runScriptSub(2)
 		servo.close()

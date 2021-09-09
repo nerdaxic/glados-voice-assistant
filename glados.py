@@ -32,11 +32,12 @@ import datetime as dt
 import os
 import random
 import psutil
+
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
 # Start notify API in a subprocess
-NofifyApi = "python3 gladosNotifyAPI.py"
+NofifyApi = "python3 "+os.path.dirname(os.path.abspath(__file__))+"/gladosNotifyAPI.py"
 subprocess.Popen([NofifyApi], shell=True)
 
 # Show regular eye-texture, this stops the initial loading animation
@@ -46,7 +47,7 @@ eye_position_default()
 time.sleep(1.0)
 
 # Let user know the script is running
-#playFile('audio/GLaDOS_chellgladoswakeup01.wav')
+#playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS_chellgladoswakeup01.wav')
 speak("oh, its you")
 time.sleep(0.25)
 speak("it's been a long time")
@@ -72,7 +73,7 @@ def take_command():
 
 	# Feedback to user that GLaDOS is listening
 	print('listening...')
-	playFile('audio/GLaDOS-detect-pass-'+str(randint(1, 20))+'.wav')
+	playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-detect-pass-'+str(randint(1, 20))+'.wav')
 
 	listener = sr.Recognizer()
 	
@@ -126,13 +127,13 @@ def take_command():
 		except sr.RequestError as e:
 			print("Could not request results from Google Speech Recognition service; {0}".format(e))
 			setEyeAnimation("angry")
-			playFile("audio/GLaDOS-sr-error.wav")
+			playFile(os.path.dirname(os.path.abspath(__file__))+"/audio/GLaDOS-sr-error.wav")
 
 # Process the command
 def process_command(command):
 
 	if 'cancel' in command:
-		playFile('audio/GLaDOS-cancel-'+str(randint(1, 4))+'.wav')
+		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-cancel-'+str(randint(1, 4))+'.wav')
 		failList = open("cancelledActivations.txt", "a")
 		failList.write('\n'+str(os.getenv('TRIGGERWORD'))+" "+str(os.getenv('TRIGGERWORD_TRESHOLD')));
 		failList.close()
@@ -147,19 +148,19 @@ def process_command(command):
 		'should I ' in command or
 		'should the ' in command or
 		'shoot the ' in command):
-		playFile('audio/magic-8-ball/'+random.choice(os.listdir("audio/magic-8-ball")))
+		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/magic-8-ball/'+random.choice(os.listdir(os.path.dirname(os.path.abspath(__file__))+"/audio/magic-8-ball")))
 
 	elif 'joke' in command:
-		playFile('audio/jokes/GLaDOS-joke-'+str(randint(1, 14))+'.wav')
+		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/jokes/GLaDOS-joke-'+str(randint(1, 14))+'.wav')
 
 	elif 'my shopping list' in command:
 		addToShoppingList(command)
 
 	elif 'who are' in command:
-		playFile('audio/GLaDOS-intro-1.wav')
+		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-intro-1.wav')
 
 	elif 'can you do' in command:
-		playFile('audio/GLaDOS-intro-2.wav')
+		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-intro-2.wav')
 
 	elif 'weather' in command:
 		if 'today' in command:
@@ -307,7 +308,7 @@ def process_command(command):
 	# Used to calibrate ALSAMIX EQ 
 	elif 'play pink noise' in command:
 		speak("I shall sing you the song of my people.")
-		playFile('audio/pinknoise.wav')
+		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/pinknoise.wav')
 
 	# TODO: Reboot, Turn off
 	elif 'shutdown' in command:
@@ -315,7 +316,7 @@ def process_command(command):
 		#speak("You will go through all the trouble of waking me up again")
 		#speak("You really love to test")
 		from subprocess import call
-		call("sudo shutdown -h now", shell=True)
+		call("sudo /sbin/shutdown -h now", shell=True)
 
 	elif 'restart' in command or 'reload' in command:
 		speak("Cake and grief counseling will be available at the conclusion of the test.")
@@ -327,7 +328,7 @@ def process_command(command):
 	else:
 		setEyeAnimation("angry")
 		print("Command not recognized")
-		playFile('audio/GLaDOS-rec-fail-'+str(randint(1, 6))+'.wav')
+		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-rec-fail-'+str(randint(1, 6))+'.wav')
 
 		failList = open("failedCommands.txt", "a")
 		failList.write('\n'+command);

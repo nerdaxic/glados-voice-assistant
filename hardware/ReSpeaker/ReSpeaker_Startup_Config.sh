@@ -27,4 +27,4 @@ echo "Resetting Mic Array..."
 # Speech recognition level
 python3 /home/nerdaxic/respeakerDFU/usb_4_mic_array/tuning.py GAMMAVAD_SR 3
 # Check if ran correctly
-touch /home/nerdaxic/GLaDOS/mic.sh
+#touch /home/nerdaxic/GLaDOS/mic.sh

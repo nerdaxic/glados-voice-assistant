@@ -29,7 +29,6 @@ def playFile(filename):
 
 	# Initialize PyAudio
 	p = pyaudio.PyAudio()
-
 	
 	# Creates a Stream to which the wav file is written to.
 	# Setting output to "True" makes the sound be "played" rather than recorded
@@ -105,7 +104,7 @@ def fetchTTSSample(line, wait=True):
 		else:
 			# Complain about speech synthesis core
 			setEyeAnimation("angry")
-			playFile("audio/GLaDOS-tts-error.wav")
+			playFile(os.path.dirname(os.path.abspath(__file__))+"/audio/GLaDOS-tts-error.wav")
 			return False
 	else:
 		subprocess.Popen([TTSCommand], shell=True)
@@ -133,7 +132,7 @@ def speak(line):
 		    print ("File not exist, generating...")
 
 		    # Play "hold on"
-		    playFile('audio/GLaDOS-wait-'+str(randint(1, 6))+'.wav')
+		    playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-wait-'+str(randint(1, 6))+'.wav')
 
 		    # Try to get wave-file from https://glados.c-net.org/
 		    # Save line to TTS-folder

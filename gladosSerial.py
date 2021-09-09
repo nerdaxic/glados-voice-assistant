@@ -2,7 +2,7 @@ from gladosTTS import *
 import time
 import serial
 from dotenv import load_dotenv
-load_dotenv(dotenv_path='settings.env')
+load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
 def setEyeAnimation(animation="idle"):
 
