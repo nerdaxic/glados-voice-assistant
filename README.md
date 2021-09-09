@@ -7,6 +7,9 @@ DIY Voice Assistant based on the GLaDOS character from Portal video game series.
 
 [Check out the GLaDOS Voice Assistant project on Twitter](https://twitter.com/search?q=(%23glados)%20(from%3Anerdaxic)&src=typed_query)
 
+## Description
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Y3h5tKWqf-w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Main features
 1. Local Trigger word detection using PocketSphinx
 2. Speech to text processing using Google's API (for now)
@@ -20,7 +23,34 @@ Tight integration with Home Assistant's local API:
 * Can read and speak sensor data
 * Notification API, so Home Assistant can speak notifications aloud
 
+## What it can do:
+* Clock
+* Control lights and devices
+* Weather and forecast
+* Add things to shopping list
+* Read sensor information
+* Random magic 8-ball answers
+* Tell jokes
+* Judge you and be mean
+* Advanced fat-shaming
+* Log stuff and gather training data locally
+
+
 > Note: The code is provided as reference only.
+
+## To use:
+You can add glados.py to your crontab file or run it manually.
+``` 
+crontab -e
+@reboot python3 /home/username/GLaDOS-Voice-Assistant/glados.py
+``` 
+Additionally you can configure the ReSpeaker at startup by adding following lines to root's crontab:
+``` 
+sudo su
+crontab -e
+@reboot bash /home/username/GLaDOS-Voice-Assistant/hardware/ReSpeaker/ReSpeaker_Startup_Config.sh
+@reboot python3 /home/username/GLaDOS-Voice-Assistant/hardware/ReSpeaker/ReSpeaker_Turn_off_Pixelring.py
+``` 
 
 ## Hardware
 List of reference hardware what [nerdaxic](https://github.com/nerdaxic/) is developing on, models might not need to be exact. 

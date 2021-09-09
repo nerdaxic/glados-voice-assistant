@@ -10,7 +10,7 @@ from gladosSerial import *
 from gladosServo import *
 import sys
 from dotenv import load_dotenv
-load_dotenv(dotenv_path='settings.env')
+load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
 # GPIO settings to use single pin to turn amplifier circuit on and off
 GPIO.setwarnings(False)

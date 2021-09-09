@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 #	   _____ _           _____   ____   _____
 #	  / ____| |         |  __ \ / __ \ / ____|
 #	 | |  __| |     __ _| |  | | |  | | (___  
@@ -30,8 +31,9 @@ import speech_recognition as sr
 import datetime as dt
 import os
 import random
+import psutil
 from dotenv import load_dotenv
-load_dotenv(dotenv_path='settings.env')
+load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
 # Start notify API in a subprocess
 NofifyApi = "python3 gladosNotifyAPI.py"
@@ -40,7 +42,8 @@ subprocess.Popen([NofifyApi], shell=True)
 # Show regular eye-texture, this stops the initial loading animation
 setEyeAnimation("idle")
 
-eye_position_random()
+eye_position_default()
+time.sleep(1.0)
 
 # Let user know the script is running
 #playFile('audio/GLaDOS_chellgladoswakeup01.wav')
@@ -51,6 +54,18 @@ time.sleep(1.5)
 speak("how have you been")
 
 eye_position_default()
+
+# Reload Python script after doing changes to it
+def restart_program():
+    try:
+        p = psutil.Process(os.getpid())
+        for handler in p.get_open_files() + p.connections():
+            os.close(handler.fd)
+    except Exception as e:
+        print(e)
+
+    python = sys.executable
+    os.execl(python, python, *sys.argv)
 
 # Say something snappy and listen for the command
 def take_command():
@@ -66,13 +81,13 @@ def take_command():
 
 		# Collect ambient noise for filtering
 
-		listener.adjust_for_ambient_noise(source, duration=0.5)
+		#listener.adjust_for_ambient_noise(source, duration=1.0)
 		print("Speak... ")
 		setEyeAnimation("idle-green")
 
 		try:
 			# Record
-			voice = listener.listen(source, timeout=2)
+			voice = listener.listen(source, timeout=3)
 
 			print("Got it...")
 			setEyeAnimation("idle")
@@ -117,7 +132,7 @@ def take_command():
 def process_command(command):
 
 	if 'cancel' in command:
-		playFile('audio/GLaDOS-ok-'+str(randint(1, 6))+'.wav')
+		playFile('audio/GLaDOS-cancel-'+str(randint(1, 4))+'.wav')
 		failList = open("cancelledActivations.txt", "a")
 		failList.write('\n'+str(os.getenv('TRIGGERWORD'))+" "+str(os.getenv('TRIGGERWORD_TRESHOLD')));
 		failList.close()
@@ -128,10 +143,10 @@ def process_command(command):
 	elif 'time' in command:
 		readTime()
 
-	elif 'should i' in command:
-		playFile('audio/magic-8-ball/'+random.choice(os.listdir("audio/magic-8-ball")))
-
-	elif 'should my' in command:
+	elif ('should my ' in command or 
+		'should I ' in command or
+		'should the ' in command or
+		'shoot the ' in command):
 		playFile('audio/magic-8-ball/'+random.choice(os.listdir("audio/magic-8-ball")))
 
 	elif 'joke' in command:
@@ -156,7 +171,7 @@ def process_command(command):
 		else:
 			sayforecastfromHA(getDayIndex(command))
 
-		if randint(1, 1) == 1:
+		if randint(1, 10) == 1:
 			speak("You don't even care.")
 			speak("Do you?")
 
@@ -194,6 +209,23 @@ def process_command(command):
 		setCoverTo("open")
 		speak("Sure.")
 
+
+	elif 'blinds' in command or 'curtain' in command:
+		if 'open' in command:
+			if 'bedroom' in command:
+				call_HA_Service("cover.set_cover_position", "cover.bedroom_roller_blind_left", data='"position": "100"')
+				call_HA_Service("cover.set_cover_position", "cover.bedroom_roller_blind_right", data='"position": "100"')
+			elif 'living room' in command:
+				call_HA_Service("cover.set_cover_position", "cover.cinema_blind", data='"position": "100"')			
+		elif 'close' in command:
+			if 'bedroom' in command:
+				call_HA_Service("cover.set_cover_position", "cover.bedroom_roller_blind_left", data='"position": "0"')
+				call_HA_Service("cover.set_cover_position", "cover.bedroom_roller_blind_right", data='"position": "0"')
+			elif 'living room' in command:
+				call_HA_Service("cover.set_cover_position", "cover.cinema_blind", data='"position": "0"')
+
+		speak("Sure.")
+			
 	elif 'turn on hallway lights' in command:
 		lightSwitch("light.hallway_lights", "on")
 		speak("Sure.")
@@ -210,6 +242,17 @@ def process_command(command):
 		if 'turn off' in command:
 			runHaScript("turn_off_home_cinema")
 			speak("Sure.")
+
+	elif 'air conditioning' in command or ' ac' in command:
+		if 'turn on' in command:
+			speak("Give me a minute.")
+			speak("The neurotoxin generator takes a moment to heat up.")
+			call_HA_Service("climate.set_temperature", "climate.living_room_ac", data='"temperature": "23"')
+			call_HA_Service("climate.set_hvac_mode", "climate.living_room_ac", data='"hvac_mode": "heat_cool"')
+			call_HA_Service("climate.set_fan_mode", "climate.living_room_ac", data='"fan_mode": "auto"')
+		if 'turn off' in command:
+			call_HA_Service("climate.turn_off", "climate.living_room_ac")
+			speak("The neurotoxin levels will reach dangerously unleathal levels within a minute.")
 
 	##### SENSOR OUTPUT ###########################
 
@@ -268,10 +311,15 @@ def process_command(command):
 
 	# TODO: Reboot, Turn off
 	elif 'shutdown' in command:
-		#speak("I remember the last time you tried to murdered me")
+		speak("I remember the last time you tried to murdered me")
 		#speak("You will go through all the trouble of waking me up again")
 		#speak("You really love to test")
-		os.system('sudo shutdown now')
+		from subprocess import call
+		call("sudo shutdown -h now", shell=True)
+
+	elif 'restart' in command or 'reload' in command:
+		speak("Cake and grief counseling will be available at the conclusion of the test.")
+		restart_program()
 
 	
 	##### FAILED ###########################
@@ -304,3 +352,4 @@ for phrase in speech:
 		print(e)
 		speak("Well that failed, you really need to write better code")
 		setEyeAnimation("idle")
+

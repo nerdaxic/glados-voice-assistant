@@ -132,6 +132,20 @@ void loop(void) {
       state = 1;
       lastMode = 5;
     }
+
+    // Restart loading animation
+    if(data_received == '6'){
+      rec_light.setPixelColor(0, rec_light.Color(0,0,0));
+      rec_light.show();
+      colorWipe(ring_light.gamma32(ring_light.Color(0, 0, 0)), 50);
+      tft.fillScreen(GC9A01A_BLACK);
+      delay(700);
+    
+      startAnimation()
+      
+      state = 0;
+      lastMode = NULL;
+    }
   }
 
   if(state == 0){

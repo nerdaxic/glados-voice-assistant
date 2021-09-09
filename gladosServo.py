@@ -4,7 +4,7 @@ from random import randint
 
 def eye_position_random():
 	servo = maestro.Controller(ttyStr="/dev/ttyACM1")
-	servo.setAccel(0,35)
+	servo.setAccel(0,25)
 	servo.setSpeed(0,100)
 	servo.setAccel(1,25)
 	servo.setSpeed(1,20)

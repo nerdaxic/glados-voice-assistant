@@ -40,7 +40,7 @@ def startTimer(command):
 		if matches[12]:
 			context = matches[12]
 		
-		removal_list = ["timer","the","for", "a"]
+		removal_list = ["timer","the","for", "a", "set up"]
 		edit_string_as_list = context.split()
 		final_list = [word for word in edit_string_as_list if word not in removal_list]
 		context = ' '.join(final_list)

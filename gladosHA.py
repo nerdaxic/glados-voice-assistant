@@ -69,6 +69,7 @@ def runHaScript(script):
 	}
 
 	response = requests.post(url, headers=headers, verify=False)
+
 def lightSwitch(light, state="on"):
 	url = endpoint+"services/light/turn_"+state
 	headers = {
@@ -247,3 +248,24 @@ def getDayIndex(command):
 		diff = diff + 7
 
 	return diff
+
+def call_HA_Service(service, entity, data=""):
+
+	domain = service.partition(".")[0]
+	service = service.partition(".")[2]
+
+	url = endpoint+"services/"+domain+"/"+service
+	
+	print(url)
+	headers = {
+	 "Authorization": "Bearer "+token,
+	 "content-type": "application/json",
+	}
+
+	if data != "":
+		data = ", "+data
+
+	payload = '{"entity_id": "'+entity+'"'+data+'}'
+
+	response = requests.post(url, headers=headers, data=payload, verify=False)
+	print(response.content)

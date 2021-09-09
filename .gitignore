@@ -6,6 +6,7 @@ collectedSpeech/**
 collectedWakeWords/**
 failedCommands.txt
 cancelledActivations.txt
+gladosdemo.py
 
 # Local enviroment file
 settings.env
