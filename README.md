@@ -5,16 +5,15 @@ DIY Voice Assistant based on the GLaDOS character from Portal video game series.
 * Written mostly in Python
 * Work in progress
 
-[Check out the GLaDOS Voice Assistant project on Twitter](https://twitter.com/search?q=(%23glados)%20(from%3Anerdaxic)&src=typed_query)
-
 ## Description
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Y3h5tKWqf-w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+### 📺 [Watch the intro video on YouTube](https://www.youtube.com/embed/Y3h5tKWqf-w)
+### 🛠 [Check out the GLaDOS Voice Assistant project on Twitter](https://twitter.com/search?q=(%23glados)%20(from%3Anerdaxic)&src=typed_query)
 
 ## Main features
 1. Local Trigger word detection using PocketSphinx
 2. Speech to text processing using Google's API (for now)
 3. GLaDOS Text-to-Speech generation using https://glados.c-net.org/
-4. Storeing of generated audio samples locally for instant answers in the future
+4. Storing of generated audio samples locally for instant answers in the future
 5. Animatronic eye control using servos
 5. Round LCD for an eye to display display textures
 
