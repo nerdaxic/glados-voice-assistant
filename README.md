@@ -6,7 +6,8 @@ DIY Voice Assistant based on the GLaDOS character from Portal video game series.
 * Work in progress
 
 ## Description
-### 📺 [Watch the intro video on YouTube](https://www.youtube.com/embed/Y3h5tKWqf-w)
+### 📺 [GLaDOS Voice Assistant | Introduction](https://www.youtube.com/embed/Y3h5tKWqf-w)
+### 📺 [GLaDOS Voice Assistant | Software - Python tutorial](https://youtu.be/70_imR6cBGc)
 ### 🛠 [Check out the GLaDOS Voice Assistant project on Twitter](https://twitter.com/search?q=(%23glados)%20(from%3Anerdaxic)&src=typed_query)
 
 ## Main features
