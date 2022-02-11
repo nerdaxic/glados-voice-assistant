@@ -5,10 +5,12 @@ DIY Voice Assistant based on the GLaDOS character from Portal video game series.
 * Written mostly in Python
 * Work in progress
 
+[Introduction - DIY GLaDOS Voice Assistant with Python and Raspberry Pi](https://www.henrirantanen.fi/2022/02/10/diy-glados-raspberry-pi-voice-assistant/?utm_source=github.com&utm_medium=social&utm_campaign=post&utm_content=DIY+GLaDOS+Voice+Assistant+with+Python+and+Raspberry+Pi)
+
 ## Description
-### 📺 [GLaDOS Voice Assistant | Introduction](https://www.youtube.com/embed/Y3h5tKWqf-w)
-### 📺 [GLaDOS Voice Assistant | Software - Python tutorial](https://youtu.be/70_imR6cBGc)
-### 🛠 [Check out the GLaDOS Voice Assistant project on Twitter](https://twitter.com/search?q=(%23glados)%20(from%3Anerdaxic)&src=typed_query)
+### YouTube 📺 [GLaDOS Voice Assistant | Introduction](https://www.youtube.com/embed/Y3h5tKWqf-w)
+### YouTube 📺 [GLaDOS Voice Assistant | Software - Python tutorial](https://youtu.be/70_imR6cBGc)
+### Twitter 🛠 [GLaDOS Voice Assistant project build](https://twitter.com/search?q=(%23glados)%20(from%3Anerdaxic)&src=typed_query)
 
 ## Main features
 1. Local Trigger word detection using PocketSphinx
