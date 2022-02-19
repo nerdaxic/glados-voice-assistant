@@ -41,8 +41,104 @@ Tight integration with Home Assistant's local API:
 
 > Note: The code is provided as reference only.
 
-## To use:
-1. Install [Raspberry Pi operating system](https://downloads.raspberrypi.org/raspios_arm64/images/raspios_arm64-2022-01-28/2022-01-28-raspios-bullseye-arm64.zip)  (64-bit version needed for future updates)
+## Set up Raspberry Pi
+### 1) Install 64-bit Raspberry Pi operating system
+Use [Win32DiskImager](https://sourceforge.net/projects/win32diskimager/) or [Raspberry Pi Imager](https://www.raspberrypi.com/software/) to write the operating system to a microSD card.
+
+📀 [2022-01-28-raspios-bullseye-arm64.zip](https://downloads.raspberrypi.org/raspios_arm64/images/raspios_arm64-2022-01-28/2022-01-28-raspios-bullseye-arm64.zip)
+
+### 2) Once finished writing the image to SD-card, go the the drive labelled "boot" and add following files:
+#### 📄 Add wpa_supplicant.conf
+This file gives Raspberry Pi your wifi details so you can automatically connect to your wifi so you can log in with SSH without plugging in keyboard etc.
+Add your wifi network name, password and [ISO/IEC alpha2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) in which the device is operating.
+``` ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=US
+
+network={
+     ssid="Your wifi network name here"
+     psk="Wifi password here"
+     scan_ssid=1
+}
+``` 
+
+#### 📄 Add empty file called "ssh" without file extension
+This tells the operating system to enable SSH so you can log in remotely.
+
+[Full guide here](https://www.raspberrypi.com/documentation/computers/configuration.html#setting-up-a-headless-raspberry-pi)
+
+### 3) Start up the Raspberry Pi
+1. Umnount SD-card
+2. Insert card into Raspberry Pi
+3. Plug in the power
+4. Device should connect to your WIFI automatically
+
+### 4) Login to Raspberry Pi
+You can use the client list in your router to find the IP-address of the Raspberry Pi.
+While you in there, I would recommend to set the DHCP server to always give the Raspberry Pi the same IP, or later setting a static IP in the Raspberry Pi config.
+
+You can use [Putty](https://www.puttygen.com/download-putty) or Linux command line to log into Paspberry PI
+
+| Item | Value |
+| :---- | -----------: |
+| Address | Check your router |
+| Default port | 22 |
+| Username | Pi |
+| Default password | raspberry |
+| Protocol | SSH |
+
+### 5) Secure your Raspberry Pi
+The server can have access keys & login tokens to your accounts & systems, so take your time to secure your server.
+
+[Securing your Raspberry Pi](https://www.raspberrypi.com/documentation/computers/configuration.html#securing-your-raspberry-pi)
+
+## Requirements
+### Install PyAudio
+PyAudio is needed to play audio files.
+``` 
+sudo apt-get update 
+sudo apt-get upgrade 
+sudo apt-get install portaudio19-dev 
+sudo pip3 install pyaudio
+``` 
+### Install python-dotenv
+Used to parse the settings file.
+``` 
+sudo pip3 install python-dotenv
+``` 
+### Install PocketSphinx
+Used for trigger word detection for now.
+``` 
+sudo apt-get install -y build-essential swig libpulse-dev libasound2-dev
+sudo pip3 install pocketsphinx
+``` 
+
+### Install SpeechRecognition 
+Used to turn audio into text for now.
+``` 
+sudo pip3 install SpeechRecognition
+``` 
+
+## Install GLaDOS Voice Assistant on your Raspberry Pi
+
+1. Go to home folder
+``` 
+cd ~
+``` 
+2. Download the source from GitHub
+``` 
+git clone https://github.com/nerdaxic/GLaDOS-Voice-Assistant/
+``` 
+3. Edit the settings file
+``` 
+cp GLaDOS-Voice-Assistant/settings.env.sample GLaDOS-Voice-Assistant/settings.env && nano GLaDOS-Voice-Assistant/settings.env
+``` 
+4. To run:
+
+Run the voice assistant:
+```
+python3 ~/GLaDOS-Voice-Assistant/glados.py
+```
 
 You can add glados.py to your crontab file or run it manually.
 ``` 
@@ -62,7 +158,7 @@ List of reference hardware what [nerdaxic](https://github.com/nerdaxic/) is deve
 Not a full bill of materials.
 | Item | Description |
 | ---- | ----------- |
-| Main board | [Raspberry Pi 4 Model B 8GB](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) |
+| Main board | [Raspberry Pi 4 Model B 8GB V1.4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) |
 | Power supply for Digital + Audio | [Raspberry Pi 15W USB-C Power supply](https://www.raspberrypi.org/products/type-c-power-supply/) |
 | Memory card | Class 10 64 GB microSDXC U3 |
 | Microcontroller | [Teensy 4](https://www.pjrc.com/store/teensy40.html), to control the eye LCD and NeoPixels |
