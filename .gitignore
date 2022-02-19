@@ -1,5 +1,5 @@
 # Ignore the collected TTS samples
-audio/tts/**
+*.wav
 
 # Ignore locally collected data
 collectedSpeech/**

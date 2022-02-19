@@ -117,7 +117,14 @@ sudo pip3 install pocketsphinx
 Used to turn audio into text for now.
 ``` 
 sudo pip3 install SpeechRecognition
+sudo apt-get install flac
 ``` 
+### Install sounddevice 
+Used for selecting sound cards
+``` 
+sudo pip3 install sounddevice
+``` 
+
 
 ## Install GLaDOS Voice Assistant on your Raspberry Pi
 
@@ -130,12 +137,17 @@ cd ~
 git clone https://github.com/nerdaxic/GLaDOS-Voice-Assistant/
 ``` 
 3. Edit the settings file
+Find the sound card ID with:
+```
+python3 -m sounddevice
+```
+Write settings to file:
 ``` 
 cp GLaDOS-Voice-Assistant/settings.env.sample GLaDOS-Voice-Assistant/settings.env && nano GLaDOS-Voice-Assistant/settings.env
 ``` 
 4. To run:
 
-Run the voice assistant:
+Launch the voice assistant:
 ```
 python3 ~/GLaDOS-Voice-Assistant/glados.py
 ```

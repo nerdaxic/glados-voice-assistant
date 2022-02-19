@@ -17,7 +17,7 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(int(os.getenv('SOUND_MUTE_PIN')), GPIO.OUT)
 
-synthFolder = os.getenv('TTS_SAMPLE_FOLDER')
+synthFolder = os.getenv('TTS_SAMPLE_FOLDER') + "/"
 
 def playFile(filename):
 
