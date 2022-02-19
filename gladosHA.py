@@ -20,6 +20,7 @@ def addToShoppingList(item):
 	item = item.capitalize()
 
 	url = endpoint+"services/shopping_list/add_item"
+
 	headers = {
 	 "Authorization": "Bearer "+token,
 	 "content-type": "application/json",
@@ -36,19 +37,9 @@ def addToShoppingList(item):
 	elif 'French fries' in item:
 		speak("If you want to upset a human, just say their weight variance is above or below the norm.")
 
-	# Check TTS library for the item
-	elif checkTTSLib(item):
-		playFile('audio/GLaDOS-shopping-list-added.wav')
-		speak(item)
-		if(random.getrandbits(1)):
-			playFile('audio/GLaDOS-shopping-list-to-your-shopping-list.wav')
-	
 	else:
 		# Item audio not found, random generic OK response
-		playFile('audio/GLaDOS-ok-'+str(randint(1, 5))+'.wav')
-
-		# Fetch the item.wav in the background for future use
-		fetchTTSSample(item, wait=False)
+		speak("I have added "+item+" to your shopping list")
 
 def activateScene(scene):
 	url = endpoint+"services/scene/turn_on"
@@ -124,7 +115,7 @@ def sayNumericSensorData(sensor):
 	# Check if value.wav is available, if not, get it before to speak full sentences.
 	if not checkTTSLib(str(sensorValue)):
 		# Play "hold on"
-		playFile('audio/GLaDOS-wait-'+str(randint(1, 2))+'.wav')
+		#playFile('audio/GLaDOS-wait-'+str(randint(1, 2))+'.wav')
 		fetchTTSSample(str(sensorValue))
 
 	if not checkTTSLib("The "+cleanTTSLine(sensorName)):
@@ -189,15 +180,14 @@ def sayforecastfromHA(days):
 		pass
 	
 	sensorData = json.loads(response.text)
-	print(sensorData)
+	
 	print("Days: "+str(days))
 	forecast = sensorData['attributes']['forecast'][days]
-	
-	#playFile('audio/GLaDOS-kerava-weather.wav')
+
+	print("forecast: "+str(forecast))
 
 	# Parse weekday of the forecast datetime
 	forecastWeekday = dt.datetime.strptime(forecast["datetime"], '%Y-%m-%dT%H:%M:%S').strftime('%A')
-	print("forecastWeekday: "+str(forecastWeekday))
 
 	if(days == 0):
 		speak("Today, it's expected to be")
@@ -242,10 +232,17 @@ def getDayIndex(command):
 
 	currentTimestamp = dt.datetime.today()
 	weekdayIndex = currentTimestamp.weekday()
+
+	print("requestIndex :"+str(requestIndex ))
+	print("weekdayIndex:"+str(weekdayIndex))
+
 	
 	diff = requestIndex-weekdayIndex
 	if diff < 0:
 		diff = diff + 7
+
+
+	print("diff: "+str(diff))
 
 	return diff
 

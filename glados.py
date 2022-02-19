@@ -202,15 +202,6 @@ def process_command(command):
 		lightSwitch("light.all_lights", "off")
 		speak("This is the situation why I was built with excellent night vision.")
 
-	elif 'close bedroom' in command:
-		setCoverTo("closed")
-		speak("Sure.")
-
-	elif 'open bedroom' in command:
-		setCoverTo("open")
-		speak("Sure.")
-
-
 	elif 'blinds' in command or 'curtain' in command:
 		if 'open' in command:
 			if 'bedroom' in command:

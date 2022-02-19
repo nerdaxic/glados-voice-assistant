@@ -124,6 +124,12 @@ Used for selecting sound cards
 ``` 
 sudo pip3 install sounddevice
 ``` 
+### Install other libraries
+Should be already installed on Raspberry
+``` 
+sudo pip3 install serial
+sudo pip3 install psutil
+``` 
 
 
 ## Install GLaDOS Voice Assistant on your Raspberry Pi

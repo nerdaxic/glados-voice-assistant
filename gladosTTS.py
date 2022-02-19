@@ -5,56 +5,19 @@ import wave
 from random import randint
 import _thread as thread
 from threading import Timer
-import RPi.GPIO as GPIO
 from gladosSerial import *
 from gladosServo import *
 import sys
+import urllib.parse
+import re
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
-
-# GPIO settings to use single pin to turn amplifier circuit on and off
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(int(os.getenv('SOUND_MUTE_PIN')), GPIO.OUT)
+from playsound import playsound as ps
 
 synthFolder = os.getenv('TTS_SAMPLE_FOLDER') + "/"
 
 def playFile(filename):
-
-	# Defines a chunk size of 1024 samples per data frame.
-	chunk = 1024  
-
-	# Open sound file  in read binary form.
-	file = wave.open(filename, 'rb')
-
-	# Initialize PyAudio
-	p = pyaudio.PyAudio()
-	
-	# Creates a Stream to which the wav file is written to.
-	# Setting output to "True" makes the sound be "played" rather than recorded
-	stream = p.open(format = p.get_format_from_width(file.getsampwidth()),
-	                channels = file.getnchannels(),
-	                rate = file.getframerate(),
-	                output = True,
-	                output_device_index = int(os.getenv('SOUND_CARD_ID')))
-
-	# Read data in chunks
-	data = file.readframes(chunk)
-
-	# Play the sound by writing the audio data to the stream
-
-	while True:
-	    data = file.readframes(chunk)
-	    if not data:
-	        break
-	    stream.write(data)  # to be played
-
-	time.sleep(0.1)
-	
-	# Stop, Close and terminate the stream
-	stream.stop_stream()
-	stream.close()
-	#p.terminate() for some reason uncommenting this crashes notify api
+	ps(filename)
 	
 
 # Turns units etc into speakable text
@@ -65,13 +28,16 @@ def cleanTTSLine(line):
 	line = line.replace("% (RH)", "percent")
 	line = line.replace("g/m³", "grams per cubic meter")
 	line = line.replace("sauna", "incinerator")
+	line = line.replace("'", "")
 	line = line.lower()
+
+	if re.search("-\d", line):
+		line = line.replace("-", "negative ")
 	
 	return line
 
 # Cleans filename for the sample
 def cleanTTSFile(line):
-
 	filename = "GLaDOS-tts-"+cleanTTSLine(line).replace(" ", "-")
 	filename = filename.replace("!", "")
 	filename = filename.replace("°c", "degrees celcius")
@@ -91,8 +57,14 @@ def checkTTSLib(line):
 
 # Get GLaDOS TTS Sample over the online API
 def fetchTTSSample(line, wait=True):
-	TTSCommand = 'curl -L --retry 30 --get --fail --data-urlencode "text='+cleanTTSLine(line)+'" -o "'+synthFolder+cleanTTSFile(line)+'" "https://glados.c-net.org/generate"'
+	# https://glados.c-net.org/
+	#TTSCommand = 'curl -L --retry 30 --get --fail --data-urlencode "text='+cleanTTSLine(line)+'" -o "'+synthFolder+cleanTTSFile(line)+'" "https://glados.c-net.org/generate"'
+	
+	# https://glados.2022.us/synthesize/
+	text = urllib.parse.quote(cleanTTSLine(line))
+	TTSCommand = 'curl -L --retry 5 --get --fail -o '+synthFolder+cleanTTSFile(line)+' https://glados.2022.us/synthesize/'+text
 
+	print(TTSCommand) 
 	if(wait):
 		setEyeAnimation("wait")
 		TTSResponse = os.system(TTSCommand)
@@ -132,7 +104,7 @@ def speak(line):
 		    print ("File not exist, generating...")
 
 		    # Play "hold on"
-		    playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-wait-'+str(randint(1, 6))+'.wav')
+		    #playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-wait-'+str(randint(1, 6))+'.wav')
 
 		    # Try to get wave-file from https://glados.c-net.org/
 		    # Save line to TTS-folder
