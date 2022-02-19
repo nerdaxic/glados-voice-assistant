@@ -134,7 +134,7 @@ cd ~
 ``` 
 2. Download the source from GitHub
 ``` 
-git clone https://github.com/nerdaxic/GLaDOS-Voice-Assistant/
+git clone https://github.com/nerdaxic/glados-voice-assistant/
 ``` 
 3. Edit the settings file
 Find the sound card ID with:
@@ -143,26 +143,26 @@ python3 -m sounddevice
 ```
 Write settings to file:
 ``` 
-cp GLaDOS-Voice-Assistant/settings.env.sample GLaDOS-Voice-Assistant/settings.env && nano GLaDOS-Voice-Assistant/settings.env
+cp glados-voice-assistant/settings.env.sample glados-voice-assistant/settings.env && nano glados-voice-assistant/settings.env
 ``` 
 4. To run:
 
 Launch the voice assistant:
 ```
-python3 ~/GLaDOS-Voice-Assistant/glados.py
+python3 ~/glados-voice-assistant/glados.py
 ```
 
 You can add glados.py to your crontab file or run it manually.
 ``` 
 crontab -e
-@reboot python3 /home/username/GLaDOS-Voice-Assistant/glados.py
+@reboot python3 /home/username/glados-voice-assistant/glados.py
 ``` 
 Additionally you can configure the ReSpeaker at startup by adding following lines to root's crontab:
 ``` 
 sudo su
 crontab -e
-@reboot bash /home/username/GLaDOS-Voice-Assistant/hardware/ReSpeaker/ReSpeaker_Startup_Config.sh
-@reboot python3 /home/username/GLaDOS-Voice-Assistant/hardware/ReSpeaker/ReSpeaker_Turn_off_Pixelring.py
+@reboot bash /home/username/glados-voice-assistant/hardware/ReSpeaker/ReSpeaker_Startup_Config.sh
+@reboot python3 /home/username/glados-voice-assistant/hardware/ReSpeaker/ReSpeaker_Turn_off_Pixelring.py
 ``` 
 
 ## Hardware
