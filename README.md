@@ -1,7 +1,7 @@
 # GLaDOS Voice Assistant
 DIY Voice Assistant based on the GLaDOS character from Portal video game series.
 
-* Designed for Raspberry Pi
+* Designed for Raspberry Pi 4 Model B (8 GB) V 1.4
 * Written mostly in Python
 * Work in progress
 
@@ -42,6 +42,8 @@ Tight integration with Home Assistant's local API:
 > Note: The code is provided as reference only.
 
 ## To use:
+1. Install [Raspberry Pi operating system](https://downloads.raspberrypi.org/raspios_arm64/images/raspios_arm64-2022-01-28/2022-01-28-raspios-bullseye-arm64.zip)  (64-bit version needed for future updates)
+
 You can add glados.py to your crontab file or run it manually.
 ``` 
 crontab -e
