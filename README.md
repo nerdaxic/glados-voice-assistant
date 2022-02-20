@@ -4,7 +4,7 @@ DIY Voice Assistant based on the GLaDOS character from Portal video game series.
 * Written mostly in Python
 * Work in progress
 
-Note: New versions of the voice assistant wont work on Raspberry Pi due to missing CPU instruction sets needed by some AI scripts. If you are looking to play along with your Raspberry Pi, check the raspberry branch.
+❗ New versions of the voice assistant will not work on Raspberry Pi due to missing CPU instruction sets needed by some AI scripts. If you are looking to play along with the old version on your Raspberry Pi, check the [raspberry branch](https://github.com/nerdaxic/glados-voice-assistant/tree/raspberry).
 
 ## Read article first!
 [DIY GLaDOS Voice Assistant with Python and Raspberry Pi](https://www.henrirantanen.fi/2022/02/10/diy-glados-raspberry-pi-voice-assistant/?utm_source=github.com&utm_medium=social&utm_campaign=post&utm_content=DIY+GLaDOS+Voice+Assistant+with+Python+and+Raspberry+Pi)
@@ -16,16 +16,16 @@ Note: New versions of the voice assistant wont work on Raspberry Pi due to missi
 
 ## Main features
 1. Local Trigger word detection using PocketSphinx
-2. Speech to text processing using Google's API (for now)
-3. GLaDOS Text-to-Speech generation using https://glados.c-net.org/
-4. Storing of generated audio samples locally for instant answers in the future
+2. Local Text-to-Speech generation using [OVOS TTS plugin for GladosTTS](https://github.com/NeonGeckoCom/neon-tts-plugin-glados) and [glados-tts model by R2D2FISH](https://github.com/R2D2FISH/glados-tts)
+3. Speech to text processing using Google's API (for now)
+4. Local TTS cache of generated audio samples locally for instant answers in the future _(will be removed due to TTS engine being fast enough)_
 5. Animatronic eye control using servos
-5. Round LCD for an eye to display display textures
+6. Round LCD for an eye to display display textures
 
 Tight integration with Home Assistant's local API:
 * Send commands to Home Assistant
 * Can read and speak sensor data
-* Notification API, so Home Assistant can speak notifications aloud
+* Notification API, so Home Assistant can speak out notifications
 
 ## What it can do:
 * Clock
@@ -42,61 +42,10 @@ Tight integration with Home Assistant's local API:
 
 > Note: The code is provided as reference only.
 
-## Set up Raspberry Pi
-### 1) Install 64-bit Raspberry Pi operating system
-Use [Win32DiskImager](https://sourceforge.net/projects/win32diskimager/) or [Raspberry Pi Imager](https://www.raspberrypi.com/software/) to write the operating system to a microSD card.
-
-📀 [2022-01-28-raspios-bullseye-arm64.zip](https://downloads.raspberrypi.org/raspios_arm64/images/raspios_arm64-2022-01-28/2022-01-28-raspios-bullseye-arm64.zip)
-
-### 2) Once finished writing the image to SD-card, go the the drive labelled "boot" and add following files:
-#### 📄 Add wpa_supplicant.conf
-This file gives Raspberry Pi your wifi details so you can automatically connect to your wifi so you can log in with SSH without plugging in keyboard etc.
-Add your wifi network name, password and [ISO/IEC alpha2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) in which the device is operating.
-``` ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-country=US
-
-network={
-     ssid="Your wifi network name here"
-     psk="Wifi password here"
-     scan_ssid=1
-}
-``` 
-
-#### 📄 Add empty file called "ssh" without file extension
-This tells the operating system to enable SSH so you can log in remotely.
-
-[Full guide here](https://www.raspberrypi.com/documentation/computers/configuration.html#setting-up-a-headless-raspberry-pi)
-
-### 3) Start up the Raspberry Pi
-1. Umnount SD-card
-2. Insert card into Raspberry Pi
-3. Plug in the power
-4. Device should connect to your WIFI automatically
-
-### 4) Login to Raspberry Pi
-You can use the client list in your router to find the IP-address of the Raspberry Pi.
-While you in there, I would recommend to set the DHCP server to always give the Raspberry Pi the same IP, or later setting a static IP in the Raspberry Pi config.
-
-You can use [Putty](https://www.puttygen.com/download-putty) or Linux command line to log into Paspberry PI
-
-| Item | Value |
-| :---- | -----------: |
-| Address | Check your router |
-| Default port | 22 |
-| Username | Pi |
-| Default password | raspberry |
-| Protocol | SSH |
-
-### 5) Secure your Raspberry Pi
-The server can have access keys & login tokens to your accounts & systems, so take your time to secure your server.
-
-[Securing your Raspberry Pi](https://www.raspberrypi.com/documentation/computers/configuration.html#securing-your-raspberry-pi)
-
 ## Requirements
 ### Install PyAudio
 PyAudio is needed to play audio files.
-``` 
+```console 
 sudo apt-get update 
 sudo apt-get upgrade 
 sudo apt-get install portaudio19-dev 
@@ -104,30 +53,30 @@ sudo pip3 install pyaudio
 ``` 
 ### Install python-dotenv
 Used to parse the settings file.
-``` 
+```console 
 sudo pip3 install python-dotenv
 ``` 
 ### Install PocketSphinx
 Used for trigger word detection for now.
-``` 
+```console 
 sudo apt-get install -y build-essential swig libpulse-dev libasound2-dev
 sudo pip3 install pocketsphinx
 ``` 
 
 ### Install SpeechRecognition 
 Used to turn audio into text for now.
-``` 
+```console 
 sudo pip3 install SpeechRecognition
 sudo apt-get install flac
 ``` 
 ### Install sounddevice 
 Used for selecting sound cards
-``` 
+```console 
 sudo pip3 install sounddevice
 ``` 
 ### Install other libraries
 Should be already installed on Raspberry
-``` 
+```console 
 sudo pip3 install serial
 sudo pip3 install psutil
 sudo pip3 install playsound
@@ -136,43 +85,64 @@ sudo snap install curl
 ``` 
 
 
-## Install GLaDOS Voice Assistant on your Raspberry Pi
+## Install GLaDOS Voice Assistant
 
-1. Go to home folder
-``` 
+#### 1. Go to home folder
+```console 
 cd ~
 ``` 
-2. Download the source from GitHub
-``` 
+#### 2. Download the source from GitHub
+```console 
 git clone https://github.com/nerdaxic/glados-voice-assistant/
 ``` 
-3. Edit the settings file
-Find the sound card ID with:
-```
+#### 3. Edit the settings file
+
+Find the sound card ID:
+```console
 python3 -m sounddevice
 ```
-Write settings to file:
-``` 
+Generate and edit the settings.env file:
+```console 
 cp glados-voice-assistant/settings.env.sample glados-voice-assistant/settings.env && nano glados-voice-assistant/settings.env
 ``` 
-4. To run:
-
-Launch the voice assistant:
+#### 4. To run:
+Launch the TTS:
+```console
+sudo docker run -p 8080:9666 gladostts
 ```
+Launch the voice assistant:
+```console
 python3 ~/glados-voice-assistant/glados.py
 ```
 
 You can add glados.py to your crontab file or run it manually.
-``` 
+```console
 crontab -e
 @reboot python3 /home/username/glados-voice-assistant/glados.py
 ``` 
 Additionally you can configure the ReSpeaker at startup by adding following lines to root's crontab:
-``` 
+```console  
 sudo su
 crontab -e
 @reboot bash /home/username/glados-voice-assistant/hardware/ReSpeaker/ReSpeaker_Startup_Config.sh
 @reboot python3 /home/username/glados-voice-assistant/hardware/ReSpeaker/ReSpeaker_Turn_off_Pixelring.py
+``` 
+
+## Integrate to Home Assistant
+
+To make Home Assistant integration work, you need to enable the API in the home assistant configuration file and generate a long-lived access token.
+Add access token and IP-address of the home assistant server into the settings.env file.
+### configuration.yaml
+
+```YAML 
+# This will enable rest api
+api:
+
+# This will add GLaDOS as a notification provider. Replace with correct IP of GLaDOS.
+notify:
+  - name: glados
+    platform: rest
+    resource: http://192.168.1.XXX:5000/notify
 ``` 
 
 ## Hardware
@@ -180,9 +150,8 @@ List of reference hardware what [nerdaxic](https://github.com/nerdaxic/) is deve
 Not a full bill of materials.
 | Item | Description |
 | ---- | ----------- |
-| Main board | [Raspberry Pi 4 Model B 8GB V1.4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) |
-| Power supply for Digital + Audio | [Raspberry Pi 15W USB-C Power supply](https://www.raspberrypi.org/products/type-c-power-supply/) |
-| Memory card | Class 10 64 GB microSDXC U3 |
+| Main board | Basic i7 laptop with 16 gigs of RAM|
+| Operating system | ubuntu-20.04.3-desktop-amd64 |
 | Microcontroller | [Teensy 4](https://www.pjrc.com/store/teensy40.html), to control the eye LCD and NeoPixels |
 | Eye lights | [Adafruit NeoPixel Diffused 5mm Through-Hole](https://www.adafruit.com/product/1938) for the "REC" light |
 | Eye lights  | [Adafruit 16 x 5050 NeoPixel Ring](https://www.adafruit.com/product/1463) |
