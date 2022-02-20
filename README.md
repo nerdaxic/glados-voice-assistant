@@ -5,6 +5,8 @@ DIY Voice Assistant based on the GLaDOS character from Portal video game series.
 * Written mostly in Python
 * Work in progress
 
+This branch is made so that the software runs on Raspberry Pi. Future versions will need neural network related functions not found in current ARM instruction set and thus can not run on Raspberry Pi.
+
 ## Read article first!
 [DIY GLaDOS Voice Assistant with Python and Raspberry Pi](https://www.henrirantanen.fi/2022/02/10/diy-glados-raspberry-pi-voice-assistant/?utm_source=github.com&utm_medium=social&utm_campaign=post&utm_content=DIY+GLaDOS+Voice+Assistant+with+Python+and+Raspberry+Pi)
 
