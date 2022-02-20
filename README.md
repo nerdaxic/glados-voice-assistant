@@ -1,9 +1,10 @@
 # GLaDOS Voice Assistant
 DIY Voice Assistant based on the GLaDOS character from Portal video game series.
 
-* Designed for Raspberry Pi 4 Model B (8 GB) V 1.4
 * Written mostly in Python
 * Work in progress
+
+Note: New versions of the voice assistant wont work on Raspberry Pi due to missing CPU instruction sets needed by some AI scripts. If you are looking to play along with your Raspberry Pi, check the raspberry branch.
 
 ## Read article first!
 [DIY GLaDOS Voice Assistant with Python and Raspberry Pi](https://www.henrirantanen.fi/2022/02/10/diy-glados-raspberry-pi-voice-assistant/?utm_source=github.com&utm_medium=social&utm_campaign=post&utm_content=DIY+GLaDOS+Voice+Assistant+with+Python+and+Raspberry+Pi)
@@ -129,6 +130,9 @@ Should be already installed on Raspberry
 ``` 
 sudo pip3 install serial
 sudo pip3 install psutil
+sudo pip3 install playsound
+sudo pip3 install flask
+sudo snap install curl
 ``` 
 
 
