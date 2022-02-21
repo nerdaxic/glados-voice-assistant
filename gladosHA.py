@@ -4,6 +4,8 @@ from gladosTTS import *
 import random
 import json
 import datetime as dt
+from glados_tts.engine import *
+
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 

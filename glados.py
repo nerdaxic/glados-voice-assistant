@@ -45,12 +45,12 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
 # Start docker container containing TTS engine
-if "gladostts" not in str(subprocess.check_output('docker ps', shell=True)):
-	print("TTS Engine is not running. Starting it...")
+#if "gladostts" not in str(subprocess.check_output('docker ps', shell=True)):
+	#print("TTS Engine is not running. Starting it...")
 	#subprocess.Popen("docker run -p 8080:9666 gladostts", shell=True)
 	#time.sleep(3.0)
-else:
-	print("TTS Engine is already running...")
+#else:
+#	print("TTS Engine is already running...")
 
 # Start notify API in a subprocess
 subprocess.Popen(["python3 "+os.path.dirname(os.path.abspath(__file__))+"/gladosNotifyAPI.py"], shell=True)

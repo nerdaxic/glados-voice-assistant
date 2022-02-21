@@ -3,6 +3,7 @@ import wave
 import datetime as dt
 from random import *
 from gladosTTS import *
+from glados_tts.engine import *
 from threading import Timer
 import re
 from gladosServo import *

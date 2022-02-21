@@ -2,6 +2,7 @@
 
 from flask import Flask, request
 from gladosTTS import *
+from glados_tts.engine import *
 
 app = Flask(__name__)
 
