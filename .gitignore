@@ -12,4 +12,4 @@ gladosdemo.py
 settings.env
 
 # Local Python cache files
-__pycache__/**
+**/__pycache__/

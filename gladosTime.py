@@ -13,13 +13,28 @@ def readTime():
 	hour = timer.strftime('%H')
 	minute = timer.strftime('%M')
 
+	if int(minute) < 10:
+		minute = "o "+minute
+
 	print(hour+":"+minute)
 	eye_position_random()
-	playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/hour/GLaDOS-hour-'+hour+'.wav')
-	eye_position_random()
-	playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/minute/GLaDOS-'+minute+'.wav')
-	r = str(randint(1, 4))
-	eye_position_random()
+
+	r = randint(1, 4)
+
+	if r == 1:
+		speak("The current time is "+hour+" "+minute)
+	elif r == 2:
+		speak("Its "+hour+" "+minute)
+	elif r == 3:
+		speak("its currently "+hour+" "+minute)
+	elif r == 4:
+		speak("The time is "+hour+" "+minute)
+
+	#playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/hour/GLaDOS-hour-'+hour+'.wav')
+	#eye_position_random()
+	#playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/minute/GLaDOS-'+minute+'.wav')
+	#r = str(randint(1, 4))
+	#eye_position_random()
 	#playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/time-comment/GLaDOS-general-'+str(r)+'-comment.wav')
 
 # Start a new timer

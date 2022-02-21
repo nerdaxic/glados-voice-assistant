@@ -22,7 +22,7 @@ def playFile(filename):
 
 # Turns units etc into speakable text
 def cleanTTSLine(line):
-	line = line.replace("°C", "degrees celcius")
+	line = line.replace("°C", "degrees")
 	line = line.replace("°", "degrees")
 	line = line.replace("hPa", "hectopascals")
 	line = line.replace("% (RH)", "percent")
@@ -57,14 +57,14 @@ def checkTTSLib(line):
 
 # Get GLaDOS TTS Sample over the online API
 def fetchTTSSample(line, wait=True):
+	
 	# https://glados.c-net.org/
 	#TTSCommand = 'curl -L --retry 30 --get --fail --data-urlencode "text='+cleanTTSLine(line)+'" -o "'+synthFolder+cleanTTSFile(line)+'" "https://glados.c-net.org/generate"'
 	
-	# https://glados.2022.us/synthesize/
+	# Use local TTS engine from https://github.com/NeonGeckoCom/neon-tts-plugin-glados
 	text = urllib.parse.quote(cleanTTSLine(line))
-	TTSCommand = 'curl -L --retry 5 --get --fail -o '+synthFolder+cleanTTSFile(line)+' https://glados.2022.us/synthesize/'+text
+	TTSCommand = 'curl -L --retry 5 --get --fail -o '+synthFolder+cleanTTSFile(line)+' '+os.getenv('TTS_ENGINE_URL')+''+text
 
-	print(TTSCommand) 
 	if(wait):
 		setEyeAnimation("wait")
 		TTSResponse = os.system(TTSCommand)
@@ -110,3 +110,29 @@ def speak(line):
 		    # Save line to TTS-folder
 		    if(fetchTTSSample(line)):
 		    	playFile(synthFolder+cleanTTSFile(line))
+
+def trigger_word_answer(id = randint(0,11)):
+	if id == 0:
+		return "tell me."
+	elif id == 1:
+		return "what do you want now."
+	elif id == 2:
+		return "hello."
+	elif id == 3:
+		return "what now."
+	elif id == 4:
+		return "hi again"
+	elif id == 5:
+		return "how are you"
+	elif id == 6:
+		return "what do you need."
+	elif id == 7:
+		return "hey there."
+	elif id == 8:
+		return "i am here."
+	elif id == 9:
+		return "leave me alone."
+	elif id == 10:
+		return "proceed."
+	elif id == 11:
+		return "yes, i see you."

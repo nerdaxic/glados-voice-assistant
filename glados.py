@@ -9,12 +9,12 @@
 #
 #	Open source voice assistant by nerdaxic
 #
-#	TTS engine based on https://glados.c-net.org/
-#	Using Google speech recognition API
+#	Local TTS engine based on https://github.com/NeonGeckoCom/neon-tts-plugin-glados
 #	Local keyword detection using PoketSphinx
+#	Using Google speech recognition API
 #	Works with Home Assistant
 #
-#	https://github.com/Nerdaxic/GLaDOS-Voice-Assistant/
+#	https://github.com/nerdaxic/glados-voice-assistant/
 #	https://www.henrirantanen.fi/
 #
 #	Rename settings.env.sample to settings.env
@@ -26,19 +26,29 @@ from gladosTime import *
 from gladosHA import *
 from gladosSerial import *
 from gladosServo import *
+from skills.glados_jokes import *
 from pocketsphinx import LiveSpeech
+import subprocess
 import speech_recognition as sr
 import datetime as dt
 import os
 import random
 import psutil
 
+# Load settings to variables from setting file
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
+# Start docker container containing TTS engine
+if "gladostts" not in str(subprocess.check_output('docker ps', shell=True)):
+	print("TTS Engine is not running. Starting it...")
+	subprocess.Popen("docker run -p 8080:9666 gladostts", shell=True)
+	time.sleep(3.0)
+else:
+	print("TTS Engine is already running...")
+
 # Start notify API in a subprocess
-NofifyApi = "python3 "+os.path.dirname(os.path.abspath(__file__))+"/gladosNotifyAPI.py"
-subprocess.Popen([NofifyApi], shell=True)
+subprocess.Popen(["python3 "+os.path.dirname(os.path.abspath(__file__))+"/gladosNotifyAPI.py"], shell=True)
 
 # Show regular eye-texture, this stops the initial loading animation
 setEyeAnimation("idle")
@@ -47,7 +57,6 @@ eye_position_default()
 time.sleep(1.0)
 
 # Let user know the script is running
-#playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS_chellgladoswakeup01.wav')
 speak("oh, its you")
 time.sleep(0.25)
 speak("it's been a long time")
@@ -73,7 +82,9 @@ def take_command():
 
 	# Feedback to user that GLaDOS is listening
 	print('listening...')
-	playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-detect-pass-'+str(randint(1, 20))+'.wav')
+
+	# Answer
+	speak(trigger_word_answer())
 
 	listener = sr.Recognizer()
 	
@@ -99,11 +110,6 @@ def take_command():
 
 			print("I heard: "+command)
 
-			# Save input as file as later training data
-			#timestamp = str(int(dt.datetime.now().timestamp()))
-			#with open("/home/nerdaxic/GLaDOS/collectedSpeech/" + timestamp+" "+command+".wav", "wb") as f:
-			#	f.write(voice.get_wav_data(convert_rate=16000))
-
 			# Remove possible trigger word from input
 			if os.getenv('TRIGGERWORD') in command:
 				command = command.replace(os.getenv('TRIGGERWORD'), '')
@@ -119,15 +125,11 @@ def take_command():
 			print("Google Speech Recognition could not parse audio")
 			speak("My speech recognition core could not understand audio")
 
-			#timestamp = str(int(dt.datetime.now().timestamp()))
-			#with open("/home/nerdaxic/GLaDOS/collectedSpeech/" + timestamp+" fail.wav", "wb") as f:
-			#	f.write(voice.get_wav_data(convert_rate=8000))
-
 		# Connection to STT API failed
 		except sr.RequestError as e:
 			print("Could not request results from Google Speech Recognition service; {0}".format(e))
 			setEyeAnimation("angry")
-			playFile(os.path.dirname(os.path.abspath(__file__))+"/audio/GLaDOS-sr-error.wav")
+			speak("My speech recognition core has failed. {0}".format(e))
 
 # Process the command
 def process_command(command):
@@ -151,7 +153,7 @@ def process_command(command):
 		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/magic-8-ball/'+random.choice(os.listdir(os.path.dirname(os.path.abspath(__file__))+"/audio/magic-8-ball")))
 
 	elif 'joke' in command:
-		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/jokes/GLaDOS-joke-'+str(randint(1, 14))+'.wav')
+		speak(fetch_joke())
 
 	elif 'my shopping list' in command:
 		addToShoppingList(command)
@@ -280,8 +282,8 @@ def process_command(command):
 	
 	##### PLEASANTRIES ###########################
 	elif 'how are you' in command:
-		speak("I'm still a bit mad about being unplugged not a long time ago.")
-		speak("you murderer")
+		speak("Im still a bit mad about being unplugged not a long time ago.")
+		speak("you murderer.")
 
 	elif 'can you hear me' in command:
 		speak("Yes, I can hear you loud and clear")
@@ -344,4 +346,3 @@ for phrase in speech:
 		print(e)
 		speak("Well that failed, you really need to write better code")
 		setEyeAnimation("idle")
-
