@@ -1,0 +1,78 @@
+[
+  {
+    "message": "And this is the type of question you need a superintelligent artificial intelligence to answer for you.",
+    "verdict": "neutral"
+  },
+  {
+    "message": "As I see it, yes.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Ask me again in a few decades.",
+    "verdict": "neutral"
+  },
+  {
+    "message": "Do not count on it.",
+    "verdict": "negative"
+  },
+  {
+    "message": "It can not be for no reason. You must deserve it.",
+    "verdict": "positive"
+  },
+  {
+    "message": "It is certain.",
+    "verdict": "positive"
+  },
+  {
+    "message": "It is decidedly so.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Most likely.",
+    "verdict": "positive"
+  },
+  {
+    "message": "My reply is, no.",
+    "verdict": "negative"
+  },
+  {
+    "message": "My sources say no.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Now you are just wasting my time",
+    "verdict": "neutral"
+  },
+  {
+    "message": "outlook good.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Outlook not so good.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Signs point to yes",
+    "verdict": "positive"
+  },
+  {
+    "message": "I am very doubtful about that.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Yes",
+    "verdict": "positive"
+  },
+  {
+    "message": "Yes. Come on.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Yes, definitely",
+    "verdict": "positive"
+  },
+  {
+    "message": "Yes, you may rely on it.",
+    "verdict": "positive"
+  }
+]

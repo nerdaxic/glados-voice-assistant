@@ -10,6 +10,8 @@ from gladosServo import *
 import sys
 import urllib.parse
 import re
+import json
+import random
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 from playsound import playsound as ps
@@ -56,83 +58,70 @@ def checkTTSLib(line):
 		return False
 
 # Get GLaDOS TTS Sample over the online API
-def fetchTTSSample(line, wait=True):
-	
-	# https://glados.c-net.org/
-	#TTSCommand = 'curl -L --retry 30 --get --fail --data-urlencode "text='+cleanTTSLine(line)+'" -o "'+synthFolder+cleanTTSFile(line)+'" "https://glados.c-net.org/generate"'
-	
+def fetchTTSSample(line):
+		
 	# Use local TTS engine from https://github.com/NeonGeckoCom/neon-tts-plugin-glados
 	text = urllib.parse.quote(cleanTTSLine(line))
 	TTSCommand = 'curl -L --retry 5 --get --fail -o '+synthFolder+cleanTTSFile(line)+' '+os.getenv('TTS_ENGINE_URL')+''+text
 
-	if(wait):
-		setEyeAnimation("wait")
-		TTSResponse = os.system(TTSCommand)
+	setEyeAnimation("wait")
+	TTSResponse = os.system(TTSCommand)
 
-		if(TTSResponse == 0):
-			print('Success: TTS sample "'+line+'" fetched')
-			setEyeAnimation("idle")
-			return True
-		else:
-			# Complain about speech synthesis core
-			setEyeAnimation("angry")
-			playFile(os.path.dirname(os.path.abspath(__file__))+"/audio/GLaDOS-tts-error.wav")
-			return False
+	if(TTSResponse == 0):
+		print('Success: TTS sample "'+line+'" fetched')
+		setEyeAnimation("idle")
+		return True
 	else:
-		subprocess.Popen([TTSCommand], shell=True)
+		# Complain about speech synthesis core
+		setEyeAnimation("angry")
+		speak("My speech synthesiser core is offline.")
 		return False
 
 
 # Speak out the line
 def speak(line):
+	file = checkTTSLib(line)
 
-	# Limitation of the TTS API
-	if(len(line) < 255):
+	# Check if file exists
+	if file:
+		if eye_position_script(line) == False:
+			eye_position_random()
 
-		file = checkTTSLib(line)
+		print(line)
+		playFile(file)
+		
 
-		# Check if file exists
-		if file:
-			if eye_position_script(line) == False:
-				eye_position_random()
+	# Else generate file
+	else:
+	    print ("File not exist, generating...")
 
-			playFile(file)
-			print (line)
+	    # Save line to TTS-folder
+	    if(fetchTTSSample(line)):
+	    	print(line)
+	    	playFile(synthFolder+cleanTTSFile(line))
 
-		# Else generate file
-		else:
-		    print ("File not exist, generating...")
 
-		    # Play "hold on"
-		    #playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-wait-'+str(randint(1, 6))+'.wav')
 
-		    # Try to get wave-file from https://glados.c-net.org/
-		    # Save line to TTS-folder
-		    if(fetchTTSSample(line)):
-		    	playFile(synthFolder+cleanTTSFile(line))
+# Load jokes from a json file into a "playlist"
+file = open("skills/glados_greetings.json")
+greetings = json.load(file)
 
-def trigger_word_answer(id = randint(0,11)):
-	if id == 0:
-		return "tell me."
-	elif id == 1:
-		return "what do you want now."
-	elif id == 2:
-		return "hello."
-	elif id == 3:
-		return "what now."
-	elif id == 4:
-		return "hi again"
-	elif id == 5:
-		return "how are you"
-	elif id == 6:
-		return "what do you need."
-	elif id == 7:
-		return "hey there."
-	elif id == 8:
-		return "i am here."
-	elif id == 9:
-		return "leave me alone."
-	elif id == 10:
-		return "proceed."
-	elif id == 11:
-		return "yes, i see you."
+# Shuffle the list
+random.shuffle(greetings)
+
+# Global variable to make sure same greeting does not come up twice in a row
+greeting_index = 0;
+
+# Fetch the next joke from the playlist
+def fetch_greeting():
+	global greeting_index
+
+	greeting = greetings[greeting_index]["greeting"]
+	greeting_index += 1;
+
+	# Loop the "playlist"	
+	if(greeting_index > len(greetings)):
+		greeting_index = 0
+		random.shuffle(greetings)
+
+	return greeting

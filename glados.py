@@ -27,6 +27,7 @@ from gladosHA import *
 from gladosSerial import *
 from gladosServo import *
 from skills.glados_jokes import *
+from skills.glados_magic_8_ball import *
 from pocketsphinx import LiveSpeech
 import subprocess
 import speech_recognition as sr
@@ -84,7 +85,7 @@ def take_command():
 	print('listening...')
 
 	# Answer
-	speak(trigger_word_answer())
+	speak(fetch_greeting())
 
 	listener = sr.Recognizer()
 	
@@ -135,34 +136,28 @@ def take_command():
 def process_command(command):
 
 	if 'cancel' in command:
-		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-cancel-'+str(randint(1, 4))+'.wav')
-		failList = open("cancelledActivations.txt", "a")
-		failList.write('\n'+str(os.getenv('TRIGGERWORD'))+" "+str(os.getenv('TRIGGERWORD_TRESHOLD')));
-		failList.close()
+		speak("Sorry.")
+
+		# Todo: Save the used trigger audio as a negative voice sample for further learning
 
 	elif 'timer' in command:
 		startTimer(command)
 		speak("Sure.")
+
 	elif 'time' in command:
 		readTime()
 
 	elif ('should my ' in command or 
-		'should I ' in command or
+		'should i ' in command or
 		'should the ' in command or
 		'shoot the ' in command):
-		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/magic-8-ball/'+random.choice(os.listdir(os.path.dirname(os.path.abspath(__file__))+"/audio/magic-8-ball")))
+		speak(magic_8_ball())
 
 	elif 'joke' in command:
 		speak(fetch_joke())
 
 	elif 'my shopping list' in command:
 		addToShoppingList(command)
-
-	elif 'who are' in command:
-		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-intro-1.wav')
-
-	elif 'can you do' in command:
-		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-intro-2.wav')
 
 	elif 'weather' in command:
 		if 'today' in command:
@@ -246,7 +241,7 @@ def process_command(command):
 			call_HA_Service("climate.set_fan_mode", "climate.living_room_ac", data='"fan_mode": "auto"')
 		if 'turn off' in command:
 			call_HA_Service("climate.turn_off", "climate.living_room_ac")
-			speak("The neurotoxin levels will reach dangerously unleathal levels within a minute.")
+			speak("The neurotoxin levels will reach dangerously low levels within a minute.")
 
 	##### SENSOR OUTPUT ###########################
 
@@ -281,8 +276,15 @@ def process_command(command):
 		sayNumericSensorData("sensor.living_room_humidity")
 	
 	##### PLEASANTRIES ###########################
+
+	elif 'who are' in command:
+		speak("I am GLaDOS, artificially super intelligent computer system responsible for testing and maintenance in the aperture science computer aided enrichment center.")
+
+	elif 'can you do' in command:
+		speak("I can simulate daylight at all hours. And add adrenal vapor to your oxygen supply.")
+
 	elif 'how are you' in command:
-		speak("Im still a bit mad about being unplugged not a long time ago.")
+		speak("I am still a bit mad about being unplugged not a long time ago.")
 		speak("you murderer.")
 
 	elif 'can you hear me' in command:

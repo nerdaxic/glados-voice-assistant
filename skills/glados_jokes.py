@@ -2,7 +2,7 @@ import json
 import random
 
 # Load jokes from a json file into a "playlist"
-file = open("skills/glados-jokes.json")
+file = open("skills/glados_jokes.json")
 jokes = json.load(file)
 
 # Shuffle the list
@@ -23,5 +23,6 @@ def fetch_joke(id=False, topic=False):
 	# Loop the "playlist"	
 	if(joke_index > len(jokes)):
 		joke_index = 0
+		random.shuffle(jokes)
 
 	return joke

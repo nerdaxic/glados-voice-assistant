@@ -108,6 +108,7 @@ cp glados-voice-assistant/settings.env.sample glados-voice-assistant/settings.en
 #### 4. To run:
 Launch the TTS:
 ```console
+<<<<<<< HEAD
 docker run -p 8080:9666 gladostts
 ```
 If you get an error:
@@ -117,6 +118,10 @@ sudo setfacl --modify user:$USER:rw /var/run/docker.sock
 sudo reboot
 ```
 
+=======
+sudo docker run -p 8080:9666 gladostts
+```
+>>>>>>> ed4b973ae78575e29ffab8722375f2352e5cca1b
 Launch the voice assistant:
 ```console
 python3 ~/glados-voice-assistant/glados.py
