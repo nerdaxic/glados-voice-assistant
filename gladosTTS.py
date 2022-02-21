@@ -78,27 +78,27 @@ def fetchTTSSample(line):
 		return False
 
 
-# Speak out the line
-def speak(line):
-	file = checkTTSLib(line)
-
-	# Check if file exists
-	if file:
-		if eye_position_script(line) == False:
-			eye_position_random()
-
-		print(line)
-		playFile(file)
-		
-
-	# Else generate file
-	else:
-	    print ("File not exist, generating...")
-
-	    # Save line to TTS-folder
-	    if(fetchTTSSample(line)):
-	    	print(line)
-	    	playFile(synthFolder+cleanTTSFile(line))
+## Speak out the line
+#def speak(line):
+#	file = checkTTSLib(line)
+#
+#	# Check if file exists
+#	if file:
+#		if eye_position_script(line) == False:
+#			eye_position_random()
+#
+#		print(line)
+#		playFile(file)
+		#
+#
+#	# Else generate file
+#	else:
+#	    print ("File not exist, generating...")
+#
+#	    # Save line to TTS-folder
+#	    if(fetchTTSSample(line)):
+#	    	print(line)
+#	    	playFile(synthFolder+cleanTTSFile(line))
 
 
 

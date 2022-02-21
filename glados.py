@@ -29,12 +29,16 @@ from gladosServo import *
 from skills.glados_jokes import *
 from skills.glados_magic_8_ball import *
 from pocketsphinx import LiveSpeech
+
 import subprocess
 import speech_recognition as sr
 import datetime as dt
 import os
 import random
 import psutil
+
+from importlib import import_module
+from glados_tts.engine import *
 
 # Load settings to variables from setting file
 from dotenv import load_dotenv
@@ -43,8 +47,8 @@ load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.en
 # Start docker container containing TTS engine
 if "gladostts" not in str(subprocess.check_output('docker ps', shell=True)):
 	print("TTS Engine is not running. Starting it...")
-	subprocess.Popen("docker run -p 8080:9666 gladostts", shell=True)
-	time.sleep(3.0)
+	#subprocess.Popen("docker run -p 8080:9666 gladostts", shell=True)
+	#time.sleep(3.0)
 else:
 	print("TTS Engine is already running...")
 
