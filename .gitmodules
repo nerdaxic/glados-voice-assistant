@@ -1,0 +1,3 @@
+[submodule "glados_tts"]
+	path = glados_tts
+	url = https://github.com/nerdaxic/glados-tts.git

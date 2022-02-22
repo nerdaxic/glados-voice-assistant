@@ -44,24 +44,35 @@ from glados_tts.engine import *
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
-# Start notify API in a subprocess
-subprocess.Popen(["python3 "+os.path.dirname(os.path.abspath(__file__))+"/gladosNotifyAPI.py"], shell=True)
+def start_up():
 
-# Show regular eye-texture, this stops the initial loading animation
-setEyeAnimation("idle")
+	# Show regular eye-texture, this stops the initial loading animation
+	setEyeAnimation("idle")
 
-eye_position_default()
-time.sleep(2.0)
+	eye_position_default()
 
-# Let user know the script is running
-speak("oh, its you", cache=True)
-time.sleep(0.25)
-speak("it's been a long time", cache=True)
-time.sleep(1.5)
-speak("how have you been", cache=True)
-print("\nWaiting for keyphrase: "+os.getenv('TRIGGERWORD').capitalize())
+	# Set respeaker to dim glow inside the head.
+	# See hardware folder for more info.
+	try:
+		from pixel_ring import pixel_ring
+		pixel_ring.set_color(r=5,g=0,b=0)
+	except Exception as e:
+		print(e)
 
-eye_position_default()
+	# Start notify API in a subprocess
+	print("\nStarting notification API...\n")
+	subprocess.Popen(["python3 "+os.path.dirname(os.path.abspath(__file__))+"/gladosNotifyAPI.py"], shell=True)
+
+
+	# Let user know the script is running
+	speak("oh, its you", cache=True)
+	time.sleep(0.25)
+	speak("it's been a long time", cache=True)
+	time.sleep(1.5)
+	speak("how have you been", cache=True)
+	print("\nWaiting for keyphrase: "+os.getenv('TRIGGERWORD').capitalize())
+
+	eye_position_default()
 
 # Reload Python script after doing changes to it
 def restart_program():
@@ -329,6 +340,8 @@ def process_command(command):
 	print("\nWaiting for trigger...")
 	eye_position_default()
 	setEyeAnimation("idle")
+
+start_up()
 
 # Local keyword detection loop
 speech = LiveSpeech(lm=False, keyphrase=os.getenv('TRIGGERWORD'), kws_threshold=1e-20)

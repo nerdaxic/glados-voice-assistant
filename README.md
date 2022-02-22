@@ -131,14 +131,7 @@ You can add glados.py to your crontab file or run it manually.
 ```console
 crontab -e
 @reboot python3 /home/username/glados-voice-assistant/glados.py
-``` 
-Additionally you can configure the ReSpeaker at startup by adding following lines to root's crontab:
-```console  
-sudo su
-crontab -e
-@reboot bash /home/username/glados-voice-assistant/hardware/ReSpeaker/ReSpeaker_Startup_Config.sh
-@reboot python3 /home/username/glados-voice-assistant/hardware/ReSpeaker/ReSpeaker_Turn_off_Pixelring.py
-``` 
+```
 
 ## Integrate to Home Assistant
 
