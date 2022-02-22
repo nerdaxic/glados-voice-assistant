@@ -15,6 +15,9 @@ import random
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 from playsound import playsound as ps
+import shutil
+
+from glados_tts.engine import *
 
 synthFolder = os.getenv('TTS_SAMPLE_FOLDER') + "/"
 
@@ -60,14 +63,7 @@ def checkTTSLib(line):
 # Get GLaDOS TTS Sample over the online API
 def fetchTTSSample(line):
 		
-	# Use local TTS engine from https://github.com/NeonGeckoCom/neon-tts-plugin-glados
-	text = urllib.parse.quote(cleanTTSLine(line))
-	TTSCommand = 'curl -L --retry 5 --get --fail -o '+synthFolder+cleanTTSFile(line)+' '+os.getenv('TTS_ENGINE_URL')+''+text
-
-	setEyeAnimation("wait")
-	TTSResponse = os.system(TTSCommand)
-
-	if(TTSResponse == 0):
+	if(glados_tts(cleanTTSLine(line), speak=False) == True):
 		print('Success: TTS sample "'+line+'" fetched')
 		setEyeAnimation("idle")
 		return True
@@ -79,30 +75,45 @@ def fetchTTSSample(line):
 
 
 ## Speak out the line
-#def speak(line):
-#	file = checkTTSLib(line)
-#
-#	# Check if file exists
-#	if file:
-#		if eye_position_script(line) == False:
-#			eye_position_random()
-#
-#		print(line)
-#		playFile(file)
-		#
-#
-#	# Else generate file
-#	else:
-#	    print ("File not exist, generating...")
-#
-#	    # Save line to TTS-folder
-#	    if(fetchTTSSample(line)):
-#	    	print(line)
-#	    	playFile(synthFolder+cleanTTSFile(line))
+def speak(line, cache=False):
+
+	line = cleanTTSLine(line)
+	# Generate filename
+	file = checkTTSLib(line)
+
+	# Check if file exists
+	if file:
+		# Animate eye
+		if eye_position_script(line) == False:
+			eye_position_random()
+
+		# Speak from cache
+		print("GLaDOS: " + line.capitalize())
+		playFile(file)
+
+	# TTS Sample not in cache...
+	else:
+		print ("File not exist, generating...")
+		setEyeAnimation("wait")
+
+		# Generate line and save to TTS-folder
+		if(glados_tts(line)):
+
+			setEyeAnimation("idle")
+
+			if eye_position_script(line) == False:
+				eye_position_random()
+
+	    	# Speak
+			ps('output.wav')
+
+			if(cache):
+				shutil.copyfile("output.wav", synthFolder+cleanTTSFile(line))
+
+	eye_position_default()
 
 
-
-# Load jokes from a json file into a "playlist"
+# Load greetings from a json file into a "playlist"
 file = open("skills/glados_greetings.json")
 greetings = json.load(file)
 
@@ -112,7 +123,7 @@ random.shuffle(greetings)
 # Global variable to make sure same greeting does not come up twice in a row
 greeting_index = 0;
 
-# Fetch the next joke from the playlist
+# Fetch the next greeting from the playlist
 def fetch_greeting():
 	global greeting_index
 
@@ -120,7 +131,7 @@ def fetch_greeting():
 	greeting_index += 1;
 
 	# Loop the "playlist"	
-	if(greeting_index > len(greetings)):
+	if(greeting_index >= len(greetings)):
 		greeting_index = 0
 		random.shuffle(greetings)
 

@@ -29,9 +29,7 @@ def addToShoppingList(item):
 	}
 
 	payload =  '{"name":"'+item+'"}'
-
 	response = requests.post(url, headers=headers, data=payload, verify=False)
-	print(response.text)
 
 	# Check if cheese.wav exists and respond
 	if 'Cake' in item:
@@ -89,6 +87,9 @@ def setCoverTo(position):
 	response = requests.post(url, headers=headers, verify=False)
 
 def sayNumericSensorData(sensor):
+
+	speak("Hold on", cache=True)
+
 	url = endpoint+"states/"+sensor
 	headers = {
 	 "Authorization": "Bearer "+token,
@@ -114,19 +115,8 @@ def sayNumericSensorData(sensor):
 	else:
 		sensorValue = int(sensorValue)
 
-	# Check if value.wav is available, if not, get it before to speak full sentences.
-	if not checkTTSLib(str(sensorValue)):
-		# Play "hold on"
-		#playFile('audio/GLaDOS-wait-'+str(randint(1, 2))+'.wav')
-		fetchTTSSample(str(sensorValue))
-
-	if not checkTTSLib("The "+cleanTTSLine(sensorName)):
-		fetchTTSSample("The "+cleanTTSLine(sensorName))
-
-	speak("The "+sensorName)
-	speak("is currently")
-	speak(str(sensorValue))
-	speak(sensorUnit)
+	speak(cleanTTSLine("The " + sensorName + " is currently " + str(sensorValue)+" "+sensorUnit))
+	
 
 	return sensorValue
 
@@ -139,9 +129,8 @@ def saySaunaCompleteTime(temperature):
 	hour = readyTime.strftime('%H')
 	minute = readyTime.strftime('%M')
 
-	speak("The operational temperature will be reached approximately at")
-	speak(hour)
-	playFile('audio/clock/minute/GLaDOS-'+minute+'.wav')
+	speak("The operational temperature will be reached approximately at"+hour+":"+minute)
+
 
 def sayCurrentWeatherfromHA():
 	url = endpoint+"states/"+os.getenv('HOME_ASSISTANT_WEATHER_ENTITY')
@@ -155,11 +144,11 @@ def sayCurrentWeatherfromHA():
 	except:
 		return False
 		pass
+		
 	sensorData = json.loads(response.text)
 	weather = sensorData['state'];
 	temperature = str(sensorData['attributes']['temperature']);
 	
-	#playFile('audio/GLaDOS-kerava-weather.wav')
 	speak("The current atmospheric conditions near the enrichment center are")
 	speak(weather)
 	speak("Temperature on the surface is approximately")
@@ -168,13 +157,16 @@ def sayCurrentWeatherfromHA():
 
 # 0 being today, 1 tomorrow, etc
 def sayforecastfromHA(days):
+
+	# Apologize for TTS delay
+	speak("Let me check that for you, give me a moment.", cache=True)
+
 	url = endpoint+"states/"+os.getenv('HOME_ASSISTANT_WEATHER_ENTITY')
 	headers = {
 	 "Authorization": "Bearer "+token,
 	 "content-type": "application/json",
 	}
 
-	#print(url)
 	try:
 		response = requests.get(url, headers=headers, verify=False)
 	except:
@@ -182,31 +174,48 @@ def sayforecastfromHA(days):
 		pass
 	
 	sensorData = json.loads(response.text)
-	
-	print("Days: "+str(days))
+
+	# TODO: HA returns the forecast on +00:00 timezone. 
+	# Currently this can give wrong day's forecast depending on what time you ask.
+
+	print("Forecaset "+str(days) + " days from now:")
 	forecast = sensorData['attributes']['forecast'][days]
 
-	print("forecast: "+str(forecast))
+	print(str(forecast)+"\n")
 
 	# Parse weekday of the forecast datetime
+	# Swedish Weather Institute format (SMHI)
 	forecastWeekday = dt.datetime.strptime(forecast["datetime"], '%Y-%m-%dT%H:%M:%S').strftime('%A')
 
-	if(days == 0):
-		speak("Today, it's expected to be")
-	if(days == 1):
-		speak("Tomorrow, the weather should be")
-	if(days > 1):
-		speak("On "+forecastWeekday+" the weather is expected to be ")
-	if(days > 7):
-		speak("Forecasts this long are out of the authority of my weather core")
+	weather = ""
 
-	speak(str(forecast["condition"]))
-	speak("with the surface temperatures ranging from")
-	speak(str(forecast["temperature"]))
-	speak("°")
-	speak("to the low of")
-	speak(str(forecast["templow"]))
-	speak("°C")
+	if(days == 0):
+		weather += "Today it's expected to be "
+		day = "today"
+	elif(days == 1):
+		weather += "Tomorrow, the weather should be "
+		day = "tomorrow"
+	elif(days > 1):
+		weather += "On "+forecastWeekday+" the weather is expected to be "
+		day = "on " + forecastWeekday
+	
+	weather += str(forecast["condition"])
+	weather += ", with the surface temperatures ranging from "
+	weather += str(forecast["temperature"])
+	weather += " °, "
+	weather += "to the low of "
+	weather += str(forecast["templow"])
+	weather += " °C."
+
+	if(forecast["precipitation"] > 5):
+		weather += " Please note that, there is a " + str(forecast["precipitation"]) + " procent chance of rain " + day +"."
+	else:
+		weather += " It is not expected to rain " + day +"."
+
+	if(days > 7):
+		weather = "Forecasts this long are out of the authority of my weather core"
+
+	speak(weather, cache=False)
 
 def getDayIndex(command):
 	if 'today' in command:

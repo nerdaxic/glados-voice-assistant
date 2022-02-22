@@ -2,7 +2,6 @@
 
 from flask import Flask, request
 from gladosTTS import *
-from glados_tts.engine import *
 
 app = Flask(__name__)
 
@@ -13,6 +12,9 @@ def hello():
 @app.route("/notify")
 def notify():
     message = request.args.get('message')
+
+    print("\nNOTIFY API: " + message + "\n")
+
     try:
     	speak(message.lower())
     except Exception as e:

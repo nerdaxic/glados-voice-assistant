@@ -6,7 +6,7 @@ load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.en
 
 def eye_position_random():
 	if(os.getenv('MAESTRO_SERIAL_ENABLE') == "true"):
-		servo = maestro.Controller(ttyStr=os.getenv('EYE_SERIAL_PORT'))
+		servo = maestro.Controller(ttyStr=os.getenv('MAESTRO_SERIAL_PORT'))
 		servo.setAccel(0,25)
 		servo.setSpeed(0,100)
 		servo.setAccel(1,25)
@@ -18,7 +18,7 @@ def eye_position_random():
 
 def eye_position_default():
 	if(os.getenv('MAESTRO_SERIAL_ENABLE') == "true"):
-		servo = maestro.Controller(ttyStr=os.getenv('EYE_SERIAL_PORT'))
+		servo = maestro.Controller(ttyStr=os.getenv('MAESTRO_SERIAL_PORT'))
 		servo.setAccel(0,15)
 		servo.setSpeed(0,10)
 		servo.setAccel(1,25)
@@ -30,7 +30,7 @@ def eye_position_default():
 
 def eye_position_open():
 	if(os.getenv('MAESTRO_SERIAL_ENABLE') == "true"):
-		servo = maestro.Controller(ttyStr=os.getenv('EYE_SERIAL_PORT'))
+		servo = maestro.Controller(ttyStr=os.getenv('MAESTRO_SERIAL_PORT'))
 		servo.setAccel(0,15)
 		servo.setSpeed(0,10)
 		servo.setAccel(1,25)
@@ -45,7 +45,7 @@ def eye_position_open():
 
 def eye_position_script(script):
 	if(os.getenv('MAESTRO_SERIAL_ENABLE') == "true"):
-		servo = maestro.Controller(ttyStr=os.getenv('EYE_SERIAL_PORT'))
+		servo = maestro.Controller(ttyStr=os.getenv('MAESTRO_SERIAL_PORT'))
 		servo.setAccel(0,15)
 		servo.setSpeed(0,100)
 		servo.setAccel(1,25)

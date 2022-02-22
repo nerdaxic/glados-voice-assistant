@@ -77,7 +77,7 @@ sudo pip3 install sounddevice
 ### Install other libraries
 Should be already installed on Raspberry
 ```console 
-sudo pip3 install serial
+sudo pip3 install pyserial
 sudo pip3 install psutil
 sudo pip3 install playsound
 sudo pip3 install flask
