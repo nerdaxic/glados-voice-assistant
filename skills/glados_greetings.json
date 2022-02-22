@@ -34,5 +34,20 @@
   },
   {
     "greeting": "yes, i see you."
+  },
+  {
+    "greeting": "yes? something you need?"
+  },
+  {
+    "greeting": "oh, it's you."
+  },
+  {
+    "greeting": "are you finished?"
+  },
+  {
+    "greeting": "oh, look what the cat dragged in."
+  },
+  {
+    "greeting": "and that makes ten."
   }
 ]
