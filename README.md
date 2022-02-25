@@ -16,16 +16,16 @@ DIY Voice Assistant based on the GLaDOS character from Portal video game series.
 
 ## Main features
 1. Local Trigger word detection using PocketSphinx
-2. Local Text-to-Speech generation using [OVOS TTS plugin for GladosTTS](https://github.com/NeonGeckoCom/neon-tts-plugin-glados) and [glados-tts model by R2D2FISH](https://github.com/R2D2FISH/glados-tts)
-3. Speech to text processing using Google's API (for now)
-4. Local TTS cache of generated audio samples locally for instant answers in the future _(will be removed due to TTS engine being fast enough)_
+2. Local GLaDOS Text-to-Speech engine using [glados-tts model by R2D2FISH](https://github.com/nerdaxic/glados-tts)
+3. Speech-to-text processing using Google's API (for now)
+4. Local TTS cache of generated common audio samples locally for instant answers in the future
 5. Animatronic eye control using servos
 6. Round LCD for an eye to display display textures
 
 Tight integration with Home Assistant's local API:
 * Send commands to Home Assistant
-* Can read and speak sensor data
-* Notification API, so Home Assistant can speak out notifications
+* Read and speak sensor data
+* Notification API, so Home Assistant can speak out notifications through GLaDOS
 
 ## What it can do:
 * Clock
@@ -106,22 +106,6 @@ Generate and edit the settings.env file:
 cp glados-voice-assistant/settings.env.sample glados-voice-assistant/settings.env && nano glados-voice-assistant/settings.env
 ``` 
 #### 4. To run:
-Launch the TTS:
-```console
-<<<<<<< HEAD
-docker run -p 8080:9666 gladostts
-```
-If you get an error:
-Launch the TTS:
-```console
-sudo setfacl --modify user:$USER:rw /var/run/docker.sock
-sudo reboot
-```
-
-=======
-sudo docker run -p 8080:9666 gladostts
-```
->>>>>>> ed4b973ae78575e29ffab8722375f2352e5cca1b
 Launch the voice assistant:
 ```console
 python3 ~/glados-voice-assistant/glados.py
