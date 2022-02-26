@@ -41,6 +41,9 @@ Tight integration with Home Assistant's local API:
 
 
 > Note: The code is provided as reference only.
+## Voice Assistant pipeline overview
+![General AI Voice Assistant Pipeline](https://www.henrirantanen.fi/wp-content/uploads/2022/02/ai-voice-assistant-pipeline.jpg)
+
 
 ## Requirements
 ### Install PyAudio
