@@ -1,15 +1,25 @@
 # GLaDOS Voice Assistant
 DIY Voice Assistant based on the GLaDOS character from Portal video game series.
+## Featured on:
+🛠 [Hackday](https://www.tomshardware.com/news/raspberry-pi-glados-voice-assistant-head) - Tech blog
 
-* Written mostly in Python
-* Work in progress
+🛠 [Tom's Hardware](https://www.tomshardware.com/news/raspberry-pi-glados-voice-assistant-head) - Technology news
 
-❗ New versions of the voice assistant will not work on Raspberry Pi due to missing CPU instruction sets needed by some AI scripts. If you are looking to play along with the old version on your Raspberry Pi, check the [raspberry branch](https://github.com/nerdaxic/glados-voice-assistant/tree/raspberry).
+🎮 [PCGamer](https://www.pcgamer.com/this-guy-decided-to-mock-our-future-ai-overlords-with-a-glados-smart-assistant/) - Online magazine
+
+🇫🇮 [Ilta-Sanomat](https://www.is.fi/digitoday/art-2000008642371.html) - The second largest newspaper in Finland
+
+🇫🇮 [Muropaketti](https://muropaketti.com/tietotekniikka/tietotekniikkauutiset/onpas-hieno-suomalainen-youtube-kayttaja-teki-portal-pelin-glados-tekoalyrobotista-huiman-hienon-aaniavustajan/) - Finnish computing website
 
 ## Read article first!
 [DIY GLaDOS Voice Assistant with Python and Raspberry Pi](https://www.henrirantanen.fi/2022/02/10/diy-glados-raspberry-pi-voice-assistant/?utm_source=github.com&utm_medium=social&utm_campaign=post&utm_content=DIY+GLaDOS+Voice+Assistant+with+Python+and+Raspberry+Pi)
 
 ## Description
+* Written mostly in Python
+* Work in progress
+
+❗ New versions of the voice assistant will not work on Raspberry Pi due to missing CPU instruction sets needed by some AI scripts. If you are looking to play along with the old version on your Raspberry Pi, check the [raspberry branch](https://github.com/nerdaxic/glados-voice-assistant/tree/raspberry).
+
 * YouTube 📺 [GLaDOS Voice Assistant | Introduction](https://www.youtube.com/embed/Y3h5tKWqf-w)
 * YouTube 📺 [GLaDOS Voice Assistant | Software - Python tutorial](https://youtu.be/70_imR6cBGc)
 * Twitter 🛠 [GLaDOS Voice Assistant project build](https://twitter.com/search?q=(%23glados)%20(from%3Anerdaxic)&src=typed_query)
