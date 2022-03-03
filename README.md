@@ -11,8 +11,8 @@ DIY Voice Assistant based on the GLaDOS character from Portal video game series.
 
 🇫🇮 [Muropaketti](https://muropaketti.com/tietotekniikka/tietotekniikkauutiset/onpas-hieno-suomalainen-youtube-kayttaja-teki-portal-pelin-glados-tekoalyrobotista-huiman-hienon-aaniavustajan/) - Finnish computing website
 
-## Read article first!
-[DIY GLaDOS Voice Assistant with Python and Raspberry Pi](https://www.henrirantanen.fi/2022/02/10/diy-glados-raspberry-pi-voice-assistant/?utm_source=github.com&utm_medium=social&utm_campaign=post&utm_content=DIY+GLaDOS+Voice+Assistant+with+Python+and+Raspberry+Pi)
+## Read project article first!
+📄 [GLaDOS Voice Assistant](https://www.henrirantanen.fi/2022/02/10/glados-voice-assistant-with-custom-text-to-speech/?utm_source=github.com&utm_medium=social&utm_campaign=post&utm_content=DIY+GLaDOS+Voice+Assistant+with+Python+and+Raspberry+Pi) - henrirantanen.fi
 
 ## Description
 * Written mostly in Python
