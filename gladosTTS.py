@@ -14,16 +14,15 @@ import json
 import random
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
-from playsound import playsound as ps
 import shutil
+from subprocess import call
 
 from glados_tts.engine import *
 
 synthFolder = os.getenv('TTS_SAMPLE_FOLDER') + "/"
 
 def playFile(filename):
-	ps(filename)
-	
+	call(["aplay", filename])	
 
 # Turns units etc into speakable text
 def cleanTTSLine(line):
@@ -105,8 +104,7 @@ def speak(line, cache=False):
 				eye_position_random()
 
 	    	# Speak
-			ps('output.wav')
-
+                        call(["aplay", "./output.wav"])
 			if(cache):
 				shutil.copyfile("output.wav", synthFolder+cleanTTSFile(line))
 
