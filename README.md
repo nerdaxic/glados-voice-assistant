@@ -92,7 +92,6 @@ Should be already installed on Raspberry
 ```console 
 sudo pip3 install pyserial
 sudo pip3 install psutil
-sudo pip3 install playsound
 sudo pip3 install flask
 sudo snap install curl
 ``` 
