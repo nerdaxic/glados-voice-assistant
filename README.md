@@ -1,6 +1,12 @@
 # GLaDOS Voice Assistant
-DIY Voice Assistant based on the GLaDOS character from Portal video game series.
+<table>
+<tr>
+  <td width="33%"><img src="https://www.henrirantanen.fi/wp-content/uploads/2022/01/HER_0941-728.jpg" width="100%"></td>
+    <td>
+      <strong>DIY Voice Assistant based on the GLaDOS character from Portal video game series.</strong>
+
 ## Featured on:
+      
 🛠 [Hackday](https://www.tomshardware.com/news/raspberry-pi-glados-voice-assistant-head) - Tech blog
 
 🛠 [Tom's Hardware](https://www.tomshardware.com/news/raspberry-pi-glados-voice-assistant-head) - Technology news
@@ -10,6 +16,12 @@ DIY Voice Assistant based on the GLaDOS character from Portal video game series.
 🇫🇮 [Ilta-Sanomat](https://www.is.fi/digitoday/art-2000008642371.html) - The second largest newspaper in Finland
 
 🇫🇮 [Muropaketti](https://muropaketti.com/tietotekniikka/tietotekniikkauutiset/onpas-hieno-suomalainen-youtube-kayttaja-teki-portal-pelin-glados-tekoalyrobotista-huiman-hienon-aaniavustajan/) - Finnish computing website
+      
+📺 [YouTube](https://www.youtube.com/playlist?list=PLs-qfwv3feinbxvTzFtmrHJrGSMrR09-t) - GLaDOS Voice Assistant playlist
+      
+  </td>
+  </tr>
+  </table>
 
 ## Read project article first!
 📄 [GLaDOS Voice Assistant](https://www.henrirantanen.fi/2022/02/10/glados-voice-assistant-with-custom-text-to-speech/?utm_source=github.com&utm_medium=social&utm_campaign=post&utm_content=DIY+GLaDOS+Voice+Assistant+with+Python+and+Raspberry+Pi) - henrirantanen.fi
