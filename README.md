@@ -7,7 +7,7 @@
 
 ## Featured on:
       
-🛠 [Hackday](https://www.tomshardware.com/news/raspberry-pi-glados-voice-assistant-head) - Tech blog
+🛠 [Hackday](https://hackaday.com/2021/09/13/glados-voice-assistant-passive-aggressively-automates-home/) - Tech blog
 
 🛠 [Tom's Hardware](https://www.tomshardware.com/news/raspberry-pi-glados-voice-assistant-head) - Technology news
 
