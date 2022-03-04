@@ -15,9 +15,6 @@
     "greeting": "hi again"
   },
   {
-    "greeting": "how are you"
-  },
-  {
     "greeting": "what do you need."
   },
   {
@@ -46,5 +43,8 @@
   },
   {
     "greeting": "and that makes ten."
+  },
+  {
+    "greeting": "Yes?"
   }
 ]
