@@ -104,7 +104,7 @@ def speak(line, cache=False):
 				eye_position_random()
 
 	    	# Speak
-                        call(["aplay", "./output.wav"])
+			call(["aplay", "./output.wav"])
 			if(cache):
 				shutil.copyfile("output.wav", synthFolder+cleanTTSFile(line))
 
