@@ -7,12 +7,19 @@ from subprocess import call
 import re
 
 def started_listening():
-	respeaker_mode("listen")
+	print("started listening")
+	try:
+		respeaker_mode("listen")
+	except Exception as e:
+		print(e)
 	# TODO: Add hook to send trigger to Home Assistant API
 
 def stopped_listening():
-	print("stopped to listen")
-	respeaker_mode("wait")
+	print("stopped listening")
+	try:
+		respeaker_mode("wait")
+	except Exception as e:
+		print(e)
 	# TODO: Add hook to send trigger to Home Assistant API
 
 def started_speaking():
@@ -21,7 +28,7 @@ def started_speaking():
 	# TODO: Add hook to send trigger to Home Assistant API
 
 def stopped_speaking():
-	print("stopped to speak")
+	print("stopped speaking")
 	# TODO: Add hook to send trigger to Home Assistant API
 
 def log_failed_command(command):
