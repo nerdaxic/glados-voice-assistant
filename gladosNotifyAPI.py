@@ -22,5 +22,9 @@ def notify():
     
     return "Notify API"
 
+# TODO: Add endpoint for volume level control.
+# amixer -D pulse sset Master 50%
+
 if __name__ == "__main__":
 	app.run(host="0.0.0.0")
+

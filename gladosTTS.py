@@ -7,6 +7,7 @@ import _thread as thread
 from threading import Timer
 from gladosSerial import *
 from gladosServo import *
+from glados_functions import *
 import sys
 import urllib.parse
 import re
@@ -75,6 +76,7 @@ def fetchTTSSample(line):
 
 ## Speak out the line
 def speak(line, cache=False):
+	started_speaking()
 
 	line = cleanTTSLine(line)
 	# Generate filename
@@ -105,6 +107,7 @@ def speak(line, cache=False):
 
 	    	# Speak
 			call(["aplay", "./output.wav"])
+			
 			if(cache):
 				shutil.copyfile("output.wav", synthFolder+cleanTTSFile(line))
 

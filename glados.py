@@ -26,6 +26,7 @@ from gladosTime import *
 from gladosHA import *
 from gladosSerial import *
 from gladosServo import *
+from glados_functions import *
 from skills.glados_jokes import *
 from skills.glados_magic_8_ball import *
 from pocketsphinx import LiveSpeech
@@ -50,18 +51,11 @@ def start_up():
 	setEyeAnimation("idle")
 
 	eye_position_default()
-
-	# Set respeaker to dim glow inside the head.
-	# See hardware folder for more info.
-	try:
-		from pixel_ring import pixel_ring
-		pixel_ring.set_color(r=5,g=0,b=0)
-	except Exception as e:
-		print(e)
+	respeaker_pixel_ring()
 
 	# Start notify API in a subprocess
-	print("\nStarting notification API...\n")
-	subprocess.Popen(["python3 "+os.path.dirname(os.path.abspath(__file__))+"/gladosNotifyAPI.py"], shell=True)
+	#print("\nStarting notification API...\n")
+	#subprocess.Popen(["python3 "+os.path.dirname(os.path.abspath(__file__))+"/gladosNotifyAPI.py"], shell=True)
 
 
 	# Let user know the script is running
@@ -105,7 +99,9 @@ def take_command():
 
 		try:
 			# Record
+			started_listening()
 			voice = listener.listen(source, timeout=3)
+			stopped_listening()
 
 			print("Got it...")
 			setEyeAnimation("idle")
@@ -324,17 +320,17 @@ def process_command(command):
 		speak("Cake and grief counseling will be available at the conclusion of the test.", cache=True)
 		restart_program()
 
+	elif 'volume' in command:
+		speak(adjust_volume(command), cache=True)
 	
 	##### FAILED ###########################
 
 	else:
 		setEyeAnimation("angry")
 		print("Command not recognized")
-		playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/GLaDOS-rec-fail-'+str(randint(1, 6))+'.wav')
+		speak("I have no idea what you meant by that.")
 
-		failList = open("failedCommands.txt", "a")
-		failList.write('\n'+command);
-		failList.close()
+		log_failed_command(command)
 
 	
 	print("\nWaiting for trigger...")
@@ -348,9 +344,14 @@ speech = LiveSpeech(lm=False, keyphrase=os.getenv('TRIGGERWORD'), kws_threshold=
 for phrase in speech:
 	try:
 		# Listen for command
+		started_listening()
 		command = take_command()
+		stopped_listening()
+		
 		# Execute command
 		process_command(command)
+		stopped_speaking()
+		
 	except Exception as e:
 		# Something failed
 		setEyeAnimation("angry")

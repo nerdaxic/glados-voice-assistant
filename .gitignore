@@ -4,9 +4,9 @@
 # Ignore locally collected data
 collectedSpeech/**
 collectedWakeWords/**
-failedCommands.txt
 cancelledActivations.txt
 gladosdemo.py
+failed_commands.txt
 
 # Local enviroment file
 settings.env
