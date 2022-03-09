@@ -5,26 +5,30 @@ from gladosServo import *
 from word2number import w2n
 from subprocess import call
 import re
+import os
+from dotenv import load_dotenv
+load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
 def started_listening():
 	print("started listening")
-	try:
+	if(os.getenv('RESPEAKER_CONNECTED')):
 		respeaker_mode("listen")
-	except Exception as e:
-		print(e)
+
 	# TODO: Add hook to send trigger to Home Assistant API
 
 def stopped_listening():
 	print("stopped listening")
-	try:
+	if(os.getenv('RESPEAKER_CONNECTED')):
 		respeaker_mode("wait")
-	except Exception as e:
-		print(e)
+	
 	# TODO: Add hook to send trigger to Home Assistant API
 
 def started_speaking():
 	print("started to speak")
-	respeaker_pixel_ring()
+	
+	if(os.getenv('RESPEAKER_CONNECTED')):
+		respeaker_pixel_ring()
+
 	# TODO: Add hook to send trigger to Home Assistant API
 
 def stopped_speaking():

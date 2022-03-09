@@ -7,7 +7,7 @@ import _thread as thread
 from threading import Timer
 from gladosSerial import *
 from gladosServo import *
-from glados_functions import *
+
 import sys
 import urllib.parse
 import re
@@ -19,6 +19,7 @@ import shutil
 from subprocess import call
 
 from glados_tts.engine import *
+from glados_functions import *
 
 synthFolder = os.getenv('TTS_SAMPLE_FOLDER') + "/"
 
