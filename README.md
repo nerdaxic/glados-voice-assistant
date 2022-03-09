@@ -116,9 +116,16 @@ sudo snap install curl
 cd ~
 ``` 
 #### 2. Download the source from GitHub
+This will download GLaDOS Voice Assistant and the TTS submodule.
 ```console 
-git clone https://github.com/nerdaxic/glados-voice-assistant/
+git clone --recurse-submodules https://github.com/nerdaxic/glados-voice-assistant/
 ``` 
+
+After this you can play around with the TTS, this works as stand-alone.
+```console
+python3 ~/glados-voice-assistant/glados-tts/glados.py
+```
+
 #### 3. Edit the settings file
 
 Find the sound card ID:
