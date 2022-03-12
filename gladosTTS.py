@@ -24,7 +24,7 @@ from glados_functions import *
 synthFolder = os.getenv('TTS_SAMPLE_FOLDER') + "/"
 
 def playFile(filename):
-	call(["aplay", filename])	
+	call(["aplay", "-q", filename])	
 
 # Turns units etc into speakable text
 def cleanTTSLine(line):
@@ -107,7 +107,7 @@ def speak(line, cache=False):
 				eye_position_random()
 
 	    	# Speak
-			call(["aplay", "./output.wav"])
+			call(["aplay", "-q", "./output.wav"])
 			
 			if(cache):
 				shutil.copyfile("output.wav", synthFolder+cleanTTSFile(line))
