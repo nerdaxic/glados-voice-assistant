@@ -67,12 +67,16 @@ Tight integration with Home Assistant's local API:
 ![General AI Voice Assistant Pipeline](https://www.henrirantanen.fi/wp-content/uploads/2022/02/ai-voice-assistant-pipeline.jpg)
 
 
-## Requirements
+## Requirements for Ubuntu
+### Install tools
+```console
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install python3-pip
+```
 ### Install PyAudio
 PyAudio is needed to play audio files.
 ```console 
-sudo apt-get update 
-sudo apt-get upgrade 
 sudo apt-get install portaudio19-dev 
 sudo pip3 install pyaudio
 ``` 
@@ -105,9 +109,30 @@ Should be already installed on Raspberry
 sudo pip3 install pyserial
 sudo pip3 install psutil
 sudo pip3 install flask
-sudo snap install curl
 ``` 
+### Install tools needed by TTS
+```console
 
+sudo pip3 install phonemizer
+sudo pip3 install inflect
+sudo pip3 install unidecode
+sudo pip3 install scipy
+sudo pip3 install playsound
+
+# Without GPU-support
+pip3 install torch==1.5.1+cpu torchvision==0.6.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
+
+# With CUDA-support
+sudo apt install nvidia-cuda-toolkit
+nvcc -V
+pip3 install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
+
+#You can test cuda support by running
+python3
+>>> import torch
+>>> torch.cuda.is_available()
+```
+Might have to reboot here...
 
 ## Install GLaDOS Voice Assistant
 
