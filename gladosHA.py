@@ -123,13 +123,11 @@ def sayNumericSensorData(sensor):
 def saySaunaCompleteTime(temperature):
 	readyTemp = 60
 	minutesLeft = int(8/3*(readyTemp-int(temperature)))
-	print(minutesLeft)
 	readyTime = dt.datetime.today() + dt.timedelta(minutes = minutesLeft)
-	print(readyTime)
 	hour = readyTime.strftime('%H')
 	minute = readyTime.strftime('%M')
 
-	speak("The operational temperature will be reached approximately at"+hour+":"+minute)
+	speak("The operational temperature will be reached approximately at "+hour+":"+minute)
 
 
 def sayCurrentWeatherfromHA():
@@ -178,10 +176,7 @@ def sayforecastfromHA(days):
 	# TODO: HA returns the forecast on +00:00 timezone. 
 	# Currently this can give wrong day's forecast depending on what time you ask.
 
-	print("Forecaset "+str(days) + " days from now:")
 	forecast = sensorData['attributes']['forecast'][days]
-
-	print(str(forecast)+"\n")
 
 	# Parse weekday of the forecast datetime
 	# Swedish Weather Institute format (SMHI)
@@ -243,17 +238,10 @@ def getDayIndex(command):
 
 	currentTimestamp = dt.datetime.today()
 	weekdayIndex = currentTimestamp.weekday()
-
-	print("requestIndex :"+str(requestIndex ))
-	print("weekdayIndex:"+str(weekdayIndex))
-
 	
 	diff = requestIndex-weekdayIndex
 	if diff < 0:
 		diff = diff + 7
-
-
-	print("diff: "+str(diff))
 
 	return diff
 
@@ -264,7 +252,6 @@ def call_HA_Service(service, entity, data=""):
 
 	url = endpoint+"services/"+domain+"/"+service
 	
-	print(url)
 	headers = {
 	 "Authorization": "Bearer "+token,
 	 "content-type": "application/json",
@@ -276,4 +263,3 @@ def call_HA_Service(service, entity, data=""):
 	payload = '{"entity_id": "'+entity+'"'+data+'}'
 
 	response = requests.post(url, headers=headers, data=payload, verify=False)
-	print(response.content)

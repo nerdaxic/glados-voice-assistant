@@ -244,6 +244,12 @@ def process_command(command):
 			call_HA_Service("climate.turn_off", "climate.living_room_ac")
 			speak("The neurotoxin levels will reach dangerously low levels within a minute.", cache=True)
 
+	elif 'it smells' in command:
+		runHaScript("cat_poop")
+		speak("I noticed my air quality sensors registered some organic neurotoxins.", cache=True)
+		speak("Let me spread it around a bit!", cache=True)
+				
+
 	##### SENSOR OUTPUT ###########################
 
 	elif 'living room temperature' in command:

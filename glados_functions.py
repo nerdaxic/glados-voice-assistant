@@ -10,30 +10,31 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
 def started_listening():
-	print("started listening")
 	if(os.getenv('RESPEAKER_CONNECTED')):
 		respeaker_mode("listen")
 
 	# TODO: Add hook to send trigger to Home Assistant API
+	return
 
 def stopped_listening():
-	print("stopped listening")
 	if(os.getenv('RESPEAKER_CONNECTED')):
 		respeaker_mode("wait")
 	
 	# TODO: Add hook to send trigger to Home Assistant API
+	return
 
 def started_speaking():
-	print("started to speak")
 	
 	if(os.getenv('RESPEAKER_CONNECTED')):
 		respeaker_pixel_ring()
 
 	# TODO: Add hook to send trigger to Home Assistant API
+	return
 
 def stopped_speaking():
-	print("stopped speaking")
+
 	# TODO: Add hook to send trigger to Home Assistant API
+	return
 
 def log_failed_command(command):
 	failList = open("failed_commands.txt", "a")

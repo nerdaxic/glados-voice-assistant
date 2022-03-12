@@ -78,48 +78,27 @@ sudo apt install python3-pip
 PyAudio is needed to play audio files.
 ```console 
 sudo apt-get install portaudio19-dev 
-sudo pip3 install pyaudio
 ``` 
-### Install python-dotenv
-Used to parse the settings file.
-```console 
-sudo pip3 install python-dotenv
-``` 
+
 ### Install PocketSphinx
 Used for trigger word detection for now.
 ```console 
 sudo apt-get install -y build-essential swig libpulse-dev libasound2-dev
-sudo pip3 install pocketsphinx
 ``` 
 
 ### Install SpeechRecognition 
 Used to turn audio into text for now.
 ```console 
-sudo pip3 install SpeechRecognition
 sudo apt-get install flac
 ``` 
-### Install sounddevice 
-Used for selecting sound cards
-```console 
-sudo pip3 install sounddevice
-``` 
+
 ### Install other libraries
-Should be already installed on Raspberry
+Install python modules from requirements.txt file
 ```console 
-sudo pip3 install pyserial
-sudo pip3 install psutil
-sudo pip3 install flask
+cd ~/glados-voice-assistant
+sudo pip3 install -r requirements.txt
 ``` 
-### Install tools needed by TTS
-```console
 
-sudo pip3 install phonemizer
-sudo pip3 install inflect
-sudo pip3 install unidecode
-sudo pip3 install scipy
-sudo pip3 install playsound
-
-```
 ### Install pytorch
 See here: https://pytorch.org/get-started/locally/#start-locally
 
