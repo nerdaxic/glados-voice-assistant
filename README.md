@@ -119,20 +119,9 @@ sudo pip3 install unidecode
 sudo pip3 install scipy
 sudo pip3 install playsound
 
-# Without GPU-support
-pip3 install torch==1.5.1+cpu torchvision==0.6.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
-
-# With CUDA-support
-sudo apt install nvidia-cuda-toolkit
-nvcc -V
-pip3 install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
-
-#You can test cuda support by running
-python3
->>> import torch
->>> torch.cuda.is_available()
 ```
-Might have to reboot here...
+### Install pytorch
+See here: https://pytorch.org/get-started/locally/#start-locally
 
 ## Install GLaDOS Voice Assistant
 
