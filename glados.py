@@ -29,6 +29,7 @@ from gladosServo import *
 from glados_functions import *
 from skills.glados_jokes import *
 from skills.glados_magic_8_ball import *
+from skills.glados_home_assistant import *
 from pocketsphinx import LiveSpeech
 
 import subprocess
@@ -50,13 +51,14 @@ def start_up():
 	# Show regular eye-texture, this stops the initial loading animation
 	setEyeAnimation("idle")
 
+	home_assistant_initialize()
+
 	eye_position_default()
 	respeaker_pixel_ring()
 
 	# Start notify API in a subprocess
-	#print("\nStarting notification API...\n")
-	#subprocess.Popen(["python3 "+os.path.dirname(os.path.abspath(__file__))+"/gladosNotifyAPI.py"], shell=True)
-
+	print("\033[1;94mINFO:\033[;97m Starting notification API...\n")
+	subprocess.Popen(["python3 "+os.path.dirname(os.path.abspath(__file__))+"/gladosNotifyAPI.py"], shell=True)
 
 	# Let user know the script is running
 	speak("oh, its you", cache=True)
@@ -110,7 +112,7 @@ def take_command():
 			command = listener.recognize_google(voice)
 			command = command.lower()
 
-			print("\nTEST SUBJECT: "+command.capitalize() + "\n")
+			print("\n\033[1;36mTEST SUBJECT:\033[0;37m: "+command.capitalize() + "\n")
 
 			# Remove possible trigger word from input
 			if os.getenv('TRIGGERWORD') in command:
@@ -158,71 +160,16 @@ def process_command(command):
 		speak(fetch_joke(), cache=True)
 
 	elif 'my shopping list' in command:
-		addToShoppingList(command)
+		speak(home_assistant_process_command(command), cache=True)
 
 	elif 'weather' in command:
-		if 'today' in command:
-			sayforecastfromHA(0)
-		elif 'current' in command:
-			sayCurrentWeatherfromHA()
-		elif 'right now' in command:
-			sayCurrentWeatherfromHA()
-		else:
-			sayforecastfromHA(getDayIndex(command))
-
-		if randint(1, 10) == 1:
-			speak("You don't even care.", cache=True)
-			speak("Do you?", cache=True)
+		speak(home_assistant_process_command(command))
 
 	##### LIGHTING CONTROL ###########################
 
-	elif 'daylight' in command:
-		activateScene("scene.daylight")
-		speak("I can simulate daylight at all hours. And add adrenal vapor to your oxygen supply.", cache=True)
+	elif 'turn off' in command or 'turn on' in command and 'light' in command:
+		speak(home_assistant_process_command(command))
 
-	elif 'studio light' in command:
-		activateScene("scene.studio_lights")
-		speak("There you go.", cache=True)
-
-	elif 'night light' in command:
-		activateScene("scene.night_light")
-		speak("Hello darkness my old friend.")
-		
-	elif 'turn down the lights' in command:
-		activateScene("scene.night_light")
-		speak("Okay, fine.", cache=True)
-
-	elif 'evening light' in command:
-		activateScene("scene.night_light")
-		speak("Almost time for you to be detained in the relaxation vault.", cache=True)
-
-	elif 'turn off all lights' in command:
-		lightSwitch("light.all_lights", "off")
-		speak("This is the situation why I was built with excellent night vision.", cache=True)
-
-	elif 'blinds' in command or 'curtain' in command:
-		if 'open' in command:
-			if 'bedroom' in command:
-				call_HA_Service("cover.set_cover_position", "cover.bedroom_roller_blind_left", data='"position": "100"')
-				call_HA_Service("cover.set_cover_position", "cover.bedroom_roller_blind_right", data='"position": "100"')
-			elif 'living room' in command:
-				call_HA_Service("cover.set_cover_position", "cover.cinema_blind", data='"position": "100"')			
-		elif 'close' in command:
-			if 'bedroom' in command:
-				call_HA_Service("cover.set_cover_position", "cover.bedroom_roller_blind_left", data='"position": "0"')
-				call_HA_Service("cover.set_cover_position", "cover.bedroom_roller_blind_right", data='"position": "0"')
-			elif 'living room' in command:
-				call_HA_Service("cover.set_cover_position", "cover.cinema_blind", data='"position": "0"')
-
-		speak("Sure.")
-			
-	elif 'turn on hallway lights' in command:
-		lightSwitch("light.hallway_lights", "on")
-		speak("Sure.")
-
-	elif 'turn on bathroom lights' in command:
-		activateScene("scene.bathroom_daylight")
-		speak("Let me get that for you")
 
 	##### DEVICE CONTROL ##########################
 	elif 'cinema' in command:

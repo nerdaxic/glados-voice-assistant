@@ -4,36 +4,55 @@ from gladosSerial import *
 from gladosServo import *
 from word2number import w2n
 from subprocess import call
+from skills.glados_home_assistant import home_assistant_utility_script
 import re
 import os
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
 def started_listening():
+
+	global home_assistant
+
 	if(os.getenv('RESPEAKER_CONNECTED')):
 		respeaker_mode("listen")
 
-	# TODO: Add hook to send trigger to Home Assistant API
+	# Hook to send trigger to Home Assistant API
+	home_assistant_utility_script("started_listening")
+
 	return
 
 def stopped_listening():
+
+	global home_assistant
+
 	if(os.getenv('RESPEAKER_CONNECTED')):
 		respeaker_mode("wait")
 	
-	# TODO: Add hook to send trigger to Home Assistant API
+	# Hook to send trigger to Home Assistant API
+	home_assistant_utility_script("stopped_listening")
+	
 	return
 
 def started_speaking():
+
+	global home_assistant
 	
 	if(os.getenv('RESPEAKER_CONNECTED')):
 		respeaker_pixel_ring()
 
-	# TODO: Add hook to send trigger to Home Assistant API
+	# Hook to send trigger to Home Assistant API
+	home_assistant_utility_script("started_speaking")
+
 	return
 
 def stopped_speaking():
 
-	# TODO: Add hook to send trigger to Home Assistant API
+	global home_assistant
+
+	# Hook to send trigger to Home Assistant API
+	home_assistant_utility_script("stopped_speaking")
+	
 	return
 
 def log_failed_command(command):

@@ -10,6 +10,9 @@ failed_commands.txt
 
 # Local enviroment file
 settings.env
+home_assistant_settings.yaml
 
 # Local Python cache files
 **/__pycache__/
+
+test.py

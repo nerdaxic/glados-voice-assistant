@@ -1,0 +1,89 @@
+# Server related settings
+api:
+  # Address of your Home Assistant server
+  address: "https://192.168.1.221:8123"
+  # Long-lived access token
+  token: "1234"
+
+# The weather entity settings to get forecasts etc
+weather:
+  entity: "weather.kerava"
+
+# Allow setting of volume level from Home Assistant
+#volume:
+#  entity: "input_number.glados_volume"
+
+# Allow mute of the mic automatically (player playing etc.)
+#mute:
+#  entity: "input_boolean.glados_microphone"
+
+# All schene condigurations
+scenes:
+  - scene:
+    command: ["turn on studio lights"]
+    entity: "scene.studio_lights"
+    response: ["Yeah, sure."]
+
+  - scene:
+    command: ["turn on daylight", "turn on lights"]
+    entity: "scene.daylight"
+    response: ["To maintain a constant testing cycle, I simulate daylight at all hours and add adrenal vapor to your oxygen supply."]
+
+  - scene:
+    command: ["turn down the lights", "turn on night light", "turn on evening light"]
+    entity: "scene.night_light"
+    response: ["Look at the time, its getting late already.", "It's almost time for you to be detained in your relaxation vault."]
+
+  - scene:
+    command: ["turn on cinema lights", "turn on the cinema lights"]
+    entity: "scene.cinema_scene"
+    response: ["Getting ready for some Simpsons are you?", "Okay, give me a moment"]
+
+# All light configurations
+lights:
+
+  - light:
+    command: ["turn $on_off $room lights", "turn $on_off the lights in $room", "set $room lights $light_state"]
+    entity: "light.$room_lights"
+    response: ["I have turned $on_off the lights in the $room.", "$room lights are now $on_off.", "Okay. Fine.", "Let me get that for you."]
+
+  - light:
+    command: ["turn $on_off all lights", "set all lights $light_state"]
+    entity: "light.all_lights"
+    response: ["I have turned $on_off all lights."]
+
+  - light:
+    command: ["turn $on_off test lamp","set test lamp $color"]
+    entity: "light.test_lamp"
+    # response missing for test purposes
+    
+  - light:
+    command: ["turn $on_off test lamp2","set test2 lamp $color"]
+    entity: "light.test_lamp2"
+    response: "Okay."
+
+# All script configurations
+scripts:
+#  - script:
+#    command: ["turn on home cinema", "turn on cinema"]
+#    entity: "script.start_cinema"
+#    response: ["okay, fine.", "give me a moment."]
+
+
+# Run scripts with GLaDOS internal triggers
+    start_listening:
+      entity: "script.glados_start_listening_script"
+
+#    stop_listening:
+#      entity: "script.glados_stop_listening_script"
+
+#    start_speaking:
+#      entity: "script.glados_start_speaking_script"
+
+    stop_speaking:
+      entity: "script.glados_stop_speaking_script"
+
+# Examples for variables
+# on_off        "on" | "off"
+# room          "living room" | "bedroom" | "bathroom"
+# light_state   "92 procent" | "green" | "half brightness"

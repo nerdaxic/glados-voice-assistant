@@ -28,11 +28,6 @@ def playFile(filename):
 
 # Turns units etc into speakable text
 def cleanTTSLine(line):
-	line = line.replace("°C", "degrees")
-	line = line.replace("°", "degrees")
-	line = line.replace("hPa", "hectopascals")
-	line = line.replace("% (RH)", "percent")
-	line = line.replace("g/m³", "grams per cubic meter")
 	line = line.replace("sauna", "incinerator")
 	line = line.replace("'", "")
 	line = line.lower()
@@ -89,13 +84,13 @@ def speak(line, cache=False):
 		if eye_position_script(line) == False:
 			eye_position_random()
 
+		print("\033[1;33mGLaDOS:\033[0;37m " + line.capitalize())
 		# Speak from cache
-		print("GLaDOS: " + line.capitalize())
 		playFile(file)
 
 	# TTS Sample not in cache...
 	else:
-		print ("File not exist, generating...")
+		print("\033[1;94mINFO:\033[;97m The audio sample does not exist, generating...")
 		setEyeAnimation("wait")
 
 		# Generate line and save to TTS-folder
@@ -106,11 +101,15 @@ def speak(line, cache=False):
 			if eye_position_script(line) == False:
 				eye_position_random()
 
+			print("\033[1;33mGLaDOS:\033[0;37m " + line.capitalize())
+
 	    	# Speak
 			call(["aplay", "-q", "./output.wav"])
 			
 			if(cache):
 				shutil.copyfile("output.wav", synthFolder+cleanTTSFile(line))
+
+	
 
 	eye_position_default()
 
