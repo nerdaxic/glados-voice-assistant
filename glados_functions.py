@@ -14,7 +14,7 @@ def started_listening():
 
 	global home_assistant
 
-	if(os.getenv('RESPEAKER_CONNECTED')):
+	if(os.getenv('RESPEAKER_CONNECTED', 'False').lower() in ('true', '1', 't')):
 		respeaker_mode("listen")
 
 	# Hook to send trigger to Home Assistant API
@@ -26,7 +26,7 @@ def stopped_listening():
 
 	global home_assistant
 
-	if(os.getenv('RESPEAKER_CONNECTED')):
+	if(os.getenv('RESPEAKER_CONNECTED', 'False').lower() in ('true', '1', 't')):
 		respeaker_mode("wait")
 	
 	# Hook to send trigger to Home Assistant API
@@ -38,7 +38,7 @@ def started_speaking():
 
 	global home_assistant
 	
-	if(os.getenv('RESPEAKER_CONNECTED')):
+	if(os.getenv('RESPEAKER_CONNECTED', 'False').lower() in ('true', '1', 't')):
 		respeaker_pixel_ring()
 
 	# Hook to send trigger to Home Assistant API
