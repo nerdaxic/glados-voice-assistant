@@ -17,10 +17,9 @@ def respeaker_errors(e):
 		print("\nERROR: Library missing.")
 		print("Run 'sudo pip3 install pixel_ring'")
 		exit();
-	if "name 'pixel_ring' is not defined" in str(e):
+	if "name 'pixel_ring' is not defined" in str(e) and os.getenv('RESPEAKER_CONNECTED'):
 		print("\nERROR: ReSpeaker is probably not connected?")
-		if(os.getenv('RESPEAKER_CONNECTED')):
-			exit();
+		exit();
 	else:
 		print(e)
 
