@@ -17,14 +17,14 @@ def respeaker_errors(e):
 		print("\nERROR: Library missing.")
 		print("Run 'sudo pip3 install pixel_ring'")
 		exit();
-	if "name 'pixel_ring' is not defined" in str(e) and os.getenv('RESPEAKER_CONNECTED'):
+	if "name 'pixel_ring' is not defined" in str(e):
 		print("\nERROR: ReSpeaker is probably not connected?")
 		exit();
 	else:
 		print(e)
 
 # Try to load the ReSpeaker pixel ring library
-if(os.getenv('RESPEAKER_CONNECTED')):
+if(os.getenv('RESPEAKER_CONNECTED', 'False').lower() in ('true', '1', 't')):
 	try:
 		from pixel_ring import pixel_ring
 	except Exception as e:
@@ -36,7 +36,7 @@ def respeaker_pixel_ring(rgb=0x100000):
 
 	# Set respeaker to dim glow inside the head.
 	# See hardware folder for more info.
-	if(os.getenv('RESPEAKER_CONNECTED')):
+	if(os.getenv('RESPEAKER_CONNECTED', 'False').lower() in ('true', '1', 't')):
 		try:
 			pixel_ring.set_color(rgb)
 		except Exception as e:
@@ -44,7 +44,7 @@ def respeaker_pixel_ring(rgb=0x100000):
 
 # Set respeaker to animation modes
 def respeaker_mode(mode):
-	if(os.getenv('RESPEAKER_CONNECTED')):
+	if(os.getenv('RESPEAKER_CONNECTED', 'False').lower() in ('true', '1', 't')):
 		if(mode == "listen"):
 			try:
 				pixel_ring.listen()
