@@ -13,9 +13,7 @@ load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.en
 def started_listening():
 
 	global home_assistant
-
-	if(os.getenv('RESPEAKER_CONNECTED', 'False').lower() in ('true', '1', 't')):
-		respeaker_mode("listen")
+	respeaker_mode("listen")
 
 	# Hook to send trigger to Home Assistant API
 	home_assistant_utility_script("started_listening")
@@ -25,9 +23,7 @@ def started_listening():
 def stopped_listening():
 
 	global home_assistant
-
-	if(os.getenv('RESPEAKER_CONNECTED', 'False').lower() in ('true', '1', 't')):
-		respeaker_mode("wait")
+	respeaker_mode("wait")
 	
 	# Hook to send trigger to Home Assistant API
 	home_assistant_utility_script("stopped_listening")
@@ -37,9 +33,7 @@ def stopped_listening():
 def started_speaking():
 
 	global home_assistant
-	
-	if(os.getenv('RESPEAKER_CONNECTED', 'False').lower() in ('true', '1', 't')):
-		respeaker_pixel_ring()
+	respeaker_pixel_ring()
 
 	# Hook to send trigger to Home Assistant API
 	home_assistant_utility_script("started_speaking")
