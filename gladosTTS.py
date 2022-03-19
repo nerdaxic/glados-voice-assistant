@@ -18,7 +18,11 @@ load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.en
 import shutil
 from subprocess import call
 
-from glados_tts.engine import *
+if(os.getenv('TTS_SERVER') == 'remote'):
+	import socket
+if(os.getenv('TTS_SERVER') == 'local'):
+	from glados_tts.engine import *
+	
 from glados_functions import *
 
 synthFolder = os.getenv('TTS_SAMPLE_FOLDER') + "/"
@@ -56,18 +60,41 @@ def checkTTSLib(line):
 	else:
 		return False
 
-# Get GLaDOS TTS Sample over the online API
+# Get GLaDOS TTS Sample
 def fetchTTSSample(line):
-		
-	if(glados_tts(cleanTTSLine(line), speak=False) == True):
-		print('Success: TTS sample "'+line+'" fetched')
-		setEyeAnimation("idle")
-		return True
+	if(os.getenv('TTS_SERVER') == 'local'):
+		if(glados_tts(cleanTTSLine(line), speak=False) == True):
+			print('Success: TTS sample "'+line+'" fetched')
+			setEyeAnimation("idle")
+			return True
+		else:
+			# Complain about speech synthesis core
+			setEyeAnimation("angry")
+			speak("My speech synthesiser core is offline.")
+			return False
+	if(os.getenv('TTS_SERVER') == 'remote'):
+		def recvall(sock):
+			buff_size = 4096
+			data = b''
+			while True:
+				part = sock.recv(buff_size)
+				data += part
+				if len(part) < buff_size:
+					break
+			return data
+			
+		with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+			s.connect((os.getenv('TTS_REMOTE_ADD'),os.getenv('TTS_REMOTE_PORT')))
+			s.sendall(line.encode('utf-8'))
+			data = recvall(s)
+			with open('output.wav', 'wb') as o:
+				o.write(data)		
+	
 	else:
-		# Complain about speech synthesis core
-		setEyeAnimation("angry")
-		speak("My speech synthesiser core is offline.")
-		return False
+			# Complain about speech synthesis core
+			setEyeAnimation("angry")
+			speak("My speech synthesiser core is offline.")
+			return False		
 
 
 ## Speak out the line
