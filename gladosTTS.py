@@ -109,8 +109,7 @@ def speak(line, cache=False):
 			if(cache):
 				shutil.copyfile("output.wav", synthFolder+cleanTTSFile(line))
 
-	
-
+	stopped_speaking()
 	eye_position_default()
 
 

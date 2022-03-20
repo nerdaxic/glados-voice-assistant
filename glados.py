@@ -297,9 +297,9 @@ speech = LiveSpeech(lm=False, keyphrase=os.getenv('TRIGGERWORD'), kws_threshold=
 for phrase in speech:
 	try:
 		# Listen for command
-		started_listening()
+		#started_listening()
 		command = take_command()
-		stopped_listening()
+		#stopped_listening()
 		
 		# Execute command
 		process_command(command)
