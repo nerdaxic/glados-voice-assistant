@@ -1,6 +1,4 @@
 import os
-import subprocess
-import pyaudio
 import wave
 from random import randint
 import _thread as thread
@@ -18,12 +16,10 @@ load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.en
 import shutil
 from subprocess import call
 
-if(os.getenv('TTS_SERVER') == 'local'):
-	from glados_tts.engine import *
-	
+if(os.getenv('TTS_ENGINE_API') == ''): from glados_tts.engine import *
 from glados_functions import *
 
-synthFolder = os.getenv('TTS_SAMPLE_FOLDER') + "/"
+synthFolder = os.getenv('TTS_CACHE_FOLDER') + "/"
 
 def playFile(filename):
 	call(["aplay", "-q", filename])	
@@ -60,21 +56,18 @@ def checkTTSLib(line):
 
 # Get GLaDOS TTS Sample
 def fetchTTSSample(line):
-	if(os.getenv('TTS_SERVER') == 'local'):
-		if(glados_tts(cleanTTSLine(line), speak=False) == True):
+	
+	# Local TTS Engine
+	if(os.getenv('TTS_ENGINE_API') == ''):	
+		if(glados_tts(cleanTTSLine(line)) == True):
 			print('Success: TTS sample "'+line+'" fetched')
 			setEyeAnimation("idle")
 			return True
-		else:
-			# Complain about speech synthesis core
-			setEyeAnimation("angry")
-			speak("My speech synthesiser core is offline.")
-			return False
-	elif(os.getenv('TTS_SERVER') == 'remote'):
+	
+	# Remote TTS Engine API
+	else:
 		text = urllib.parse.quote(cleanTTSLine(line))
-		TTSCommand = 'curl -L --retry 5 --get --fail -o output.wav '+os.getenv('TTS_ENGINE_URL')+text
-
-		print(TTSCommand) 
+		TTSCommand = 'curl -L --retry 5 --get --fail -o audio/GLaDOS-tts-temp-output.wav '+os.getenv('TTS_ENGINE_API')+text
 		setEyeAnimation("wait")
 		TTSResponse = os.system(TTSCommand)
 
@@ -82,17 +75,11 @@ def fetchTTSSample(line):
 			print('Success: TTS sample "'+line+'" fetched')
 			setEyeAnimation("idle")
 			return True
-		else:
-			# Complain about speech synthesis core
-			setEyeAnimation("angry")
-			playFile(os.path.dirname(os.path.abspath(__file__))+"/audio/GLaDOS-tts-error.wav")
-			return False
-	
-	else:
-		# Complain about speech synthesis core
-		setEyeAnimation("angry")
-		speak("My speech synthesiser core is offline.")
-		return False		
+
+	# Complain about speech synthesis core
+	setEyeAnimation("angry")
+	playFile(os.path.dirname(os.path.abspath(__file__))+"/audio/GLaDOS-tts-error.wav")
+	return False
 
 
 ## Speak out the line
@@ -119,7 +106,6 @@ def speak(line, cache=False):
 		setEyeAnimation("wait")
 
 		# Generate line and save to TTS-folder
-		# if(glados_tts(line)):
 		if(fetchTTSSample(line)):
 
 			setEyeAnimation("idle")
@@ -130,10 +116,10 @@ def speak(line, cache=False):
 			print("\033[1;33mGLaDOS:\033[0;37m " + line.capitalize())
 
 	    	# Speak
-			call(["aplay", "-q", "./output.wav"])
+			playFile("./audio/GLaDOS-tts-temp-output.wav")
 			
 			if(cache):
-				shutil.copyfile("output.wav", synthFolder+cleanTTSFile(line))
+				shutil.copyfile("audio/GLaDOS-tts-temp-output.wav", synthFolder+cleanTTSFile(line))
 
 	
 
