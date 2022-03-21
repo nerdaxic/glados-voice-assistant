@@ -458,14 +458,18 @@ def home_assistant_run_script(script):
 # Run scripts based on whats happening on GLaDOS
 def home_assistant_utility_script(glados_state):
 
-	if "start_listening" in home_assistant["scripts"].keys() and "started_listening" in glados_state:
-		home_assistant_run_script(home_assistant["scripts"]["start_listening"]["entity"])
-	
-	elif "stop_listening" in home_assistant["scripts"].keys() and "stopped_listening" in glados_state:
-		home_assistant_run_script(home_assistant["scripts"]["stop_listening"]["entity"])
-	
-	elif "start_speaking" in home_assistant["scripts"].keys() and "started_speaking" in glados_state:
-		home_assistant_run_script(home_assistant["scripts"]["start_speaking"]["entity"])
-	
-	elif "stop_speaking" in home_assistant["scripts"].keys() and "stopped_speaking" in glados_state:
-		home_assistant_run_script(home_assistant["scripts"]["stop_speaking"]["entity"])
+	try:
+		if "start_listening" in home_assistant["scripts"].keys() and "started_listening" in glados_state:
+			home_assistant_run_script(home_assistant["scripts"]["start_listening"]["entity"])
+		
+		elif "stop_listening" in home_assistant["scripts"].keys() and "stopped_listening" in glados_state:
+			home_assistant_run_script(home_assistant["scripts"]["stop_listening"]["entity"])
+		
+		elif "start_speaking" in home_assistant["scripts"].keys() and "started_speaking" in glados_state:
+			home_assistant_run_script(home_assistant["scripts"]["start_speaking"]["entity"])
+		
+		elif "stop_speaking" in home_assistant["scripts"].keys() and "stopped_speaking" in glados_state:
+			home_assistant_run_script(home_assistant["scripts"]["stop_speaking"]["entity"])
+	except:
+		# None of the scripts above defined
+		pass
