@@ -128,7 +128,7 @@ python3 -m sounddevice
 ```
 Generate and edit the settings.env file:
 ```console 
-cp glados-voice-assistant/settings.env.sample glados-voice-assistant/settings.env && nano glados-voice-assistant/settings.env
+cp ~/glados-voice-assistant/settings.env.sample ~/glados-voice-assistant/settings.env && nano ~/glados-voice-assistant/settings.env
 ``` 
 #### 4. To run:
 Launch the voice assistant:
