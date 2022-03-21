@@ -137,7 +137,9 @@ def take_command():
 # Process the command
 def process_command(command):
 
-	if 'cancel' in command:
+	if ('cancel' in command or
+		'nevermind' in command or
+		'forget it' in command):
 		speak("Sorry.", cache=True)
 
 		# Todo: Save the used trigger audio as a negative voice sample for further learning
@@ -296,9 +298,9 @@ speech = LiveSpeech(lm=False, keyphrase=os.getenv('TRIGGERWORD'), kws_threshold=
 for phrase in speech:
 	try:
 		# Listen for command
-		started_listening()
+		#started_listening()
 		command = take_command()
-		stopped_listening()
+		#stopped_listening()
 		
 		# Execute command
 		process_command(command)
