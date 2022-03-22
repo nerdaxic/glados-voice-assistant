@@ -1,5 +1,5 @@
 CC BY-NC-SA 4.0
-# GLaDOS Voice Assisntant licence
+# GLaDOS Voice Assistant licence
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
 
 Please see: 
