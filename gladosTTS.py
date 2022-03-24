@@ -119,11 +119,7 @@ def speak(line, cache=False):
 			playFile("./audio/GLaDOS-tts-temp-output.wav")
 			
 			if(cache):
-<<<<<<< HEAD
-				shutil.copyfile("output.wav", synthFolder+cleanTTSFile(line))
-=======
 				shutil.copyfile("audio/GLaDOS-tts-temp-output.wav", synthFolder+cleanTTSFile(line))
->>>>>>> 1bd1a00bf8b42442854740ca50a5d9a3b115054a
 
 	stopped_speaking()
 	eye_position_default()
