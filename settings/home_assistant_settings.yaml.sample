@@ -7,7 +7,7 @@ api:
 
 # The weather entity settings to get forecasts etc
 weather:
-  entity: "weather.kerava"
+  entity: "weather.home"
 
 # Allow setting of volume level from Home Assistant
 #volume:

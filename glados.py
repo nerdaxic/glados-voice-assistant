@@ -40,7 +40,6 @@ import random
 import psutil
 
 from importlib import import_module
-from glados_tts.engine import *
 
 # Load settings to variables from setting file
 from dotenv import load_dotenv

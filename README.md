@@ -116,7 +116,8 @@ git clone --recurse-submodules https://github.com/nerdaxic/glados-voice-assistan
 
 After this you can play around with the TTS, this works as stand-alone.
 ```console
-python3 ~/glados-voice-assistant/glados-tts/glados.py
+cd ~/glados-voice-assistant/glados_tts/
+python3 glados.py
 ```
 
 #### 3. Edit the settings file
@@ -127,7 +128,7 @@ python3 -m sounddevice
 ```
 Generate and edit the settings.env file:
 ```console 
-cp glados-voice-assistant/settings.env.sample glados-voice-assistant/settings.env && nano glados-voice-assistant/settings.env
+cp ~/glados-voice-assistant/settings.env.sample ~/glados-voice-assistant/settings.env && nano ~/glados-voice-assistant/settings.env
 ``` 
 #### 4. To run:
 Launch the voice assistant:
