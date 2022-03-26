@@ -1,17 +1,19 @@
 from gladosTTS import *
 import time
 import serial
-from dotenv import load_dotenv
-load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
+
+import glados_settings
+glados_settings.load_from_file()
+
 
 def setEyeAnimation(animation="idle"):
 
-	if(os.getenv('EYE_SERIAL_ENABLE') == "true"):
+	if(glados_settings.settings["hardware"]["eye_controller"]["serial_enable"] == "true"):
 		
 		try:
 			ser = serial.Serial(
-				port=os.getenv('EYE_SERIAL_PORT'),
-				baudrate=os.getenv('EYE_SERIAL_RATE'),
+				port=glados_settings.settings["hardware"]["eye_controller"]["serial_port"],
+				baudrate=oglados_settings.settings["hardware"]["eye_controller"]["serial_rate"],
 				parity=serial.PARITY_NONE,
 				stopbits=serial.STOPBITS_ONE,
 				bytesize=serial.EIGHTBITS,

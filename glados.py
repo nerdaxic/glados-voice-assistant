@@ -21,12 +21,12 @@
 #	Edit settings.env to match your setup
 #
 
-from gladosTTS import *
+##from gladosTTS import *
 from gladosTime import *
-from gladosHA import *
 from gladosSerial import *
 from gladosServo import *
 from glados_functions import *
+
 from skills.glados_jokes import *
 from skills.glados_magic_8_ball import *
 from skills.glados_home_assistant import *
@@ -39,13 +39,15 @@ import os
 import random
 import psutil
 
-from importlib import import_module
+#from importlib import import_module
+import glados_settings
 
-# Load settings to variables from setting file
-from dotenv import load_dotenv
-load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
+glados_settings.load_from_file()
+
 
 def start_up():
+
+	
 
 	# Show regular eye-texture, this stops the initial loading animation
 	setEyeAnimation("idle")
@@ -65,7 +67,7 @@ def start_up():
 	speak("it's been a long time", cache=True)
 	time.sleep(1.5)
 	speak("how have you been", cache=True)
-	print("\nWaiting for keyphrase: "+os.getenv('TRIGGERWORD').capitalize())
+	print("\nWaiting for keyphrase: "+glados_settings.settings["assistant"]["trigger_word"].capitalize())
 
 	eye_position_default()
 
@@ -114,8 +116,8 @@ def take_command():
 			print("\n\033[1;36mTEST SUBJECT:\033[0;37m: "+command.capitalize() + "\n")
 
 			# Remove possible trigger word from input
-			if os.getenv('TRIGGERWORD') in command:
-				command = command.replace(os.getenv('TRIGGERWORD'), '')
+			if glados_settings.settings["assistant"]["trigger_word"] in command:
+				command = command.replace(glados_settings.settings["assistant"]["trigger_word"], '')
 
 			return command
 
@@ -170,65 +172,7 @@ def process_command(command):
 
 	elif 'turn off' in command or 'turn on' in command and 'light' in command:
 		speak(home_assistant_process_command(command))
-
-
-	##### DEVICE CONTROL ##########################
-	elif 'cinema' in command:
-		if 'turn on' in command:
-			runHaScript("kaynnista_kotiteatteri")
-			speak("Okay. It will take a moment for all the devices to start", cache=True)
-		if 'turn off' in command:
-			runHaScript("turn_off_home_cinema")
-			speak("Sure.")
-
-	elif 'air conditioning' in command or ' ac' in command:
-		if 'turn on' in command:
-			speak("Give me a minute.", cache=True)
-			speak("The neurotoxin generator takes a moment to heat up.", cache=True)
-			call_HA_Service("climate.set_temperature", "climate.living_room_ac", data='"temperature": "23"')
-			call_HA_Service("climate.set_hvac_mode", "climate.living_room_ac", data='"hvac_mode": "heat_cool"')
-			call_HA_Service("climate.set_fan_mode", "climate.living_room_ac", data='"fan_mode": "auto"')
-		if 'turn off' in command:
-			call_HA_Service("climate.turn_off", "climate.living_room_ac")
-			speak("The neurotoxin levels will reach dangerously low levels within a minute.", cache=True)
-
-	elif 'it smells' in command:
-		runHaScript("cat_poop")
-		speak("I noticed my air quality sensors registered some organic neurotoxins.", cache=True)
-		speak("Let me spread it around a bit!", cache=True)
 				
-
-	##### SENSOR OUTPUT ###########################
-
-	elif 'living room temperature' in command:
-		sayNumericSensorData("sensor.living_room_temperature")
-
-	elif 'bedroom temperature' in command:
-		num = sayNumericSensorData("sensor.bedroom_temperature")
-		if(num>23):
-			speak("This is too high for optimal relaxation experience.")
-
-	elif 'outside temperature' in command:
-		speak("According to your garbage weather station in the balcony")
-		sayNumericSensorData("sensor.outside_temperature")
-
-	elif 'incinerator' in command or 'sauna' in command:
-		num = sayNumericSensorData("sensor.sauna_temperature")
-		if num > 55:
-			speak("The Aperture Science Emergency Intelligence Incinerator Pre-heating cycle is complete, you should get in", cache=True)
-			speak("You will be baked and then there will be cake.", cache=True)
-		elif num <= 25:
-			speak("Testing cannot continue", cache=True)
-			speak("The Aperture Science Emergency Intelligence Incinerator is currently offline", cache=True)
-		elif num > 25:
-			speak("The Aperture Science Emergency Intelligence Incinerator Pre-heating cycle is currently running", cache=True)
-			saySaunaCompleteTime(num)
-
-	elif 'temperature' in command:
-		sayNumericSensorData("sensor.indoor_temperature")
-
-	elif 'humidity' in command:
-		sayNumericSensorData("sensor.living_room_humidity")
 	
 	##### PLEASANTRIES ###########################
 
@@ -294,7 +238,7 @@ def process_command(command):
 start_up()
 
 # Local keyword detection loop
-speech = LiveSpeech(lm=False, keyphrase=os.getenv('TRIGGERWORD'), kws_threshold=1e-20)
+speech = LiveSpeech(lm=False, keyphrase=glados_settings.settings["assistant"]["trigger_word"], kws_threshold=1e-20)
 for phrase in speech:
 	try:
 		# Listen for command

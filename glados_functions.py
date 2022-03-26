@@ -1,14 +1,15 @@
 #!/usr/bin/python3
 from glados_respeaker import *
-from gladosSerial import *
-from gladosServo import *
+#from gladosSerial import *
+#from gladosServo import *
 from word2number import w2n
-from subprocess import call
+import subprocess
 from skills.glados_home_assistant import home_assistant_utility_script
 import re
 import os
-from dotenv import load_dotenv
-load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
+import yaml
+#from dotenv import load_dotenv
+#load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
 def started_listening():
 
