@@ -30,14 +30,11 @@ def addToShoppingList(item):
 	payload =  '{"name":"'+item+'"}'
 	response = requests.post(url, headers=headers, data=payload, verify=False)
 
-	# Check if cheese.wav exists and respond
 	if 'Cake' in item:
 		speak("The Enrichment Center is required to remind you that you will be baked, and then there will be cake.")
 	elif 'French fries' in item:
 		speak("If you want to upset a human, just say their weight variance is above or below the norm.")
-
 	else:
-		# Item audio not found, random generic OK response
 		speak("I have added "+item+" to your shopping list")
 
 def activateScene(scene):
