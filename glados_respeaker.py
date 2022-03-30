@@ -1,11 +1,22 @@
 #!/usr/bin/python3
 import os
-from dotenv import load_dotenv
-load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
+
+import glados_settings
+glados_settings.load_from_file()
+
+def respeaker_init():
+
+	# Try to load the ReSpeaker pixel ring library
+	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] in ('true', '1', 't')):
+		try:
+			from pixel_ring import pixel_ring
+		except Exception as e:
+			respeaker_errors(e)
 
 
 # Parse error messages into most common help hints
 def respeaker_errors(e):
+
 	if "Access denied" in str(e):
 		print("\nERROR: No permission to access ReSpeaker hardware.")
 		print("Check the README.md for udev rules in the hardware/respeaker folder.")
@@ -23,12 +34,6 @@ def respeaker_errors(e):
 	else:
 		print(e)
 
-# Try to load the ReSpeaker pixel ring library
-if(os.getenv('RESPEAKER_CONNECTED', 'False').lower() in ('true', '1', 't')):
-	try:
-		from pixel_ring import pixel_ring
-	except Exception as e:
-		respeaker_errors(e)
 
 # Set the ring to static color.
 # Input 8 bit HEX color codes
@@ -36,15 +41,17 @@ def respeaker_pixel_ring(rgb=0x100000):
 
 	# Set respeaker to dim glow inside the head.
 	# See hardware folder for more info.
-	if(os.getenv('RESPEAKER_CONNECTED', 'False').lower() in ('true', '1', 't')):
+	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] in ('true', '1', 't')):
 		try:
 			pixel_ring.set_color(rgb)
 		except Exception as e:
 			respeaker_errors(e)
 
+
 # Set respeaker to animation modes
 def respeaker_mode(mode):
-	if(os.getenv('RESPEAKER_CONNECTED', 'False').lower() in ('true', '1', 't')):
+
+	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] in ('true', '1', 't')):
 		if(mode == "listen"):
 			try:
 				pixel_ring.listen()
@@ -55,3 +62,6 @@ def respeaker_mode(mode):
 				pixel_ring.wait() 
 			except Exception as e:
 				respeaker_errors(e);
+
+
+respeaker_init()

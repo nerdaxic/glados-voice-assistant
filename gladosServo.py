@@ -1,12 +1,13 @@
 import maestro
 import os
 from random import randint
-from dotenv import load_dotenv
-load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
+
+import glados_settings
+glados_settings.load_from_file()
 
 def eye_position_random():
-	if(os.getenv('MAESTRO_SERIAL_ENABLE') == "true"):
-		servo = maestro.Controller(ttyStr=os.getenv('MAESTRO_SERIAL_PORT'))
+	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] == "true"):
+		servo = maestro.Controller(ttyStr=glados_settings["hardware"]["servo_controller"]["serial_port"])
 		servo.setAccel(0,25)
 		servo.setSpeed(0,100)
 		servo.setAccel(1,25)
@@ -17,8 +18,8 @@ def eye_position_random():
 		servo.close()
 
 def eye_position_default():
-	if(os.getenv('MAESTRO_SERIAL_ENABLE') == "true"):
-		servo = maestro.Controller(ttyStr=os.getenv('MAESTRO_SERIAL_PORT'))
+	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] == "true"):
+		servo = maestro.Controller(ttyStr=glados_settings["hardware"]["servo_controller"]["serial_port"])
 		servo.setAccel(0,15)
 		servo.setSpeed(0,10)
 		servo.setAccel(1,25)
@@ -29,8 +30,8 @@ def eye_position_default():
 		servo.close()
 
 def eye_position_open():
-	if(os.getenv('MAESTRO_SERIAL_ENABLE') == "true"):
-		servo = maestro.Controller(ttyStr=os.getenv('MAESTRO_SERIAL_PORT'))
+	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] == "true"):
+		servo = maestro.Controller(ttyStr=glados_settings["hardware"]["servo_controller"]["serial_port"])
 		servo.setAccel(0,15)
 		servo.setSpeed(0,10)
 		servo.setAccel(1,25)
@@ -44,8 +45,8 @@ def eye_position_open():
 		servo.close()
 
 def eye_position_script(script):
-	if(os.getenv('MAESTRO_SERIAL_ENABLE') == "true"):
-		servo = maestro.Controller(ttyStr=os.getenv('MAESTRO_SERIAL_PORT'))
+	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] == "true"):
+		servo = maestro.Controller(ttyStr=glados_settings["hardware"]["servo_controller"]["serial_port"])
 		servo.setAccel(0,15)
 		servo.setSpeed(0,100)
 		servo.setAccel(1,25)

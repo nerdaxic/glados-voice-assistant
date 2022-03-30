@@ -5,21 +5,25 @@ import _thread as thread
 from threading import Timer
 from gladosSerial import *
 from gladosServo import *
-
+from glados_functions import *
 import sys
 import urllib.parse
 import re
 import json
 import random
-from dotenv import load_dotenv
-load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
+
 import shutil
 from subprocess import call
 
-if(os.getenv('TTS_ENGINE_API') == ''): from glados_tts.engine import *
+import glados_settings
+glados_settings.load_from_file()
+
+if(glados_settings.settings["tts"]["api"] == ''): from glados_tts.engine import *
 from glados_functions import *
 
-synthFolder = os.getenv('TTS_CACHE_FOLDER') + "/"
+
+synthFolder = glados_settings.settings["tts"]["cache_folder"] + "/"
+
 
 def playFile(filename):
 	call(["aplay", "-q", filename])	
@@ -58,7 +62,7 @@ def checkTTSLib(line):
 def fetchTTSSample(line):
 	
 	# Local TTS Engine
-	if(os.getenv('TTS_ENGINE_API') == ''):	
+	if(glados_settings.settings["tts"]["api"] == ''):	
 		if(glados_tts(cleanTTSLine(line)) == True):
 			print('Success: TTS sample "'+line+'" fetched')
 			setEyeAnimation("idle")
@@ -67,7 +71,7 @@ def fetchTTSSample(line):
 	# Remote TTS Engine API
 	else:
 		text = urllib.parse.quote(cleanTTSLine(line))
-		TTSCommand = 'curl -L --retry 5 --get --fail -o audio/GLaDOS-tts-temp-output.wav '+os.getenv('TTS_ENGINE_API')+text
+		TTSCommand = 'curl -L --retry 5 --get --fail -o audio/GLaDOS-tts-temp-output.wav '+glados_settings.settings["tts"]["api"]+text
 		setEyeAnimation("wait")
 		TTSResponse = os.system(TTSCommand)
 

@@ -1,0 +1,42 @@
+# This file contains the settings of the voice assistant core.
+# Skill-related settings are under skill-spesific files.
+
+assistant:
+
+  # What the assistant is listening for?
+  trigger_word: "hey alexa"
+
+hardware:
+  # Which sound card to use?
+  sound_card: 0
+  # Get a list with 'python3 -m sounddevice'
+  # Select "plugequal" if you wanna use ALSAMIX EQ
+
+  # Use ReSpeaker?
+  respeaker_connected: True
+
+  # Animatronics | Teensy: LCD / LED controller
+  eye_controller:
+    serial_enable: True
+    serial_port: "/dev/ttyACM2"
+    serial_rate: "9600"
+
+  # Animatronics | Pololu Micro Maestro: Servo controller
+  servo_controller:
+    serial_enable: True
+    serial_port: "/dev/ttyACM0"
+    serial_rate: "9600"
+  
+
+  # NOTE: If you are having issues with serial, check that your user belongs to dialout group
+  # sudo usermod -a -G dialout <username>
+  # To find Maestro and Teensy, replug devices and run: 
+  # echo "EYE_SERIAL_PORT:" && dmesg | grep -A 2 Teensyduino | tail -3 && echo "MAESTRO_SERIAL_PORT:" && dmesg | grep -A 3 "Pololu Corporation" | tail -4
+
+tts:
+  # TTS Engine API - Leave blank for local TTS or enter address for remote API
+  # (example of remote api address: http://glados-tts.com:8124/synthesize/)
+  api: ""
+
+  # TTS Cache - Folder to store TTS samples, absolute path
+  cache_folder: "/home/nerdaxic/glados-voice-assistant/audio/tts"

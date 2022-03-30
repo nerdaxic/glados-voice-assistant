@@ -30,13 +30,6 @@ def readTime():
 	elif r == 4:
 		speak("The time is "+hour+" "+minute)
 
-	#playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/hour/GLaDOS-hour-'+hour+'.wav')
-	#eye_position_random()
-	#playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/minute/GLaDOS-'+minute+'.wav')
-	#r = str(randint(1, 4))
-	#eye_position_random()
-	#playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/time-comment/GLaDOS-general-'+str(r)+'-comment.wav')
-
 # Start a new timer
 def startTimer(command):
 	command = command.replace('-', ' ')

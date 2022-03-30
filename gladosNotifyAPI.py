@@ -1,5 +1,3 @@
-#flask run --host=0.0.0.0
-
 from flask import Flask, request
 from gladosTTS import *
 
@@ -27,4 +25,3 @@ def notify():
 
 if __name__ == "__main__":
 	app.run(host="0.0.0.0")
-
