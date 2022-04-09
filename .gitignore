@@ -7,9 +7,10 @@ collectedWakeWords/**
 cancelledActivations.txt
 failed_commands.txt
 
-# Local enviroment file
+# Local environment file
 settings.env
 home_assistant_settings.yaml
+glados_settings.yaml
 
 test.py
 
