@@ -67,41 +67,6 @@ Tight integration with Home Assistant's local API:
 ![General AI Voice Assistant Pipeline](https://www.henrirantanen.fi/wp-content/uploads/2022/02/ai-voice-assistant-pipeline.jpg)
 
 
-## Requirements for Ubuntu
-### Install tools
-```console
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt install python3-pip
-```
-### Install PyAudio
-PyAudio is needed to play audio files.
-```console 
-sudo apt-get install portaudio19-dev 
-``` 
-
-### Install PocketSphinx
-Used for trigger word detection for now.
-```console 
-sudo apt-get install -y build-essential swig libpulse-dev libasound2-dev
-``` 
-
-### Install SpeechRecognition 
-Used to turn audio into text for now.
-```console 
-sudo apt-get install flac
-``` 
-
-### Install other libraries
-Install python modules from requirements.txt file
-```console 
-cd ~/glados-voice-assistant
-sudo pip3 install -r requirements.txt
-``` 
-
-### Install pytorch
-See here: https://pytorch.org/get-started/locally/#start-locally
-
 ## Install GLaDOS Voice Assistant
 
 #### 1. Go to home folder
@@ -120,26 +85,17 @@ cd ~/glados-voice-assistant/glados_tts/
 python3 glados.py
 ```
 
-#### 3. Edit the settings file
+#### 3. Edit the settings files
 
-Find the sound card ID:
-```console
-python3 -m sounddevice
-```
-Generate and edit the settings.env file:
-```console 
-cp ~/glados-voice-assistant/settings.env.sample ~/glados-voice-assistant/settings.env && nano ~/glados-voice-assistant/settings.env
-``` 
+stored in the settings folder
+ 
 #### 4. To run:
 Launch the voice assistant:
 ```console
-python3 ~/glados-voice-assistant/glados.py
-```
+cd ~/glados-voice-assistant/
+source glados/bin/activate
+python glados.py
 
-You can add glados.py to your crontab file or run it manually.
-```console
-crontab -e
-@reboot python3 /home/username/glados-voice-assistant/glados.py
 ```
 
 ## Integrate to Home Assistant

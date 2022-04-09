@@ -13,26 +13,26 @@ hardware:
   # Select "plugequal" if you wanna use ALSAMIX EQ
 
   # Use ReSpeaker?
-  respeaker_connected: True
+  respeaker_connected: False
 
   # Animatronics | Teensy: LCD / LED controller
   eye_controller:
     serial_enable: True
-    serial_port: "/dev/ttyACM2"
+    serial_port: "/dev/serial/by-id/usb-Teensyduino_USB_Serial_8171140-if00"
     serial_rate: "9600"
 
   # Animatronics | Pololu Micro Maestro: Servo controller
   servo_controller:
-    serial_enable: True
-    serial_port: "/dev/ttyACM0"
+    serial_enable: False
+    serial_port: "/dev/ttyACM1"
     serial_rate: "9600"
-  
 
   # NOTE: If you are having issues with serial, check that your user belongs to dialout group
   # sudo usermod -a -G dialout <username>
-  # To find Maestro and Teensy, replug devices and run: 
-  # echo "EYE_SERIAL_PORT:" && dmesg | grep -A 2 Teensyduino | tail -3 && echo "MAESTRO_SERIAL_PORT:" && dmesg | grep -A 3 "Pololu Corporation" | tail -4
-
+  # To find Maestro and Teensy, plug in devices and run: 
+  # ls -h /dev/serial/by-id/
+  # It is better to use the link from "by-id" folder than use ttyACMx as the device order might change during reboot.
+ 
 tts:
   # TTS Engine API - Leave blank for local TTS or enter address for remote API
   # (example of remote api address: http://glados-tts.com:8124/synthesize/)

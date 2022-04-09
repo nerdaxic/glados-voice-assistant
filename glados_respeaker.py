@@ -4,15 +4,6 @@ import os
 import glados_settings
 glados_settings.load_from_file()
 
-def respeaker_init():
-
-	# Try to load the ReSpeaker pixel ring library
-	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] in ('true', '1', 't')):
-		try:
-			from pixel_ring import pixel_ring
-		except Exception as e:
-			respeaker_errors(e)
-
 
 # Parse error messages into most common help hints
 def respeaker_errors(e):
@@ -41,7 +32,7 @@ def respeaker_pixel_ring(rgb=0x100000):
 
 	# Set respeaker to dim glow inside the head.
 	# See hardware folder for more info.
-	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] in ('true', '1', 't')):
+	if(glados_settings.settings["hardware"]["respeaker_connected"] in (True, 'true', '1', 't')):
 		try:
 			pixel_ring.set_color(rgb)
 		except Exception as e:
@@ -51,7 +42,7 @@ def respeaker_pixel_ring(rgb=0x100000):
 # Set respeaker to animation modes
 def respeaker_mode(mode):
 
-	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] in ('true', '1', 't')):
+	if(glados_settings.settings["hardware"]["respeaker_connected"] in (True, 'true', '1', 't')):
 		if(mode == "listen"):
 			try:
 				pixel_ring.listen()
@@ -63,5 +54,9 @@ def respeaker_mode(mode):
 			except Exception as e:
 				respeaker_errors(e);
 
-
-respeaker_init()
+if(glados_settings.settings["hardware"]["respeaker_connected"] in (True, 'true', '1', 't')):
+	try:
+		print("here")
+		from pixel_ring import pixel_ring
+	except Exception as e:
+		respeaker_errors(e)

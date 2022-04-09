@@ -8,12 +8,12 @@ glados_settings.load_from_file()
 
 def setEyeAnimation(animation="idle"):
 
-	if(glados_settings.settings["hardware"]["eye_controller"]["serial_enable"] == "true"):
+	if(glados_settings.settings["hardware"]["eye_controller"]["serial_enable"] in (True, 'true', '1', 't')):
 		
 		try:
 			ser = serial.Serial(
 				port=glados_settings.settings["hardware"]["eye_controller"]["serial_port"],
-				baudrate=oglados_settings.settings["hardware"]["eye_controller"]["serial_rate"],
+				baudrate=glados_settings.settings["hardware"]["eye_controller"]["serial_rate"],
 				parity=serial.PARITY_NONE,
 				stopbits=serial.STOPBITS_ONE,
 				bytesize=serial.EIGHTBITS,
