@@ -9,8 +9,8 @@ failed_commands.txt
 
 # Local environment file
 settings.env
-home_assistant_settings.yaml
-glados_settings.yaml
+settings/home_assistant_settings.yaml
+settings/glados_settings.yaml
 
 test.py
 

@@ -7,7 +7,7 @@ glados_settings.load_from_file()
 
 def eye_position_random():
 	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] in (True, 'true', '1', 't')):
-		servo = maestro.Controller(ttyStr=glados_settings["hardware"]["servo_controller"]["serial_port"])
+		servo = maestro.Controller(ttyStr=glados_settings.settings["hardware"]["servo_controller"]["serial_port"])
 		servo.setAccel(0,25)
 		servo.setSpeed(0,100)
 		servo.setAccel(1,25)
@@ -19,7 +19,7 @@ def eye_position_random():
 
 def eye_position_default():
 	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] in (True, 'true', '1', 't')):
-		servo = maestro.Controller(ttyStr=glados_settings["hardware"]["servo_controller"]["serial_port"])
+		servo = maestro.Controller(ttyStr=glados_settings.settings["hardware"]["servo_controller"]["serial_port"])
 		servo.setAccel(0,15)
 		servo.setSpeed(0,10)
 		servo.setAccel(1,25)
@@ -31,7 +31,7 @@ def eye_position_default():
 
 def eye_position_open():
 	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] in (True, 'true', '1', 't')):
-		servo = maestro.Controller(ttyStr=glados_settings["hardware"]["servo_controller"]["serial_port"])
+		servo = maestro.Controller(ttyStr=glados_settings.settings["hardware"]["servo_controller"]["serial_port"])
 		servo.setAccel(0,15)
 		servo.setSpeed(0,10)
 		servo.setAccel(1,25)
@@ -46,7 +46,7 @@ def eye_position_open():
 
 def eye_position_script(script):
 	if(glados_settings.settings["hardware"]["servo_controller"]["serial_enable"] in (True, 'true', '1', 't')):
-		servo = maestro.Controller(ttyStr=glados_settings["hardware"]["servo_controller"]["serial_port"])
+		servo = maestro.Controller(ttyStr=glados_settings.settings["hardware"]["servo_controller"]["serial_port"])
 		servo.setAccel(0,15)
 		servo.setSpeed(0,100)
 		servo.setAccel(1,25)

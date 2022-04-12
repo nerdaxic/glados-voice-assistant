@@ -44,10 +44,7 @@ import glados_settings
 
 glados_settings.load_from_file()
 
-
 def start_up():
-
-	
 
 	# Show regular eye-texture, this stops the initial loading animation
 	setEyeAnimation("idle")
@@ -147,8 +144,7 @@ def process_command(command):
 		# Todo: Save the used trigger audio as a negative voice sample for further learning
 
 	elif 'timer' in command:
-		startTimer(command)
-		speak("Sure.")
+		speak(startTimer(command))
 
 	elif 'time' in command:
 		readTime()
@@ -225,8 +221,8 @@ def process_command(command):
 
 	else:
 		setEyeAnimation("angry")
-		print("Command not recognized")
-		speak("I have no idea what you meant by that.")
+		print("\033[1;31mERROR:\033[1;97m Command not recognized. Logged it.")
+		speak("I have no idea what you meant by that.", cache=True)
 
 		log_failed_command(command)
 

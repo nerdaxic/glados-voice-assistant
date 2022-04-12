@@ -13,7 +13,7 @@ hardware:
   # Select "plugequal" if you wanna use ALSAMIX EQ
 
   # Use ReSpeaker?
-  respeaker_connected: False
+  respeaker_connected: True
 
   # Animatronics | Teensy: LCD / LED controller
   eye_controller:
@@ -23,8 +23,8 @@ hardware:
 
   # Animatronics | Pololu Micro Maestro: Servo controller
   servo_controller:
-    serial_enable: False
-    serial_port: "/dev/ttyACM1"
+    serial_enable: True
+    serial_port: "/dev/serial/by-id/usb-Pololu_Corporation_Pololu_Micro_Maestro_6-Servo_Controller_00304206-if00"
     serial_rate: "9600"
 
   # NOTE: If you are having issues with serial, check that your user belongs to dialout group

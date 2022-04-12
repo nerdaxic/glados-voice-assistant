@@ -53,11 +53,6 @@ def startTimer(command):
 		final_list = [word for word in edit_string_as_list if word not in removal_list]
 		context = ' '.join(final_list)
 
-		if context:
-			if not checkTTSLib(context):
-				fetchTTSSample(context, wait=False)
-			context = context
-
 		# Calculate duration to seconds
 		duration = hours*3600+minutes*60+seconds
 
@@ -65,9 +60,10 @@ def startTimer(command):
 			t = Timer(duration, timerEnd, [duration, context])
 			t.start()
 			print(str(duration)+" second "+context+" timer started at "+str(dt.datetime.now()))
-			playFile(os.path.dirname(os.path.abspath(__file__))+'/audio/clock/GLaDOS_Announcer_ding_on.wav')
+
+			return "I have started a timer for "+str(duration)+" seconds."
 	else:
-		speak("I didn't understand the duration you wanted the timer for")
+		return "I didn't understand the duration you wanted the timer for"
 
 # Run this when the timer ends
 def timerEnd(duration, context=""):
@@ -77,13 +73,8 @@ def timerEnd(duration, context=""):
 	if context:
 		print("Timer for "+context+" has ended")
 
-		if not checkTTSLib(context):
-			# No words to describe context, general response
-			speak("the time is up")
-		else:
-			# Context is known, "pizza is running out of time"
-			speak(context)
-			speak("is running out of time")
+		# Context is known, "pizza is running out of time"
+		speak(context + "is running out of time.")
 	else:
 		# General response
 		print (str(duration)+" second timer ended "+str(dt.datetime.now()))
