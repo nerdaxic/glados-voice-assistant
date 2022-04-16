@@ -126,10 +126,17 @@ Find the sound card ID:
 ```console
 python3 -m sounddevice
 ```
-Generate and edit the settings.env file:
+Generate and edit the settings files:
+##### glados_setttings.yaml
 ```console 
-cp ~/glados-voice-assistant/settings.env.sample ~/glados-voice-assistant/settings.env && nano ~/glados-voice-assistant/settings.env
+cp ~/glados-voice-assistant/settings/glados_settings.yaml.sample ~/glados-voice-assistant/settings/glados_settings.yaml && nano ~/glados-voice-assistant/settings/glados_settings.yaml
 ``` 
+
+##### home_assistant_settings.yaml
+```console
+cp ~/glados-voice-assistant/settings/home_assistant_settings.yaml.sample ~/glados-voice-assistant/settings/home_assistant_settings.yaml && nano ~/glados-voice-assistant/settings/home_assistant_settings.yaml
+```
+
 #### 4. To run:
 Launch the voice assistant:
 ```console
@@ -145,7 +152,7 @@ crontab -e
 ## Integrate to Home Assistant
 
 To make Home Assistant integration work, you need to enable the API in the home assistant configuration file and generate a long-lived access token.
-Add access token and IP-address of the home assistant server into the settings.env file.
+Add access token and IP-address of the home assistant server into the home_assistant_settings.yaml file.
 ### configuration.yaml
 
 ```YAML 
