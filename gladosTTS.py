@@ -58,11 +58,11 @@ def checkTTSLib(line):
 # Get GLaDOS TTS Sample over the online API
 def fetchTTSSample(line, wait=True):
 	# https://glados.c-net.org/
-	#TTSCommand = 'curl -L --retry 30 --get --fail --data-urlencode "text='+cleanTTSLine(line)+'" -o "'+synthFolder+cleanTTSFile(line)+'" "https://glados.c-net.org/generate"'
+	TTSCommand = 'curl -L --retry 30 --get --fail --data-urlencode "text='+cleanTTSLine(line)+'" -o "'+synthFolder+cleanTTSFile(line)+'" "https://glados.c-net.org/generate"'
 	
-	# https://glados.2022.us/synthesize/
-	text = urllib.parse.quote(cleanTTSLine(line))
-	TTSCommand = 'curl -L --retry 5 --get --fail -o '+synthFolder+cleanTTSFile(line)+' https://glados.2022.us/synthesize/'+text
+	# https://glados.2022.us/synthesize/ (used for testing gladosTTS-engine
+	# text = urllib.parse.quote(cleanTTSLine(line))
+	# TTSCommand = 'curl -L --retry 5 --get --fail -o '+synthFolder+cleanTTSFile(line)+' https://glados.2022.us/synthesize/'+text
 
 	print(TTSCommand) 
 	if(wait):
