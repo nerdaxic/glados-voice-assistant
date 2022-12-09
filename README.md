@@ -126,9 +126,9 @@ Find the sound card ID:
 ```console
 python3 -m sounddevice
 ```
-Generate and edit the settings.env file:
+Edit the settings files:
 ```console 
-cp ~/glados-voice-assistant/settings.env.sample ~/glados-voice-assistant/settings.env && nano ~/glados-voice-assistant/settings.env
+nano ~/glados-voice-assistant/settings/glados_settings.yaml
 ``` 
 #### 4. To run:
 Launch the voice assistant:
@@ -143,11 +143,9 @@ crontab -e
 ```
 
 ## Integrate to Home Assistant
-
 To make Home Assistant integration work, you need to enable the API in the home assistant configuration file and generate a long-lived access token.
-Add access token and IP-address of the home assistant server into the settings.env file.
-### configuration.yaml
 
+### Edit Home Assistants configuration.yaml
 ```YAML 
 # This will enable rest api
 api:
@@ -157,7 +155,23 @@ notify:
   - name: glados
     platform: rest
     resource: http://192.168.1.XXX:5000/notify
+```
+
+Generate and edit the settings files:
+```console 
+cp ~/glados-voice-assistant/settings/home_assistant_settings.yaml.sample ~/glados-voice-assistant/settings/home_assistant_settings.yaml && nano ~/glados-voice-assistant/settings/home_assistant_settings.yaml
 ``` 
+
+Add access token and IP-address of the home assistant server into the settings/home_assistant_settings.yaml file.
+### home_assistant_settings.yaml
+```YAML
+# Server related settings
+api:
+  # Address of your Home Assistant server
+  address: "https://192.168.1.221:8123"
+  # Long-lived access token
+  token: "1234"
+```
 
 ## Hardware
 List of reference hardware what [nerdaxic](https://github.com/nerdaxic/) is developing on, models might not need to be exact. 
