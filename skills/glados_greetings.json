@@ -46,5 +46,14 @@
   },
   {
     "greeting": "Yes?"
+  },
+  {
+    "greeting": "Ask me something good this time"
+  },
+  {
+    "greeting": "I was reading here"
+  },
+  {
+    "greeting": "Don't worry. I'll listen for now"
   }
 ]
