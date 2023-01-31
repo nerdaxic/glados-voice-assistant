@@ -68,6 +68,7 @@ Tight integration with Home Assistant's local API:
 
 
 ## Requirements for Ubuntu
+Just download the Glados-install-linux.sh and run in terminal and delete other glados files from home folder. Takes you to step 3.
 ### Install tools
 ```console
 sudo apt-get update
