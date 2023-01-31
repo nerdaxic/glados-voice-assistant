@@ -68,7 +68,7 @@ Tight integration with Home Assistant's local API:
 
 
 ## Requirements for Ubuntu
-Just download the Glados-install-linux.sh and run in terminal and delete other glados files from home folder. Takes you to step 3.
+Just download the Glados-install-linux.sh and run in terminal and delete other glados files from home folder. Takes you to step 3. [Go now](https://github.com/12tae12/glados-voice-assistant/blob/main/README.md#3-edit-the-settings-file)
 ### Install tools
 ```console
 sudo apt-get update
