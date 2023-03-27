@@ -75,6 +75,7 @@ Just download the Glados-install-linux.sh and run in terminal and delete other g
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt install python3-pip
+sudo python -m pip install "kivy[base]" kivy_examples
 ```
 ### Install PyAudio
 PyAudio is needed to play audio files.
