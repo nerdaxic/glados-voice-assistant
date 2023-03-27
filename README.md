@@ -1,4 +1,5 @@
 # GLaDOS Voice Assistant
+Note: Updates will be going on soon and some may be unrelyable. GUI testing starting 3/27/2023.
 <table>
 <tr>
   <td width="33%"><img src="https://www.henrirantanen.fi/wp-content/uploads/2022/01/HER_0941-728.jpg" width="100%"></td>
