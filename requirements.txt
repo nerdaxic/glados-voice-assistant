@@ -1,4 +1,4 @@
-Flask==2.0.0
+Flask==2.3.2
 phonemizer==3.0.1
 pixel-ring==0.1.0
 playsound==1.3.0
