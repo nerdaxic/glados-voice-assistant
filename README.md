@@ -1,5 +1,5 @@
 # GLaDOS Voice Assistant
-Note: Updates will be going on soon and some may be unrelyable. GUI testing starting 3/27/2023.
+
 <table>
 <tr>
   <td width="33%"><img src="https://www.henrirantanen.fi/wp-content/uploads/2022/01/HER_0941-728.jpg" width="100%"></td>
@@ -114,7 +114,7 @@ cd ~
 #### 2. Download the source from GitHub
 This will download GLaDOS Voice Assistant and the TTS submodule.
 ```console 
-git clone --recurse-submodules https://github.com/nerdaxic/glados-voice-assistant/
+git clone --recurse-submodules https://github.com/12tae12/glados-voice-assistant/
 ``` 
 
 After this you can play around with the TTS, this works as stand-alone.
