@@ -1,3 +1,4 @@
+import time
 #!/usr/bin/python3
 #	   _____ _           _____   ____   _____
 #	  / ____| |         |  __ \ / __ \ / ____|
@@ -20,7 +21,8 @@
 #	Rename settings.env.sample to settings.env
 #	Edit settings.env to match your setup
 #
-
+print(gladosV 2.0.1)
+time.sleep(3)
 ##from gladosTTS import *
 from gladosTime import *
 from gladosSerial import *
