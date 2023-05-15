@@ -21,7 +21,7 @@ import time
 #	Rename settings.env.sample to settings.env
 #	Edit settings.env to match your setup
 #
-print(gladosV 2.0.1)
+print('gladosV 2.0.1')
 time.sleep(3)
 ##from gladosTTS import *
 from gladosTime import *
