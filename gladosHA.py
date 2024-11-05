@@ -242,20 +242,26 @@ def getDayIndex(command):
 	return diff
 
 def call_HA_Service(service, entity, data=""):
+    domain = service.partition(".")[0]
+    service = service.partition(".")[2]
 
-	domain = service.partition(".")[0]
-	service = service.partition(".")[2]
+    url = endpoint + "services/" + domain + "/" + service
+    
+    headers = {
+        "Authorization": "Bearer " + token,
+        "content-type": "application/json",
+    }
 
-	url = endpoint+"services/"+domain+"/"+service
-	
-	headers = {
-	 "Authorization": "Bearer "+token,
-	 "content-type": "application/json",
-	}
+    if data != "":
+        data = ", " + data
 
-	if data != "":
-		data = ", "+data
+    payload = '{"entity_id": "' + entity + '"' + data + '}'
 
-	payload = '{"entity_id": "'+entity+'"'+data+'}'
-
-	response = requests.post(url, headers=headers, data=payload, verify=False)
+    response = requests.post(url, headers=headers, data=payload, verify=False)
+    
+    # Process response from Home Assistant, error handling if HA responds with something else than HTTP 200 OK
+    if response.status_code == 200:
+        return True, "Service call successful."
+    else:
+        error_message = f"Home Assistant responded with: {response.status_code} - {response.text}"
+        return False, error_message

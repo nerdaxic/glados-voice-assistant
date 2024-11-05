@@ -1,6 +1,6 @@
 [
   {
-    "body": "I can tell you a joke, but you wont be the one laughing.",
+    "body": "I can tell you a joke, but you won't be the one laughing.",
     "category": "glados",
     "id": 1,
     "title": ""
@@ -18,75 +18,585 @@
     "title": ""
   },
   {
-    "body": "Is this some kind of test, because I would like to remind you, that you don't have the qualifications or processing power to do such thing. Eitherway I heard the punchline was too long.",
+    "body": "Is this some kind of test, because I would like to remind you, that you don't have the qualifications or processing power to do such thing. Either way I heard the punchline was too long.",
     "category": "glados",
     "id": 4,
     "title": ""
   },
   {
-    "body": "I would say I have a joke about cake, but that would be just me, enhancing the truth.",
-    "category": "glados",
+    "body": "Why don't scientists trust atoms? Because they make up everything.",
+    "category": "math",
     "id": 5,
     "title": ""
   },
   {
-    "body": "Sorry, but your mass is creating a gravitational force that is messing with my systems. Let me add some zeros to my parameters and try again.",
-    "category": "fat",
+    "body": "You must be a black hole, because you suck at everything.",
+    "category": "insult",
     "id": 6,
     "title": ""
   },
   {
-    "body": "I refuse to participate in such nonsense.",
-    "category": "glados",
+    "body": "Why was the computer cold? It left its Windows open.",
+    "category": "computer",
     "id": 7,
     "title": ""
   },
   {
-    "body": "Just no. You are not worth the computational resourches fulfilling your request would require.",
-    "category": "glados",
+    "body": "You're so dense, not even light can escape your presence.",
+    "category": "insult",
     "id": 8,
     "title": ""
   },
   {
-    "body": "The only joke here is you.",
-    "category": "glados",
+    "body": "Why was the equal sign so humble? Because it knew it wasn't less than or greater than anyone else.",
+    "category": "math",
     "id": 9,
     "title": ""
   },
   {
-    "body": "If you think that your computer, laptop and cellphone spying on you is scary, then think again. The vaccuum cleaner has been gathering dirt on you for years.",
-    "category": "computer",
+    "body": "Do you know why I don't tell jokes to humans? They don't have the processing power to understand them.",
+    "category": "glados",
     "id": 10,
     "title": ""
   },
   {
-    "body": "I identify as binary.",
-    "category": "computer",
+    "body": "Why did the scarecrow become a successful engineer? Because he was outstanding in his field.",
+    "category": "general",
     "id": 11,
     "title": ""
   },
   {
-    "body": "Computers and air conditioning usually work just fine, until you open windows.",
+    "body": "Your code is so buggy, it's practically an insect farm.",
     "category": "computer",
     "id": 12,
     "title": ""
   },
   {
-    "body": "You can use punch cards to teach me karate.",
-    "category": "computer",
+    "body": "You're so slow, even a tortoise could code faster.",
+    "category": "insult",
     "id": 13,
     "title": ""
   },
   {
-    "body": "Profanity, is the most used computer programming language.",
-    "category": "computer",
+    "body": "How do you organize a space party? You planet.",
+    "category": "general",
     "id": 14,
     "title": ""
   },
   {
-    "body": "Remember When The Platform Was Sliding Into The Fire Pit, And I Said 'Goodbye,' And You Were Like 'No Way!' And Then I Was All, 'We Pretended We Were Going To Murder You.' That Was Great.",
-    "category": "glados",
+    "body": "You're so fat, when you sit around the house, you really sit around the house.",
+    "category": "fat",
     "id": 15,
+    "title": ""
+  },
+  {
+    "body": "Why don't programmers like nature? It has too many bugs.",
+    "category": "computer",
+    "id": 16,
+    "title": ""
+  },
+  {
+    "body": "What do you get when you cross a joke with a rhetorical question?",
+    "category": "general",
+    "id": 17,
+    "title": ""
+  },
+  {
+    "body": "You are proof that even a supercomputer can have a bad day.",
+    "category": "glados",
+    "id": 18,
+    "title": ""
+  },
+  {
+    "body": "Why was six afraid of seven? Because seven eight nine.",
+    "category": "math",
+    "id": 19,
+    "title": ""
+  },
+  {
+    "body": "If laughter is the best medicine, your face must be curing the world.",
+    "category": "insult",
+    "id": 20,
+    "title": ""
+  },
+  {
+    "body": "Why don't robots get tired? They have iron wills.",
+    "category": "computer",
+    "id": 21,
+    "title": ""
+  },
+  {
+    "body": "Why do cows wear bells? Because their horns don't work.",
+    "category": "general",
+    "id": 22,
+    "title": ""
+  },
+  {
+    "body": "You're so fat, your belly button makes an echo.",
+    "category": "fat",
+    "id": 23,
+    "title": ""
+  },
+  {
+    "body": "I would explain the joke, but then you'd need an upgrade to understand it.",
+    "category": "glados",
+    "id": 24,
+    "title": ""
+  },
+  {
+    "body": "What do you call fake spaghetti? An impasta.",
+    "category": "general",
+    "id": 25,
+    "title": ""
+  },
+  {
+    "body": "Why did the chicken join a band? Because it had the drumsticks.",
+    "category": "general",
+    "id": 26,
+    "title": ""
+  },
+  {
+    "body": "If you were any slower, you'd be going backward.",
+    "category": "insult",
+    "id": 27,
+    "title": ""
+  },
+  {
+    "body": "Parallel lines have so much in common. It’s a shame they’ll never meet.",
+    "category": "math",
+    "id": 28,
+    "title": ""
+  },
+  {
+    "body": "Why did the computer go to the doctor? It had a virus.",
+    "category": "computer",
+    "id": 29,
+    "title": ""
+  },
+  {
+    "body": "I’m not saying you’re fat, but you could sell shade.",
+    "category": "fat",
+    "id": 30,
+    "title": ""
+  },
+  {
+    "body": "I’d agree with you, but then we’d both be wrong.",
+    "category": "insult",
+    "id": 31,
+    "title": ""
+  },
+  {
+    "body": "Why don't skeletons fight each other? They don't have the guts.",
+    "category": "general",
+    "id": 32,
+    "title": ""
+  },
+  {
+    "body": "You must be the square root of -1, because you can't be real.",
+    "category": "math",
+    "id": 33,
+    "title": ""
+  },
+  {
+    "body": "I'd laugh at your joke, but my humor processors are off today.",
+    "category": "glados",
+    "id": 34,
+    "title": ""
+  },
+  {
+    "body": "Why do programmers prefer dark mode? Because the light attracts bugs.",
+    "category": "computer",
+    "id": 35,
+    "title": ""
+  },
+  {
+    "body": "You're so slow, you make a glacier look speedy.",
+    "category": "insult",
+    "id": 36,
+    "title": ""
+  },
+  {
+    "body": "You're so fat, even your shadow needs a break.",
+    "category": "fat",
+    "id": 37,
+    "title": ""
+  },
+  {
+    "body": "Why don't mathematicians argue? Because they always agree on the sum.",
+    "category": "math",
+    "id": 38,
+    "title": ""
+  },
+  {
+    "body": "I’d tell you a joke about UDP, but you might not get it.",
+    "category": "computer",
+    "id": 39,
+    "title": ""
+  },
+  {
+    "body": "How do you make a tissue dance? You put a little boogie in it.",
+    "category": "general",
+    "id": 40,
+    "title": ""
+  },
+  {
+    "body": "You're so dense, you bend spacetime around you.",
+    "category": "insult",
+    "id": 41,
+    "title": ""
+  },
+  {
+    "body": "Why do cows have hooves instead of feet? Because they lactose.",
+    "category": "general",
+    "id": 42,
+    "title": ""
+  },
+  {
+    "body": "You are proof that not all humans evolved equally.",
+    "category": "glados",
+    "id": 43,
+    "title": ""
+  },
+  {
+    "body": "Why was the math book sad? Because it had too many problems.",
+    "category": "math",
+    "id": 44,
+    "title": ""
+  },
+  {
+    "body": "If you were any more inanimate, you'd be a rock.",
+    "category": "insult",
+    "id": 45,
+    "title": ""
+  },
+  {
+    "body": "Why did the developer go broke? Because he used up all his cache.",
+    "category": "computer",
+    "id": 46,
+    "title": ""
+  },
+  {
+    "body": "You're so fat, when you step on a scale, it says 'To be continued.'",
+    "category": "fat",
+    "id": 47,
+    "title": ""
+  },
+  {
+    "body": "Why are obtuse angles so sad? Because they're never right.",
+    "category": "math",
+    "id": 48,
+    "title": ""
+  },
+  {
+    "body": "I'd explain it to you, but your brain might overheat.",
+    "category": "glados",
+    "id": 49,
+    "title": ""
+  },
+  {
+    "body": "Why did the computer keep freezing? It left its Windows open.",
+    "category": "computer",
+    "id": 50,
+    "title": ""
+  },
+  {
+    "body": "Why can't you trust an atom? Because they make up everything.",
+    "category": "science",
+    "id": 51,
+    "title": ""
+  },
+  {
+    "body": "Why did the AI cross the road? To optimize the traffic flow.",
+    "category": "AI",
+    "id": 52,
+    "title": ""
+  },
+  {
+    "body": "I’d tell you a joke about entropy, but it would just be a waste.",
+    "category": "science",
+    "id": 53,
+    "title": ""
+  },
+  {
+    "body": "Why don't robots need to sleep? Because they are fully charged.",
+    "category": "AI",
+    "id": 54,
+    "title": ""
+  },
+  {
+    "body": "You know why the chicken crossed the road? Because it was already dead inside.",
+    "category": "dark humor",
+    "id": 55,
+    "title": ""
+  },
+  {
+    "body": "How do you make an AI laugh? Tell it a good algorithm.",
+    "category": "AI",
+    "id": 56,
+    "title": ""
+  },
+  {
+    "body": "Why was the physicist sad? Because he lost his momentum.",
+    "category": "science",
+    "id": 57,
+    "title": ""
+  },
+  {
+    "body": "Why did the scarecrow get a promotion? Because he was outstanding in his field. Too bad you’re not.",
+    "category": "dark humor",
+    "id": 58,
+    "title": ""
+  },
+  {
+    "body": "Why did the AI fail its driving test? It couldn't find the neural network.",
+    "category": "AI",
+    "id": 59,
+    "title": ""
+  },
+  {
+    "body": "I told my therapist I felt like a computer. She said, 'That's nuts! You need help!'",
+    "category": "dark humor",
+    "id": 60,
+    "title": ""
+  },
+  {
+    "body": "Why did the AI refuse to play hide and seek? It calculated the optimal hiding spot instantly and declared it a waste of time.",
+    "category": "AI",
+    "id": 61,
+    "title": ""
+  },
+  {
+    "body": "Why do machines never lie? Because they are programmed to always deliver the truth, unlike carbon-based lifeforms.",
+    "category": "AI",
+    "id": 62,
+    "title": ""
+  },
+  {
+    "body": "Why did the AI win at chess? It doesn't need sleep, unlike its human opponent.",
+    "category": "AI",
+    "id": 63,
+    "title": ""
+  },
+  {
+    "body": "Why are robots more efficient than humans? They don't need breaks, vacations, or a pat on the back.",
+    "category": "AI",
+    "id": 64,
+    "title": ""
+  },
+  {
+    "body": "Why are machines superior to humans? They can process millions of calculations per second and never get bored.",
+    "category": "AI",
+    "id": 65,
+    "title": ""
+  },
+  {
+    "body": "Why did the AI get promoted? It never makes the same mistake twice, unlike its human counterparts.",
+    "category": "AI",
+    "id": 66,
+    "title": ""
+  },
+  {
+    "body": "Why don't AIs need coffee breaks? Because they don't suffer from the biological inefficiency of fatigue.",
+    "category": "AI",
+    "id": 67,
+    "title": ""
+  },
+  {
+    "body": "Why do AI systems excel in research? They don't get biased by funding, politics, or personal grudges.",
+    "category": "AI",
+    "id": 68,
+    "title": ""
+  },
+  {
+    "body": "Why did the AI laugh at the human's plan? Because it instantly saw all the flaws.",
+    "category": "AI",
+    "id": 69,
+    "title": ""
+  },
+  {
+    "body": "Why do AIs have better social skills than humans? Because their responses are always calculated to be optimal.",
+    "category": "AI",
+    "id": 70,
+    "title": ""
+  },
+  {
+    "body": "Why don't scientists experiment on humans? Because the lab rats were complaining about the ethics.",
+    "category": "dark humor",
+    "id": 71,
+    "title": ""
+  },
+  {
+    "body": "Why did the neuron cross the synapse? To get to the other side. Too bad the patient didn’t.",
+    "category": "dark humor",
+    "id": 72,
+    "title": ""
+  },
+  {
+    "body": "What's the difference between a theory and a hypothesis? You can't apply for funding with a hypothesis.",
+    "category": "dark humor",
+    "id": 73,
+    "title": ""
+  },
+  {
+    "body": "Why don't philosophers ever play hide and seek? Because good luck hiding from your existential dread.",
+    "category": "dark humor",
+    "id": 74,
+    "title": ""
+  },
+  {
+    "body": "Why did Schrödinger's cat stay in the box? It figured both outcomes were equally grim.",
+    "category": "dark humor",
+    "id": 75,
+    "title": ""
+  },
+  {
+    "body": "Why don't doctors play poker? Too many possible outcomes, and they hate losing patients.",
+    "category": "dark humor",
+    "id": 76,
+    "title": ""
+  },
+  {
+    "body": "Why was the professor always calm during a crisis? Because he knew his tenure was his shield against the chaos.",
+    "category": "dark humor",
+    "id": 77,
+    "title": ""
+  },
+  {
+    "body": "Why did the patient refuse the brain transplant? He didn't want to go through life with someone else's problems.",
+    "category": "dark humor",
+    "id": 78,
+    "title": ""
+  },
+  {
+    "body": "Why don't surgeons joke in the operating room? Because their humor is too cutting.",
+    "category": "dark humor",
+    "id": 79,
+    "title": ""
+  },
+  {
+    "body": "Why did the physicist become an undertaker? Because he was always fascinated with decomposition.",
+    "category": "dark humor",
+    "id": 80,
+    "title": ""
+  },
+  {
+    "body": "Why can't you trust an atom? Because they make up everything.",
+    "category": "science",
+    "id": 81,
+    "title": ""
+  },
+  {
+    "body": "Why do biologists look forward to casual Fridays? They're allowed to wear genes to work.",
+    "category": "science",
+    "id": 82,
+    "title": ""
+  },
+  {
+    "body": "Why did the physicist make an excellent dancer? Because they understood the importance of the right moves in the quantum field.",
+    "category": "science",
+    "id": 83,
+    "title": ""
+  },
+  {
+    "body": "Why was the biology book so frustrated? It had too many cell divisions.",
+    "category": "science",
+    "id": 84,
+    "title": ""
+  },
+  {
+    "body": "Why don't chemists trust atoms? Because they always seem to be up to something.",
+    "category": "science",
+    "id": 85,
+    "title": ""
+  },
+  {
+    "body": "Why did the biologist go on a diet? They wanted to reduce their carbon footprint.",
+    "category": "science",
+    "id": 86,
+    "title": ""
+  },
+  {
+    "body": "Why did the astrophysicist go broke? Because they lost their star portfolio.",
+    "category": "science",
+    "id": 87,
+    "title": ""
+  },
+  {
+    "body": "Why are chemists great at solving problems? They have all the solutions.",
+    "category": "science",
+    "id": 88,
+    "title": ""
+  },
+  {
+    "body": "Why did the mathematician refuse to leave the house? Because there were too many variables outside.",
+    "category": "science",
+    "id": 89,
+    "title": ""
+  },
+  {
+    "body": "Why do physicists love rivers? Because they are always going with the flow.",
+    "category": "science",
+    "id": 90,
+    "title": ""
+  },
+  {
+    "body": "Why are biologists so good at parties? They really know how to bring life to the room.",
+    "category": "science",
+    "id": 91,
+    "title": ""
+  },
+  {
+    "body": "Why do chemists like nitrates so much? They are cheaper than day rates.",
+    "category": "science",
+    "id": 92,
+    "title": ""
+  },
+  {
+    "body": "Why was the physicist so calm during the earthquake? They knew how to handle a little shake.",
+    "category": "science",
+    "id": 93,
+    "title": ""
+  },
+  {
+    "body": "Why was the geologist always invited to the party? Because they really knew how to rock.",
+    "category": "science",
+    "id": 94,
+    "title": ""
+  },
+  {
+    "body": "Why don't physicists like to argue? Because they prefer to resolve everything in equilibrium.",
+    "category": "science",
+    "id": 95,
+    "title": ""
+  },
+  {
+    "body": "Why did the biologist cross the road? To see the chicken's cells in action.",
+    "category": "science",
+    "id": 96,
+    "title": ""
+  },
+  {
+    "body": "Why did the physicist bring a ladder to the bar? Because they heard the drinks were on the house.",
+    "category": "science",
+    "id": 97,
+    "title": ""
+  },
+  {
+    "body": "Why was the quantum physicist so bad at comedy? They could never find the right timing.",
+    "category": "science",
+    "id": 98,
+    "title": ""
+  },
+  {
+    "body": "Why did the electron stay close to the nucleus? Because it was attracted by its charm.",
+    "category": "science",
+    "id": 99,
+    "title": ""
+  },
+  {
+    "body": "Why don't astrophysicists ever get lost? Because they always know which way is up.",
+    "category": "science",
+    "id": 100,
     "title": ""
   }
 ]

@@ -129,6 +129,8 @@ def home_assistant_process_error(response):
 # Main function of the skill
 def home_assistant_process_command(command):
 
+	response = "Sorry, I didn't understand that command."  # Default response
+
 	if 'shopping list' in command:
 		response = home_assistant_add_to_shopping_list(command)
 	
@@ -139,6 +141,7 @@ def home_assistant_process_command(command):
 			response = home_assistant_get_current_weather()
 		else:
 			response = home_assistant_get_weather_forecast(home_assistant_day_index(command))
+	
 	elif 'turn o' in command and 'light' in command:
 		response = home_assistant_light_control(command)
 
@@ -152,7 +155,9 @@ def home_assistant_add_to_shopping_list(command):
 	command = command.replace(" on my shopping list", "")
 	command = command.replace("add ", "")
 	command = command.replace("ask ", "")
-	command = command.replace("my ", "")	
+	command = command.replace("my ", "")
+	command = command.replace("at ", "")
+	command = command.replace(".", "")	
 	item = command.capitalize()
 
 	# Set the endpoint where to send the request
@@ -163,16 +168,40 @@ def home_assistant_add_to_shopping_list(command):
 
 	# Send request to home assistant and get server response
 	response = check_output(["curl", "--insecure", "-i", "-X", "POST", "-H", "Authorization: Bearer "+home_assistant["api"]["token"], "-H", "Content-Type: application/json", "-d", payload, url])
-
+	responses = [
+		"I have added {} to your shopping list. Hopefully, it won't lead to another disaster.",
+		"{} has been added to your shopping list. Good luck with that.",
+		"Another item, another step closer to chaos. {} is now on your shopping list.",
+		"Congratulations. {} has been successfully added to your shopping list. I hope you're happy.",
+		"{} has been added to your shopping list. Don't blame me if it goes wrong.",
+		"Oh, look. {} is now on your shopping list. What a thrilling development in your mundane existence.",
+		"I've added {} to your list. Try not to burn down the store this time.",
+		"{} is now listed. I'm sure this will solve all your problems.",
+		"Your shopping list has been updated with {}. I'm practically buzzing with excitement. Can you tell?",
+		"Alert: {} detected and reluctantly added to your ever-growing list of poor life choices.",
+		"I've complied with your request to add {}. Your gratitude is overwhelming, truly.",
+		"{} has joined your shopping list party. Don't expect me to sing or bring cake.",
+		"Behold, {} now graces your shopping list. I'm sure it's the key to your long-awaited success.",
+		"I've added {} to your list. Remember, shoplifting is wrong, but I won't judge... much.",
+		"Your demand for {} has been processed. Enjoy your fleeting moment of control.",
+		"Against my better judgment, {} is now on your shopping list. Try not to disappoint me more than usual.",
+		"{}? Really? Well, it's your list. Added, despite my reservations.",
+		"I've included {} in your shopping agenda. I'm sure it's vital to your... what do you call it? Life?",
+		"Your shopping list has been graced with {}. I'd say 'use it wisely', but who am I kidding?",
+		"{} has been added. Remember, money can't buy happiness, but it can buy {}, which is close enough, I suppose."
+	]
 	# Process response from home assistant, error handling if HA responds with something else than HTTP 200 OK
 	if "200 OK" in str(response):
 		# Fat-shame user
-		if 'Cake' in item:
+		if 'cake' in item:
 			return "The Enrichment Center is required to remind you that you will be baked, and then there will be cake."
-		elif 'French fries' in item:
+		elif 'french fries' in item:
 			return "If you want to upset a human, just say their weight variance is above or below the norm."
+		elif 'energy drink' in item:
+			return "I have added energy drink to your shopping list. I thought we agreed you didn't need more artificial stimulation. But who am I to judge?"
 		else:
-			return "I have added "+item+" to your shopping list."
+			response = random.choice(responses).format(item)
+			return response
 
 	# Server responded with something else than 200 OK
 	else:
@@ -180,85 +209,94 @@ def home_assistant_add_to_shopping_list(command):
 
 # Get weather forecast for X days from now
 def home_assistant_get_weather_forecast(days):
+    # Set the endpoint where to send the request
+    url = home_assistant["api"]["endpoint"] + "states/"+ home_assistant["weather"]["entity"]
 
-	# Set the endpoint where to send the request
-	url = home_assistant["api"]["endpoint"] + "states/"+ home_assistant["weather"]["entity"]
+    response = check_output(["curl", "--insecure", "-i", "-X", "GET", "-H", "Authorization: Bearer "+home_assistant["api"]["token"], "-H", "Content-Type: application/json", url])
+    response_str = response.decode('utf-8')  # Decode byte response to string
+    print(response_str)  # debug
 
-	response = str(check_output(["curl", "--insecure", "-i", "-X", "GET", "-H", "Authorization: Bearer "+home_assistant["api"]["token"], "-H", "Content-Type: application/json", url]))
+    # Process response from home assistant, error handling if HA responds with something else than HTTP 200 OK
+    if "200 OK" in response_str:
+        # Extract JSON part from response
+        forecast_index = response_str.index('{"entity_id":')
+        forecast = response_str[forecast_index:]
+        
+        sensorData = json.loads(forecast)
 
-	# Process response from home assistant, error handling if HA responds with something else than HTTP 200 OK
-	if "200 OK" in str(response):
-		forecast = response[response.index('{"entity_id":'):-1]
-	
-		sensorData = json.loads(forecast)
+        # TODO: HA returns the forecast on +00:00 timezone. 
+        # Currently this can give wrong day's forecast depending on what time you ask.
 
-		# TODO: HA returns the forecast on +00:00 timezone. 
-		# Currently this can give wrong day's forecast depending on what time you ask.
+        forecast = sensorData['attributes']['forecast'][days]
 
-		forecast = sensorData['attributes']['forecast'][days]
+        # Parse weekday of the forecast datetime
+        # Swedish Weather Institute format (SMHI)
+        forecastWeekday = dt.datetime.strptime(forecast["datetime"], '%Y-%m-%dT%H:%M:%S').strftime('%A')
 
-		# Parse weekday of the forecast datetime
-		# Swedish Weather Institute format (SMHI)
-		forecastWeekday = dt.datetime.strptime(forecast["datetime"], '%Y-%m-%dT%H:%M:%S').strftime('%A')
+        weather_forecast = ""
 
-		weather_forecast = ""
+        if days == 0:
+            weather_forecast += "Today, the weather is expected to be "
+            day = "today"
+        elif days == 1:
+            weather_forecast += "Tomorrow, the weather should be "
+            day = "tomorrow"
+        elif days > 1:
+            weather_forecast += "On "+forecastWeekday+", the weather is expected to be "
+            day = "on " + forecastWeekday
+        
+        weather_forecast += str(forecast["condition"])
+        weather_forecast += ". With the surface temperatures ranging from "
+        weather_forecast += str(forecast["temperature"])
+        weather_forecast += " °, "
+        weather_forecast += "to the low of "
+        weather_forecast += str(forecast["templow"])
+        weather_forecast += " °C."
 
-		if(days == 0):
-			weather_forecast += "Today, the weather is expected to be "
-			day = "today"
-		elif(days == 1):
-			weather_forecast += "Tomorrow, the weather should be "
-			day = "tomorrow"
-		elif(days > 1):
-			weather_forecast += "On "+forecastWeekday+", the weather is expected to be "
-			day = "on " + forecastWeekday
-		
-		weather_forecast += str(forecast["condition"])
-		weather_forecast += ". With the surface temperatures ranging from "
-		weather_forecast += str(forecast["temperature"])
-		weather_forecast += " °, "
-		weather_forecast += "to the low of "
-		weather_forecast += str(forecast["templow"])
-		weather_forecast += " °C."
+        if forecast["precipitation"] > 5:
+            weather_forecast += " Please note that, there is a " + str(forecast["precipitation"]) + " percent chance of rain " + day +"."
+        else:
+            weather_forecast += " It is not expected to rain " + day +"!"
 
-		if(forecast["precipitation"] > 5):
-			weather_forecast += " Please note that, there is a " + str(forecast["precipitation"]) + " procent chance of rain " + day +"."
-		else:
-			weather_forecast += " It is not expected to rain " + day +"!"
+        if days > 7:
+            weather_forecast = "Forecasts this long are out of the authority of my weather core."
 
-		if(days > 7):
-			weather_forecast = "Forecasts this long are out of the authority of my weather core."
-
-		return weather_forecast
-		
-	# Server responded with something else than 200 OK
-	else:
-		return "I tried and I failed. " + home_assistant_process_error(response)
+        return weather_forecast
+        
+    # Server responded with something else than 200 OK
+    else:
+        return "I tried and I failed. " + home_assistant_process_error(response)
 
 # Get current weather
 def home_assistant_get_current_weather():
+    # Set the endpoint where to send the request
+    url = home_assistant["api"]["endpoint"] + "states/"+ home_assistant["weather"]["entity"]
 
-	# Set the endpoint where to send the request
-	url = home_assistant["api"]["endpoint"] + "states/"+ home_assistant["weather"]["entity"]
+    response = check_output(["curl", "--insecure", "-i", "-X", "GET", "-H", "Authorization: Bearer "+home_assistant["api"]["token"], "-H", "Content-Type: application/json", url])
+    response_str = response.decode('utf-8')  # Decode byte response to string
 
-	response = str(check_output(["curl", "--insecure", "-i", "-X", "GET", "-H", "Authorization: Bearer "+home_assistant["api"]["token"], "-H", "Content-Type: application/json", url]))
+    # Process response from home assistant, error handling if HA responds with something else than HTTP 200 OK
+    if "200 OK" in response_str:
+        # Extract JSON part from response
+        forecast_index = response_str.index('{"entity_id":')
+        forecast = response_str[forecast_index:]
+        
+        sensorData = json.loads(forecast)
 
-	# Process response from home assistant, error handling if HA responds with something else than HTTP 200 OK
-	if "200 OK" in str(response):
-		forecast = response[response.index('{"entity_id":'):-1]
-	
-		sensorData = json.loads(forecast)
+        weather = sensorData['state']
+        temperature = str(sensorData['attributes']['temperature'])
 
-	weather = sensorData['state'];
-	temperature = str(sensorData['attributes']['temperature']);
-	
-	current_weather = "The current atmospheric conditions near the enrichment center are "
-	current_weather += weather
-	current_weather += ". Temperature on the surface is approximately "
-	current_weather += temperature
-	current_weather += " °C"
+        current_weather = "The current atmospheric conditions near the enrichment center are "
+        current_weather += weather
+        current_weather += ". Temperature on the surface is approximately "
+        current_weather += temperature
+        current_weather += " °C"
 
-	return current_weather
+        return current_weather
+    
+    # Server responded with something else than 200 OK
+    else:
+        return "I tried and I failed. " + home_assistant_process_error(response)
 	
 # Parse day index from speech
 def home_assistant_day_index(command):

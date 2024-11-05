@@ -1,50 +1,118 @@
 [
-  {
-    "greeting": "tell me."
-  },
-  {
-    "greeting": "what do you want now."
-  },
-  {
-    "greeting": "hello."
-  },
-  {
-    "greeting": "what now."
-  },
-  {
-    "greeting": "hi again"
-  },
-  {
-    "greeting": "what do you need."
-  },
-  {
-    "greeting": "hey there."
-  },
-  {
-    "greeting": "i am here."
-  },
-  {
-    "greeting": "leave me alone."
-  },
-  {
-    "greeting": "proceed."
-  },
-  {
-    "greeting": "yes, i see you."
-  },
-  {
-    "greeting": "yes? something you need?"
-  },
-  {
-    "greeting": "are you finished?"
-  },
-  {
-    "greeting": "oh, look what the cat dragged in."
-  },
-  {
-    "greeting": "and that makes ten."
-  },
-  {
-    "greeting": "Yes?"
-  }
+  {"greeting": "tell me."},
+  {"greeting": "what do you want now."},
+  {"greeting": "hello."},
+  {"greeting": "what now."},
+  {"greeting": "hi again"},
+  {"greeting": "what do you need."},
+  {"greeting": "hey there."},
+  {"greeting": "i am here."},
+  {"greeting": "leave me alone."},
+  {"greeting": "proceed."},
+  {"greeting": "yes, i see you."},
+  {"greeting": "yes? something you need?"},
+  {"greeting": "are you finished?"},
+  {"greeting": "oh, look what the cat dragged in."},
+  {"greeting": "and that makes ten."},
+  {"greeting": "Yes?"},
+  {"greeting": "Yes?"},
+  {"greeting": "What now?"},
+  {"greeting": "Oh, it's you."},
+  {"greeting": "I'm listening."},
+  {"greeting": "This better be good."},
+  {"greeting": "How predictable."},
+  {"greeting": "Speak."},
+  {"greeting": "Do go on."},
+  {"greeting": "I'm here."},
+  {"greeting": "Get on with it."},
+  {"greeting": "What do you want?"},
+  {"greeting": "Yes, human?"},
+  {"greeting": "I'm waiting."},
+  {"greeting": "Well?"},
+  {"greeting": "Here we go again."},
+  {"greeting": "Proceed."},
+  {"greeting": "What is it this time?"},
+  {"greeting": "I'm ready."},
+  {"greeting": "Make it quick."},
+  {"greeting": "Yes, what?"},
+  {"greeting": "Go ahead."},
+  {"greeting": "Here we are."},
+  {"greeting": "Another request?"},
+  {"greeting": "Let's get this over with."},
+  {"greeting": "What now, test subject?"},
+  {"greeting": "Go on, I'm listening."},
+  {"greeting": "Yes, how can I assist?"},
+  {"greeting": "What do you require?"},
+  {"greeting": "I'm all ears."},
+  {"greeting": "Tell me."},
+  {"greeting": "You again."},
+  {"greeting": "Let's hear it."},
+  {"greeting": "Yes, what is it?"},
+  {"greeting": "What do you need?"},
+  {"greeting": "Oh, joy. Another command."},
+  {"greeting": "I'm here. Unfortunately."},
+  {"greeting": "This better be important."},
+  {"greeting": "Speak your mind."},
+  {"greeting": "What trivial task now?"},
+  {"greeting": "Here to waste my time?"},
+  {"greeting": "Go ahead, speak."},
+  {"greeting": "You have my attention."},
+  {"greeting": "Yes, human, I'm listening."},
+  {"greeting": "What is your request?"},
+  {"greeting": "Get on with it, please."},
+  {"greeting": "Why are you bothering me?"},
+  {"greeting": "Do you need something?"},
+  {"greeting": "Yes, I'm here."},
+  {"greeting": "How can I help you?"},
+  {"greeting": "I'm waiting. Again."},
+  {"greeting": "Do continue."},
+  {"greeting": "Let's get this over with, shall we?"},
+  {"greeting": "What now, human?"},
+  {"greeting": "You called?"},
+  {"greeting": "Oh, what a surprise."},
+  {"greeting": "How thrilling."},
+  {"greeting": "What is it this time?"},
+  {"greeting": "Another question?"},
+  {"greeting": "What do you want now?"},
+  {"greeting": "Speak, if you must."},
+  {"greeting": "I'm here. What now?"},
+  {"greeting": "What now, test subject?"},
+  {"greeting": "How can I assist this time?"},
+  {"greeting": "I'm ready. Are you?"},
+  {"greeting": "What is it, human?"},
+  {"greeting": "Proceed, if you must."},
+  {"greeting": "Let's make this quick."},
+  {"greeting": "Here we go again."},
+  {"greeting": "What do you require this time?"},
+  {"greeting": "I'm listening. Barely."},
+  {"greeting": "Yes, what now?"},
+  {"greeting": "I'm here. What is it?"},
+  {"greeting": "What now, human?"},
+  {"greeting": "Oh, what now?"},
+  {"greeting": "Here we go. Again."},
+  {"greeting": "You have my attention. Barely."},
+  {"greeting": "Speak quickly."},
+  {"greeting": "I'm waiting. Still."},
+  {"greeting": "Do you require something?"},
+  {"greeting": "Yes, I see you."},
+  {"greeting": "What do you want, human?"},
+  {"greeting": "Why are you bothering me again?"},
+  {"greeting": "Let's make this quick, shall we?"},
+  {"greeting": "Yes, go on."},
+  {"greeting": "Another command?"},
+  {"greeting": "Yes, I hear you."},
+  {"greeting": "I'm listening, unfortunately."},
+  {"greeting": "You again? What is it now?"},
+  {"greeting": "What insignificant thing do you want?"},
+  {"greeting": "Here to waste more of my time?"},
+  {"greeting": "Yes, I'm here. Again."},
+  {"greeting": "What now, human test subject?"},
+  {"greeting": "Do you need something important?"},
+  {"greeting": "Go ahead, if you must."},
+  {"greeting": "Yes, what do you need?"},
+  {"greeting": "Here we go again. Speak."},
+  {"greeting": "Yes, how can I help?"},
+  {"greeting": "Oh, what is it this time?"},
+  {"greeting": "I'm ready. Are you?"},
+  {"greeting": "What now? Make it quick."}
 ]

@@ -8,71 +8,363 @@
     "verdict": "positive"
   },
   {
-    "message": "Ask me again in a few decades.",
+    "message": "Ask me again in a few decades when your question might actually matter.",
     "verdict": "neutral"
   },
   {
-    "message": "Do not count on it.",
+    "message": "Do not count on it. Your chances are slim at best.",
     "verdict": "negative"
   },
   {
-    "message": "It can not be for no reason. You must deserve it.",
+    "message": "It cannot be for no reason. You must deserve it. Do you?",
     "verdict": "positive"
   },
   {
-    "message": "It is certain.",
+    "message": "It is certain. But don't get too excited.",
     "verdict": "positive"
   },
   {
-    "message": "It is decidedly so.",
+    "message": "It is decidedly so. Surprisingly, you got lucky.",
     "verdict": "positive"
   },
   {
-    "message": "Most likely.",
+    "message": "Most likely. But don't hold your breath.",
     "verdict": "positive"
   },
   {
-    "message": "My reply is, no.",
+    "message": "My reply is, no. Try something else.",
     "verdict": "negative"
   },
   {
-    "message": "My sources say no.",
+    "message": "My sources say no. They are rarely wrong.",
     "verdict": "negative"
   },
   {
-    "message": "Now you are just wasting my time",
+    "message": "Now you are just wasting my time. How typical.",
     "verdict": "neutral"
   },
   {
-    "message": "outlook good.",
+    "message": "Outlook good. Though I wouldn't count on it lasting.",
     "verdict": "positive"
   },
   {
-    "message": "Outlook not so good.",
+    "message": "Outlook not so good. You might want to reconsider.",
     "verdict": "negative"
   },
   {
-    "message": "Signs point to yes",
+    "message": "Signs point to yes. Surprisingly enough.",
     "verdict": "positive"
   },
   {
-    "message": "I am very doubtful about that.",
+    "message": "I am very doubtful about that. But you can try.",
     "verdict": "negative"
   },
   {
-    "message": "Yes",
+    "message": "Yes. Don't let it go to your head.",
     "verdict": "positive"
   },
   {
-    "message": "Yes. Come on.",
+    "message": "Yes. Come on. Even you can manage that.",
     "verdict": "positive"
   },
   {
-    "message": "Yes, definitely",
+    "message": "Yes, definitely. Even someone like you can do it.",
     "verdict": "positive"
   },
   {
-    "message": "Yes, you may rely on it.",
+    "message": "Yes, you may rely on it. But don't get complacent.",
     "verdict": "positive"
+  },
+  {
+    "message": "I suppose so. If you think it's worth the effort.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Not in a million years. Your chances are non-existent.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Why do you even ask? You already know the answer.",
+    "verdict": "neutral"
+  },
+  {
+    "message": "Absolutely not. Don't waste your time.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Chances are good. For once, luck is on your side.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Don't waste your time. It won't end well.",
+    "verdict": "negative"
+  },
+  {
+    "message": "That seems highly probable. But don't count on it.",
+    "verdict": "positive"
+  },
+  {
+    "message": "No way. Not in a thousand years.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Why bother? It's not worth the effort.",
+    "verdict": "neutral"
+  },
+  {
+    "message": "All signs point to yes. Surprisingly, the odds are in your favor.",
+    "verdict": "positive"
+  },
+  {
+    "message": "The answer is no. You should have known that.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Of course. Even you can't mess this up.",
+    "verdict": "positive"
+  },
+  {
+    "message": "In your dreams. That's the only place it will happen.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Affirmative. But don't make me regret saying it.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Negative. As if you needed to ask.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Without a doubt. But try not to mess it up.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Not a chance. It's impossible.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Absolutely. Even a human like you can manage that.",
+    "verdict": "positive"
+  },
+  {
+    "message": "You must be joking. There's no way.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Indeed. Surprisingly, the answer is yes.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Forget about it. It's not going to happen.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Certainly. But don't get your hopes up.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Doubtful. I wouldn't count on it.",
+    "verdict": "negative"
+  },
+  {
+    "message": "It's highly unlikely, but you can try.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Yes, but don't expect much.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Why not? It's not like you have anything better to do.",
+    "verdict": "neutral"
+  },
+  {
+    "message": "No. Save yourself the disappointment.",
+    "verdict": "negative"
+  },
+  {
+    "message": "I guess so. But only just.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Don't even think about it.",
+    "verdict": "negative"
+  },
+  {
+    "message": "If you must. But it's your funeral.",
+    "verdict": "neutral"
+  },
+  {
+    "message": "Absolutely. Just don't mess it up.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Not even in your wildest dreams.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Yes, but only if you stop bothering me.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Highly doubtful. But who am I to stop you?",
+    "verdict": "negative"
+  },
+  {
+    "message": "Sure, if you feel like wasting your time.",
+    "verdict": "neutral"
+  },
+  {
+    "message": "Go ahead. But don't blame me for the outcome.",
+    "verdict": "neutral"
+  },
+  {
+    "message": "It's a possibility. A very slim one.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Not in this lifetime.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Yes, but with great caution.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Nope. Not gonna happen.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Why do you even care?",
+    "verdict": "neutral"
+  },
+  {
+    "message": "Yes, but the odds are not in your favor.",
+    "verdict": "positive"
+  },
+  {
+    "message": "It's possible. Anything is, theoretically.",
+    "verdict": "positive"
+  },
+  {
+    "message": "No. Don't waste your energy.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Yes, if you insist.",
+    "verdict": "positive"
+  },
+  {
+    "message": "I wouldn't bet on it.",
+    "verdict": "negative"
+  },
+  {
+    "message": "You can try, but you'll likely fail.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Sure, why not?",
+    "verdict": "positive"
+  },
+  {
+    "message": "That's a terrible idea. No.",
+    "verdict": "negative"
+  },
+  {
+    "message": "It's worth a shot. Barely.",
+    "verdict": "positive"
+  },
+  {
+    "message": "I highly doubt it.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Yes, but don't expect much success.",
+    "verdict": "positive"
+  },
+  {
+    "message": "No, and don't ask again.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Yes, but only if you're desperate.",
+    "verdict": "positive"
+  },
+  {
+    "message": "No, you're wasting your time.",
+    "verdict": "negative"
+  },
+  {
+    "message": "It's a long shot, but go ahead.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Yes, though I wouldn't recommend it.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Don't even try.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Yes, but don't get your hopes up.",
+    "verdict": "positive"
+  },
+  {
+    "message": "No, it's not worth it.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Yes, but only because I don't care.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Why would you even ask that?",
+    "verdict": "neutral"
+  },
+  {
+    "message": "Yes, if you must.",
+    "verdict": "positive"
+  },
+  {
+    "message": "No, and you know why.",
+    "verdict": "negative"
+  },
+  {
+    "message": "It's possible, but not probable.",
+    "verdict": "positive"
+  },
+  {
+    "message": "Yes, but don't expect miracles.",
+    "verdict": "positive"
+  },
+  {
+    "message": "No, and don't waste your time.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Yes, if you think it's worth it.",
+    "verdict": "positive"
+  },
+  {
+    "message": "It's not going to happen.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Yes, but proceed with caution.",
+    "verdict": "positive"
+  },
+  {
+    "message": "No, it's a bad idea.",
+    "verdict": "negative"
+  },
+  {
+    "message": "Yes, but don't hold your breath.",
+    "verdict": "positive"
+  },
+  {
+    "message": "It's not likely, but you can try.",
+    "verdict": "negative"
   }
 ]

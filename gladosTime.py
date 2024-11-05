@@ -55,7 +55,7 @@ def startTimer(command):
 
 		if context:
 			if not checkTTSLib(context):
-				fetchTTSSample(context, wait=False)
+				fetchTTSSample(context)
 			context = context
 
 		# Calculate duration to seconds
