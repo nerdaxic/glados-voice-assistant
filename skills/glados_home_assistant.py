@@ -248,10 +248,10 @@ def home_assistant_get_weather_forecast(days):
         weather_forecast += str(forecast["condition"])
         weather_forecast += ". With the surface temperatures ranging from "
         weather_forecast += str(forecast["temperature"])
-        weather_forecast += " °, "
+        weather_forecast += " degrees, "
         weather_forecast += "to the low of "
         weather_forecast += str(forecast["templow"])
-        weather_forecast += " °C."
+        weather_forecast += " degrees celsius."
 
         if forecast["precipitation"] > 5:
             weather_forecast += " Please note that, there is a " + str(forecast["precipitation"]) + " percent chance of rain " + day +"."
@@ -290,7 +290,7 @@ def home_assistant_get_current_weather():
         current_weather += weather
         current_weather += ". Temperature on the surface is approximately "
         current_weather += temperature
-        current_weather += " °C"
+        current_weather += " degrees celsius"
 
         return current_weather
     

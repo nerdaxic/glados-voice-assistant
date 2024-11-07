@@ -14,7 +14,7 @@ import random
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 import shutil
-from subprocess import call
+import subprocess
 
 if(os.getenv('TTS_ENGINE_API') == ''): from glados_tts.engine import *
 from glados_functions import *
@@ -27,6 +27,8 @@ def playFile(filename):
 # Turns units etc into speakable text
 def cleanTTSLine(line):
     line = line.replace("sauna", "incinerator")
+    line = line.replace("°c", "degrees celcius")
+    line = line.replace("°", "degrees")
     line = line.replace("'", "")
     line = line.lower()
 
@@ -40,6 +42,7 @@ def cleanTTSFile(line):
     filename = "GLaDOS-tts-"+cleanTTSLine(line).replace(" ", "-")
     filename = filename.replace("!", "")
     filename = filename.replace("°c", "degrees celcius")
+    line = line.replace("°", "degrees")
     filename = filename.replace(",", "")+".wav"
 
     return filename
@@ -55,32 +58,56 @@ def checkTTSLib(line):
         return False
 
 # Get GLaDOS TTS Sample
-def fetchTTSSample(line):
+def fetchTTSSample(line, cache=False):
+
+    # Generate filename
+    file = cleanTTSFile(line)
+
+    # Specify the full path for the output file
+    output_path = f"/home/nerdaxic/glados-voice-assistant/audio/tts/{file}"
+
+    if cache:
+        # If cache is True, generate and save the audio file
+        command = [
+            "bash", "-c",
+            f'echo "{line}" | piper -m glados_tts/models/glados.onnx --output-raw | tee >(aplay -q -r 22050 -f S16_LE -t raw -) | sox -t raw -r 22050 -b 16 -e signed-integer -c 1 - "{output_path}"'
+        ]
+    else:
+        # If cache is False, generate and play audio without saving
+        command = [
+            "bash", "-c",
+            f'echo "{line}" | piper -m glados_tts/models/glados.onnx --output-raw | aplay -q -r 22050 -f S16_LE -t raw -'
+        ]
+
+    # Use subprocess.call to run the command and save wav file
+    subprocess.call(command)
+
+    #Below this is old logic to be replaced...
     
     # Local TTS Engine
-    if(os.getenv('TTS_ENGINE_API') == ''):  
-        if(glados_tts(cleanTTSLine(line)) == True):
-            print('Success: TTS sample "'+line+'" fetched')
-            setEyeAnimation("idle")
-            return True
+#    if(os.getenv('TTS_ENGINE_API') == ''):  
+#        if(glados_tts(cleanTTSLine(line)) == True):
+#            print('Success: TTS sample "'+line+'" fetched')
+#            setEyeAnimation("idle")
+#            return True
     
     # Remote TTS Engine API
-    else:
-        text = urllib.parse.quote(cleanTTSLine(line))
-        TTSCommand = 'curl -L --retry 5 --get --fail -k -o audio/GLaDOS-tts-temp-output.wav '+os.getenv('TTS_ENGINE_API')+text
-        print(TTSCommand)
-        setEyeAnimation("wait")
-        TTSResponse = os.system(TTSCommand)
+#    else:
+#        text = urllib.parse.quote(cleanTTSLine(line))
+#        TTSCommand = 'curl -L --retry 5 --get --fail -k -o audio/GLaDOS-tts-temp-output.wav '+os.getenv('TTS_ENGINE_API')+text
+#        print(TTSCommand)
+#        setEyeAnimation("wait")
+#        TTSResponse = os.system(TTSCommand)
 
-        if(TTSResponse == 0):
-            print('Success: TTS sample "'+line+'" fetched')
-            setEyeAnimation("idle")
-            return True
+#        if(TTSResponse == 0):
+#            print('Success: TTS sample "'+line+'" fetched')
+#            setEyeAnimation("idle")
+#            return True
 
     # Complain about speech synthesis core
-    setEyeAnimation("angry")
-    playFile(os.path.dirname(os.path.abspath(__file__))+"/audio/GLaDOS-tts-error.wav")
-    return False
+#    setEyeAnimation("angry")
+#    playFile(os.path.dirname(os.path.abspath(__file__))+"/audio/GLaDOS-tts-error.wav")
+    return True
 
 
 ## Speak out the line
@@ -88,6 +115,7 @@ def speak(line, cache=False):
     started_speaking()
 
     line = cleanTTSLine(line)
+
     # Generate filename
     file = checkTTSLib(line)
 
@@ -107,7 +135,7 @@ def speak(line, cache=False):
         setEyeAnimation("wait")
 
         # Generate line and save to TTS-folder
-        if(fetchTTSSample(line)):
+        if(fetchTTSSample(line, cache)):
 
             setEyeAnimation("idle")
 
@@ -117,10 +145,10 @@ def speak(line, cache=False):
             print("\033[1;33mGLaDOS:\033[0;37m " + line.capitalize())
 
             # Speak
-            playFile("./audio/GLaDOS-tts-temp-output.wav")
+            #playFile("./audio/GLaDOS-tts-temp-output.wav")
             
-            if(cache):
-                shutil.copyfile("audio/GLaDOS-tts-temp-output.wav", synthFolder+cleanTTSFile(line))
+            #if(cache):
+            #    shutil.copyfile("audio/GLaDOS-tts-temp-output.wav", synthFolder+cleanTTSFile(line))
 
     stopped_speaking()
     eye_position_default()

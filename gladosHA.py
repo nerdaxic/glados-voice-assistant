@@ -84,7 +84,16 @@ def setCoverTo(position):
 
 def sayNumericSensorData(sensor):
 
-	speak("Hold on", cache=True)
+	delayMessage = [
+		"Hold on",
+		"Hang on, I need to check that.",
+		"Give me a moment.",
+		"Not that I care, but it'll take a second.",
+		"Please wait while I pretend to check.",
+		"Please stand by.",
+		"Give me a moment to process this."
+	]
+	speak(random.choice(delayMessage), cache=True)
 
 	url = endpoint+"states/"+sensor
 	headers = {
@@ -104,9 +113,11 @@ def sayNumericSensorData(sensor):
 
 	if "°C" in sensorUnit:
 		sensorValue = round(sensorValue,1)
+		sensorUnit = "degrees celcius"
 	
 	elif "g/m³" in sensorUnit:
 		sensorValue = round(sensorValue,1)
+		sensorUnit = "grams per cubic meter"
 		
 	else:
 		sensorValue = int(sensorValue)
@@ -147,7 +158,7 @@ def sayCurrentWeatherfromHA():
 	speak(weather)
 	speak("Temperature on the surface is approximately")
 	speak(temperature)
-	speak("°C")
+	speak("degrees celcius")
 
 # 0 being today, 1 tomorrow, etc
 def sayforecastfromHA(days):
@@ -193,20 +204,23 @@ def sayforecastfromHA(days):
 	weather += str(forecast["condition"])
 	weather += ", with the surface temperatures ranging from "
 	weather += str(forecast["temperature"])
-	weather += " °, "
+	weather += " degrees, "
 	weather += "to the low of "
 	weather += str(forecast["templow"])
-	weather += " °C."
+	weather += " degrees celcius."
+
+	speak(weather, cache=False)
 
 	if(forecast["precipitation"] > 5):
-		weather += " Please note that, there is a " + str(forecast["precipitation"]) + " procent chance of rain " + day +"."
+		weather = " Please note that, there is a " + str(forecast["precipitation"]) + " procent chance of rain " + day +"."
 	else:
-		weather += " It is not expected to rain " + day +"."
+		weather = " It is not expected to rain " + day +"."
+
+	speak(weather, cache=False)
 
 	if(days > 7):
 		weather = "Forecasts this long are out of the authority of my weather core"
-
-	speak(weather, cache=False)
+		speak(weather, cache=False)
 
 def getDayIndex(command):
 	if 'today' in command:

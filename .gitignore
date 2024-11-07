@@ -12,6 +12,7 @@ settings.env
 home_assistant_settings.yaml
 
 test.py
+*.test.py
 
 
 # Gitignore template from https://github.com/github/gitignore/blob/main/Python.gitignore
