@@ -326,7 +326,7 @@ def process_command_llm(command, system_message, llm_model, tts_model, tts_prepr
         messages=messages,
         stream=True,
         options={
-            "num_ctx": 8192,
+            "num_ctx": 4000,
             "temperature": 0.9,
             "top_k": 60,
             "top_p": 0.4,
@@ -425,7 +425,7 @@ def process_command(command):
     elif 'weather' in command:
         speak(home_assistant_process_command(command))
 
-    elif ('turn off' in command or 'turn on' in command or 'turn of' in command) and 'light' in command:
+    elif ('turn off' in command or 'turn on' in command or 'turn of' in command or 'set' in command) and 'light' in command:
         speak(home_assistant_process_command(command))
 
     elif 'cinema' in command:

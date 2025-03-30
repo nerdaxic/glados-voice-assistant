@@ -1,6 +1,7 @@
 from gladosTTS import *
 import time
 import serial
+import os
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.dirname(os.path.abspath(__file__))+'/settings.env')
 
@@ -33,7 +34,6 @@ def setEyeAnimation(animation="idle"):
 			elif "idle-green" in animation:
 				ser.write("5".encode())
 		
-		except serial.SerialException:
+		except serial.SerialException as e:
 			#speak("It looks like some bird has stolen my eye")
-			print(serial.SerialException)
-			print("ERROR: Serial connection to the eye failed.")
+			print("Error", e)
